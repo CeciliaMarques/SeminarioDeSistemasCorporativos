@@ -21,7 +21,7 @@ jobs:
     - name: Install dependencies
       run: pip install -r api/requirements.txt
 
-    #Quando tiver os testes descomentas essas linhas
+    #Quando tiver os testes descomentar essas linhas
 
     #- name: Install pytest
      # run: pip install pytest
