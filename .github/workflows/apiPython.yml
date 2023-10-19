@@ -21,7 +21,7 @@ jobs:
     - name: Install dependencies
       run: pip install -r api/requirements.txt
 
-    #Quando tiver os testes descomentas essas linhas
+    #Quando tiver os testes descomentar essas linhas
 
     #- name: Install pytest
      # run: pip install pytest
@@ -33,6 +33,10 @@ jobs:
       run: |
         # Comandos para implantar a API em um servidor (exemplo: SSH, Docker, etc.)
         # Substitua pelos comandos específicos do seu ambiente de implantação
+<<<<<<< HEAD
         #Substituia para o caminho  do arquivo do sistema que vai direcionar a hospedagem
         # cd caminho/para/seu/diretorio
         echo "Deploying the API..."
+=======
+        echo "Deploying the API..."
+>>>>>>> 6d144ee62b5ca836b4ba4c451d60f0b5cfb786ac
