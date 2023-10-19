@@ -1,0 +1,31 @@
+name: CI/CD para Python Flask API
+
+on:
+  push:
+    branches:
+      - main  # Ajuste para a branch principal do seu repositório
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.x
+
+    - name: Install dependencies
+      run: pip install -r requirements.txt
+
+    - name: Run tests
+      run: pytest
+
+    - name: Deploy to server
+      run: |
+        # Comandos para implantar a API em um servidor (exemplo: SSH, Docker, etc.)
+        # Substitua pelos comandos específicos do seu ambiente de implantação
+        echo "Deploying the API..."
