@@ -33,4 +33,6 @@ jobs:
       run: |
         # Comandos para implantar a API em um servidor (exemplo: SSH, Docker, etc.)
         # Substitua pelos comandos específicos do seu ambiente de implantação
+        #Substituia para o caminho  do arquivo do sistema que vai direcionar a hospedagem
+        # cd caminho/para/seu/diretorio
         echo "Deploying the API..."
