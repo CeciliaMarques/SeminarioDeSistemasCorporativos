@@ -4,8 +4,8 @@ import psycopg2
 import sys
 
 #Host do docker DB_HOST = '172.17.0.2'
-DB_HOST = "localhost"
-DB_NOME = "bancoDsc"
+DB_HOST = "db"
+DB_NOME = "bancoDocker"
 DB_USU = "postgres"
 DB_SENHA = "12345"
 
