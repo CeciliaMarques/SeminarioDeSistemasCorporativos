@@ -145,3 +145,11 @@ def deletar_pedido(id_pedido):
     con  = conexao
     resposta = con.deletar_pedido(id_pedido)
     return resposta
+
+########## Rotas  de sistema ##########
+@app.route("/login",  methods=['POST'])
+def login():    
+    con  = conexao
+    dados = request.get_json(force=True)
+    resposta = con.logar(dados)
+    return resposta

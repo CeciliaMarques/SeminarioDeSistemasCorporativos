@@ -1,5 +1,5 @@
 from flask import Flask, jsonify
-from werkzeug.security import generate_password_hash
+from werkzeug.security import generate_password_hash,  check_password_hash
 import psycopg2
 import sys
 
@@ -269,6 +269,34 @@ def listar_pedido(id_pedido):
           vetor.append(chaves) 
                   # chaves = {}  
        return jsonify(vetor) 
-             
+
+def logar(dados):
+    email = dados["email"]
+    senha = dados["senha"]
+
+    cursor.execute("SELECT * FROM usuarios WHERE email = %s", (email,))
+    linhas = cursor.fetchall()
+    vetor = []
+
+    for resultado in linhas:
+        id_usuario, nome, email, telefone, cpf, nivel, hashed_senha = resultado
+
+        if check_password_hash(hashed_senha, senha):
+            chaves = {
+                'id_usuario': id_usuario,
+                'nome': nome,
+                'email': email,
+                'telefone': telefone,
+                'cpf': cpf,
+                'nivel': nivel
+            }
+            vetor.append(chaves)
+
+    if vetor:
+        return jsonify(vetor)
+    else:
+        return jsonify({'message': 'Credenciais inválidas'}), 401
+
+
 def fechar_conexao():
       con.close()
