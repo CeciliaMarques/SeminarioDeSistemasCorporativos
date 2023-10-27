@@ -32,19 +32,19 @@ services:
       - minha-rede  
     depends_on:
       - db  
-  # web:
-  #   build: "./frontCoorporativos"
-  #   container_name: "container-web" 
-  #   restart: always
-  #   ports:
-  #     - "80:80"
-  #   volumes:
-  #    - ./frontCoorporativos:/var/www/html 
-  #   environment:
-  #     - APACHE_DOCUMENT_ROOT=/var/www/html/public
-  #   depends_on:
-  #     - api
-  #   networks:
-  #     - minha-rede  
+  web:
+    build: "./front"
+    container_name: "container-web" 
+    restart: always
+    ports:
+      - "80:80"
+    volumes:
+     - ./front:/var/www/html 
+    environment:
+      - APACHE_DOCUMENT_ROOT=/var/www/html/public
+    depends_on:
+      - api
+    networks:
+      - minha-rede  
 networks:
   minha-rede:   

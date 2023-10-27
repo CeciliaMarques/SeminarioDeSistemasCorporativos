@@ -1,0 +1,34 @@
+{
+	"folders": [
+		{
+			"path": "..\\Config"
+		},
+		{
+			"path": "."
+		},
+		{
+			"path": "..\\Database"
+		},
+		{
+			"path": "..\\Filters"
+		},
+		{
+			"path": "..\\Helpers"
+		},
+		{
+			"path": "..\\Language"
+		},
+		{
+			"path": "..\\Libraries"
+		},
+		{
+			"path": "..\\Models"
+		},
+		{
+			"path": "..\\ThirdParty"
+		},
+		{
+			"path": "..\\Views"
+		}
+	]
+}
