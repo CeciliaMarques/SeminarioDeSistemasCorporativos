@@ -1,6 +1,8 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from app import app
 from app import conexao
+from flask_jwt_extended import jwt_required, get_jwt_identity
+
 
 #Quando o sistema estiver com todas as dependenias gerar outro arquivo requirements.txt
 
@@ -16,10 +18,13 @@ def criar_tabelas():
 
 ########## Rotas  de Usuários ##########
 @app.route("/inserir/usuario",  methods=['POST'])
-def inserir_usuario():    
+@jwt_required()
+def inserir_usuario():  
+    #current_user = get_jwt_identity()  
     con  = conexao
     dados = request.get_json(force=True)
     resposta = con.inserir_usuario(dados)
+    #return jsonify({'message': f'Hello, {current_user}'})
     return resposta
 
 @app.route("/atualizar/usuario",methods=["PUT"])

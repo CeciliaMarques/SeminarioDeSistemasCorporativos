@@ -1,11 +1,12 @@
 from flask import Flask, jsonify
 from werkzeug.security import generate_password_hash,  check_password_hash
+from flask_jwt_extended import create_access_token
 import psycopg2
 import sys
 
 #Host do docker DB_HOST = '172.17.0.2'
-DB_HOST = "db"
-DB_NOME = "bancoDocker"
+DB_HOST = "localhost"
+DB_NOME = "bancoDsc"
 DB_USU = "postgres"
 DB_SENHA = "12345"
 
@@ -290,10 +291,11 @@ def logar(dados):
                 'cpf': cpf,
                 'nivel': nivel
             }
+            access_token = create_access_token(identity=email)
             vetor.append(chaves)
 
     if vetor:
-        return jsonify(vetor)
+        return jsonify({"dados":vetor, "token": access_token})
     else:
         return jsonify({'message': 'Credenciais inválidas'}), 401
 
