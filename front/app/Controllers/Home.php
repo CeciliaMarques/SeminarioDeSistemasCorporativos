@@ -35,25 +35,28 @@ class Home extends BaseController
 
       ]);
       $arr = json_decode(curl_exec($ch), true);
+      var_dump($arr);
+
       curl_close($ch);
 
-      $dados['dados'] = [];
+      $dados['usuario'] = [];
       if ($arr == []) {
          return redirect()->to(site_url("home/login"));
       }
       if (isset($arr) != [] && isset($arr) != null) {
-         $dados['dados'] = $arr[0];
+         $dados['usuario'] = $arr['dados'][0];
+         $token['token'] = $arr['token'];
       }
 
 
-      if (isset($_POST) != null && isset($dados['dados']) != []) {
+      if (isset($_POST) != null && isset($dados['usuario']) != []) {
 
          $_SESSION["user"] = [];
-         $_SESSION["user"]["id_usu"] = $dados['dados']["id_usuariof"];
-         $_SESSION["user"]["nome"] = $dados['dados']["nome"];
-         $_SESSION["user"]["email"] = $dados['dados']["email"];
-         $_SESSION["user"]["nivel"] = $dados['dados']["nivel"];
-
+         $_SESSION["user"]["id_usu"] = $dados['usuario']["id_usuario"];
+         $_SESSION["user"]["nome"] = $dados['usuario']["nome"];
+         $_SESSION["user"]["email"] = $dados['usuario']["email"];
+         $_SESSION["user"]["nivel"] = $dados['usuario']["nivel"];
+         $_SESSION["user"]["token"] = $token["token"];
          if ($_SESSION["user"]["nivel"] == NIVEL_ADMIN) {
             return redirect()->to(site_url("cadastroFunc"));
          }

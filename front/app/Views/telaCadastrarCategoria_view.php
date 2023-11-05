@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-  <title>Cadastro de Bebidas</title>
+  <title>Cadastro de Categoria</title>
   <link rel="stylesheet" type="text/css" href="<?= base_url('public/assets/bootstrap/css/bootstrap.min.css') ?>">
   <link rel="stylesheet" type="text/css" href="<?= base_url('/https://fonts.googleapis.com/css?family=Roboto:400,300,700,400italic,300italic,700italic') ?>">
   <link rel="stylesheet" type="text/css" href="<?= base_url('public/assets/fonts/fontawesome-all.min.css') ?>">
@@ -24,7 +24,7 @@
     <nav class="navbar navbar-expand-lg p-0">
       <div class="km-navbar-brand text-lg-center">
         <div class="container">
-          <button aria-controls="navbarTogglerDemo03" style="background-color: #B22222;border: 1px solid black; color:white;" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarTogglerDemo03" data-toggle="collapse" type="button"><i aria-hidden="true" class="fa fa-bars"></i></button> <a class="navbar-brand" href="#">
+          <button aria-controls="navbarTogglerDemo03" style="background-color: #B22222;border: 1px solid black; color:white;" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarTogglerDemo03" data-toggle="collapse" type="button"><i aria-hidden="true" class="fa fa-bars"></i></button> <a class="navbar-brand" href="">
             <img alt="koolmj" class="img-fluid" src="<?= base_url('public/assets/img/logo_pizzaria.png') ?>" width="300px" height="300px"></a>
           <div class="km-navbar-brand-btn-container">
             <a class="km-navbar-brand-btn-container" style="background-color: #B22222; border: 1px solid black; color:white; font-size: 20px;" href='<?= site_url("home/logout") ?>'>Sair</a>
@@ -39,10 +39,10 @@
                 <a class="nav-link" Style="color: #white; font-size: 20px;" href="<?= site_url("cadastroFunc"); ?>">Funcionários</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" Style="color: #white; font-size: 20px;" href="<?= site_url("cadastroPizza"); ?>">Pizzas</a>
+                <a class="nav-link" Style="color: #white; font-size: 20px;" href="<?= site_url("cadastroCategoria"); ?>">Categorias</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" Style="color: #white; font-size: 20px;" href="<?= site_url("cadastrarBebida"); ?>">Bebidas</a>
+                <a class="nav-link" Style="color: #white; font-size: 20px;" href="<?= site_url("cadastroProduto"); ?>">Produtos</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" Style="color: #white; font-size: 20px;" href="<?= site_url("contaUsuario"); ?>">Minha Conta</a>
@@ -61,69 +61,34 @@
   </header>
   <div id="empresa" style="padding:20px;margin:1px;">
     <span style='color:blue;'><?= session("success"); ?></span>
-    <form class="register-form" action="<?= site_url("cadastrarBebida/getPost") ?>" method="POST" enctype="multipart/form-data">
-      <h2 class="display-4" style="font-size: 35px;">Cadastro de Bebida</h2>
+    <form class="register-form" action="<?= site_url("cadastroCategoria/getPost") ?>" method="POST" enctype="multipart/form-data">
+      <h2 class="display-4" style="font-size: 35px;">Cadastro de Categoria</h2>
       <fieldset>
         <div class="form-row">
           <div class="form-group">
             <label for="id"></label>
-            <input type="hidden" id="id_func" class="form-control" name="id_bebida" value="<?= $dados['id_bebida']; ?>">
-          </div>
-          <div class="col-12 col-sm-12 col-md-12" required>
-            <div id="lp-telnumber-wrapper">
-              <label for="tipo"><b>Tipo</b></label>
-              <select name="tipo" class="form-control mb-3">
-                <?php
-                foreach ($tipo as $key => $t) :
-                  $selected = "";
-                  if ($dados['tipo'] == $key) {
-                    $selected = "selected";
-                  }
-                ?>
-                  <option <?= $selected ?> value="<?= $key ?>"><?= $t ?></option>
-                <?php endforeach; ?>
-              </select>
-            </div>
-            <div style='color:blue;'></div>
+            <input type="hidden" id="id_func" class="form-control" name="id_usuariof">
+            <input type="hidden" id="id_pizza" class="form-control" name="id_categoria" value="<?= $dados['id_categoria']; ?>">
           </div>
           <div class="col-12 col-sm-12 col-md-12">
             <div id="lp-mail-wrapper">
-              <label for="formGroup1"><b>Sabor*</b></label>
-              <input type="text" class="form-control" id="sabor" name="sabor_bebida" placeholder="sabor" value="<?= $dados['sabor_bebida']; ?>" required>
-            </div>
-            <div style='color:blue;'></div>
-          </div>
-          <div class="col-12 col-sm-12 col-md-12">
-            <div id="lp-name-wrapper">
-              <label for="formGroup1"><b>Valor*</b></label>
-              <input type="number" step="0.01" class="form-control" id="valor" name="valor" placeholder="" value="<?= $dados['valor']; ?>" required>
+              <label for="formGroup1"><b>Categoria*</b></label>
+              <input type="text" class="form-control" id="nome" name="nome" placeholder="nome" value="<?= $dados['nome']; ?>" required>
             </div>
             <div style='color:blue;'></div>
           </div>
           <div class="col-12 col-sm-12 col-md-12" required>
             <div id="lp-telnumber-wrapper">
-              <label for="nivel"><b>Volume</b></label>
-              <select name="medida" class="form-control mb-3">
-                <?php
-                foreach ($volume as $key => $v) :
-                  $selected = "";
-                  if ($dados['medida'] == $key) {
-                    $selected = "selected";
-                  }
-                ?>
-                  <option <?= $selected ?> value="<?= $key ?>"><?= $v ?></option>
-                <?php endforeach; ?>
-              </select>
+              <label for="descricao"><b>Descrição*</b></label>
+              <input type="text" class="form-control" id="descricao" name="descricao" placeholder="descricao" value="<?= $dados['descricao']; ?>" required>
             </div>
             <div style='color:blue;'></div>
           </div>
-
           <div class="col-4 col-sm-4 col-md-4">
             <div id="lp-name-wrapper">
               <button type="submit" name="salvar" value="salvar" style="background-color: #B22222; border-color:#B22222;" class="btn btn-primary btn-block">Salvar</button>
             </div>
           </div>
-
           <div class="col-4 col-sm-4 col-md-4">
             <div id="lp-name-wrapper">
               <button type="submit" name="update" value="update" style="background-color: #B22222; border-color:#B22222;" class="btn btn-primary btn-block">Atualizar</button>
@@ -136,21 +101,21 @@
             </div>
           </div>
 
+
         </div>
       </fieldset>
     </form>
+
     <div class="title-bullet"><span> </span></div>
     <div>
       <div class="container">
-        <h2 class="display-4" style="font-size: 35px;">Lista de Bebidas</h2>
+        <h2 class="display-4" style="font-size: 35px;">Lista de Pizzas</h2>
         <div class="table-responsive">
           <table class="table">
             <thead>
               <tr>
-                <th style="font-size: 20px;">Sabor</th>
-                <th style="font-size: 20px;">valor</th>
-                <th style="font-size: 20px;">Volume</th>
-                <th style="font-size: 20px;">Tipo</th>
+                <th style="font-size: 20px;">nome</th>
+                <th style="font-size: 20px;">descrição</th>
                 <th class="text-center" style="font-size: 20px;">Editar</th>
                 <th class="text-center" style="font-size: 20px;">Excluir</th>
               </tr>
@@ -159,12 +124,10 @@
 
               <?php foreach ($listagem as $item) : ?>
                 <tr>
-                  <td style="line-height: 60px;font-size: 15px;"><?php print $item["sabor_bebida"] ?></td>
-                  <td style="line-height: 60px;font-size: 15px;"><?php print str_replace('.', ',', $item["valor"]) ?></td>
-                  <td style="line-height: 60px;font-size: 15px;"><?php print $item["medida"] ?></td>
-                  <td style="line-height: 60px;font-size: 15px;"><?php print $item["tipo"] ?></td>
-                  <td> <a href='<?= site_url("cadastrarBebida/index/{$item['id_bebida']}") ?>'><button class="btn btn-primary btn-block text-center d-block pull-right" type="button" style="height: 61px;background-color: #0b7442;"><i class="far fa-edit" style="font-size: 36px;"></i></button></a></td>
-                  <td> <a href='<?= $url = site_url("cadastrarBebida/deletar/{$item['id_bebida']}") ?>'>
+                  <td style="line-height: 60px;font-size: 15px;"><?php print $item["nome"] ?></td>
+                  <td style="line-height: 60px;font-size: 15px;"><?php print $item["descricao"] ?></td>
+                  <td> <a href='<?= site_url("cadastroCategoria/index/{$item['id_categoria']}") ?>'><button class="btn btn-primary btn-block text-center d-block pull-right" type="button" style="height: 61px;background-color: #0b7442;"><i class="far fa-edit" style="font-size: 36px;"></i></button></a></td>
+                  <td> <a href='<?= $url = site_url("cadastroCategoria/deletar/{$item['id_categoria']}") ?>'>
                       <button href='#' onclick='confirmDelete("<?= $url ?>")' class="btn btn-primary btn-block text-center d-block pull-right" type="button" style="height: 61px;background-color: #B22222;"><i class="far fa-trash-alt" style="font-size: 36px;"></i></button> </a>
                   <?php endforeach; ?>
                   </td>

@@ -62,7 +62,7 @@ def atualizar_usuario(dados):
       cursor.execute("UPDATE usuarios SET nome = %s, email = %s, telefone = %s, cpf =%s, nivel = %s, senha = %s WHERE id_usuario =%s",
                               (dados["nome"], dados["email"], dados["telefone"], dados["cpf"], dados["nivel"],generate_password_hash(dados["senha"]), dados["id_usuario"]))
       con.commit()
-      return jsonify({"message": "Atualizado com sucesso.", "data": dados}), 200 
+      return jsonify({"message": "Atualizado com sucesso.", "dados": dados}), 200 
 
 def deletar_usuario(id_usuario):
     try:
@@ -154,7 +154,7 @@ def listar_categoria(id_categoria):
 def inserir_produto(dados): 
 
       cursor.execute("INSERT INTO produtos (nome, id_categoria, unidade_medida, valor) VALUES (%s, %s, %s, %s);",
-                        (dados["nome"],  dados["id_categora"], dados["unidade_medida"], dados["valor"]))
+                        (dados["nome"],  dados["id_categoria"], dados["unidade_medida"], dados["valor"]))
       con.commit()
       return jsonify({"message": "Produto cadastrado com sucesso."}), 201
 

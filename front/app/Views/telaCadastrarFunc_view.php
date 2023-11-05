@@ -39,10 +39,10 @@
                 <a class="nav-link" Style="color: #white; font-size: 20px;" href="<?= site_url("cadastroFunc"); ?>">Funcionários</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" Style="color: #white; font-size: 20px;" href="<?= site_url("cadastroPizza"); ?>">Pizzas</a>
+                <a class="nav-link" Style="color: #white; font-size: 20px;" href="<?= site_url("cadastroCategoria"); ?>">Categorias</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" Style="color: #white; font-size: 20px;" href="<?= site_url("cadastrarBebida"); ?>">Bebidas</a>
+                <a class="nav-link" Style="color: #white; font-size: 20px;" href="<?= site_url("cadastroProduto"); ?>">Produtos</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" Style="color: #white; font-size: 20px;" href="<?= site_url("contaUsuario"); ?>">Minha Conta</a>
@@ -67,7 +67,7 @@
         <div class="form-row">
           <div class="form-group">
             <label for="id"></label>
-            <input type="hidden" id="id_func" class="form-control" name="id_usuariof" value="<?= $dados['id_usuariof']; ?>">
+            <input type="hidden" id="id_func" class="form-control" name="id_usuario" value="<?= $dados['id_usuario']; ?>">
           </div>
           <div class="col-12 col-sm-12 col-md-12">
             <div id="lp-mail-wrapper">
@@ -176,8 +176,8 @@
                   <td style="line-height: 60px;font-size: 15px;"><?php print $item["cpf"] ?></td>
                   <td style="line-height: 60px;font-size: 15px;"><?php print $item["nivel"] ?></td>
                   <td style="line-height: 60px;font-size: 15px;"><?php print $item["telefone"] ?></td>
-                  <td> <a href='<?= site_url("cadastroFunc/index/{$item['id_usuariof']}") ?>'><button class="btn btn-primary btn-block text-center d-block pull-right" type="button" style="height: 61px;background-color: #0b7442;"><i class="far fa-edit" style="font-size: 36px;"></i></button></a></td>
-                  <td> <a href='<?= $url = site_url("cadastroFunc/deletar/{$item['id_usuariof']}") ?>'>
+                  <td> <a href='<?= site_url("cadastroFunc/index/{$item['id_usuario']}") ?>'><button class="btn btn-primary btn-block text-center d-block pull-right" type="button" style="height: 61px;background-color: #0b7442;"><i class="far fa-edit" style="font-size: 36px;"></i></button></a></td>
+                  <td> <a href='<?= $url = site_url("cadastroFunc/deletar/{$item['id_usuario']}") ?>'>
                       <button href='#' onclick='confirmDelete("<?= $url ?>")' class="btn btn-primary btn-block text-center d-block pull-right" type="button" style="height: 61px;background-color: #B22222;"><i class="far fa-trash-alt" style="font-size: 36px;"></i></button> </a>
                   <?php endforeach; ?>
                   </td>

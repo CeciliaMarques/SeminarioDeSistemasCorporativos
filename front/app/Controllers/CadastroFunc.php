@@ -16,7 +16,7 @@ class CadastroFunc extends BaseController
    
     $usuarioModel = new \App\Models\UsuarioModel();
     if ($_GET == null) {
-      $arr['dados']['id_usuariof'] = -1;
+      $arr['dados']['id_usuario'] = -1;
       $arr['dados']['nome'] = '';
       $arr['dados']['cpf'] = '';
       $arr['dados']['email'] = '';
@@ -28,9 +28,12 @@ class CadastroFunc extends BaseController
       $idU = $id;
       $ch = curl_init();
       curl_setopt_array($ch, [
-        CURLOPT_URL => 'http://127.0.0.1:5000/usuario/' . $idU,
+        CURLOPT_URL => 'http://127.0.0.1:5000/listar/usuario/' . $idU,
         CURLOPT_CUSTOMREQUEST => 'GET',
         CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_HTTPHEADER => [
+          'Authorization: Bearer ' . $_SESSION['user']['token'] // Adicione o token ao cabeçalho
+      ],
         CURLOPT_SSL_VERIFYPEER => false
 
       ]);
@@ -42,9 +45,12 @@ class CadastroFunc extends BaseController
 
     $ch = curl_init();
     curl_setopt_array($ch, [
-      CURLOPT_URL => 'http://127.0.0.1:5000/usuarios',
+      CURLOPT_URL => 'http://127.0.0.1:5000/listar/usuarios',
       CURLOPT_CUSTOMREQUEST => 'GET',
       CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_HTTPHEADER => [
+        'Authorization: Bearer ' . $_SESSION['user']['token'] // Adicione o token ao cabeçalho
+    ],
       CURLOPT_SSL_VERIFYPEER => false
 
     ]);
@@ -114,9 +120,12 @@ public function getPost(){
   {
     $ch = curl_init();
     curl_setopt_array($ch, [
-      CURLOPT_URL => 'http://127.0.0.1:5000/delete/usuario/' . $id,
+      CURLOPT_URL => 'http://127.0.0.1:5000/deletar/usuario/' . $id,
       CURLOPT_CUSTOMREQUEST => 'DELETE',
       CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_HTTPHEADER => [
+        'Authorization: Bearer ' . $_SESSION['user']['token'] // Adicione o token ao cabeçalho
+    ],
       CURLOPT_SSL_VERIFYPEER => false
 
 
@@ -138,6 +147,9 @@ public function getPost(){
       CURLOPT_CUSTOMREQUEST => 'PUT',
       CURLOPT_RETURNTRANSFER => true,
       CURLOPT_POSTFIELDS => $x,
+      CURLOPT_HTTPHEADER => [
+        'Authorization: Bearer ' . $_SESSION['user']['token'] // Adicione o token ao cabeçalho
+    ],
       CURLOPT_SSL_VERIFYPEER => false
 
 

@@ -18,7 +18,7 @@ def criar_tabelas():
 
 ########## Rotas  de Usuários ##########
 @app.route("/inserir/usuario",  methods=['POST'])
-@jwt_required()
+# @jwt_required()
 def inserir_usuario():  
     #current_user = get_jwt_identity()  
     con  = conexao
@@ -28,6 +28,7 @@ def inserir_usuario():
     return resposta
 
 @app.route("/atualizar/usuario",methods=["PUT"])
+@jwt_required()
 def atualizar_usuario():    
     con  = conexao
     dados = request.get_json(force=True)
@@ -35,18 +36,21 @@ def atualizar_usuario():
     return resposta
 
 @app.route("/listar/usuarios",methods=["GET"])
+@jwt_required()
 def listar_usuarios():    
     con  = conexao
     resposta = con.listar_usuarios()
     return resposta
 
 @app.route("/listar/usuario/<id_usuario>",methods=["GET"])
+@jwt_required()
 def listar_usuario(id_usuario):    
     con  = conexao
     resposta = con.listar_usuario(id_usuario)
     return resposta
 
 @app.route("/deletar/usuario/<id_usuario>",methods=["DELETE"])
+@jwt_required()
 def deletar_usuario(id_usuario):    
     con  = conexao
     resposta = con.deletar_usuario(id_usuario)
@@ -54,6 +58,7 @@ def deletar_usuario(id_usuario):
 
 ########## Rotas  de Categorias ##########
 @app.route("/inserir/categoria",  methods=['POST'])
+@jwt_required()
 def inserir_categoria():    
     con  = conexao
     dados = request.get_json(force=True)
@@ -61,6 +66,7 @@ def inserir_categoria():
     return resposta
 
 @app.route("/atualizar/categoria",methods=["PUT"])
+@jwt_required()
 def atualizar_categoria():    
     con  = conexao
     dados = request.get_json(force=True)
@@ -80,6 +86,7 @@ def listar_categoria(id_categoria):
     return resposta
 
 @app.route("/deletar/categoria/<id_categoria>",methods=["DELETE"])
+@jwt_required()
 def deletar_categoria(id_categoria):    
     con  = conexao
     resposta = con.deletar_categoria(id_categoria)
