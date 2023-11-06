@@ -35,21 +35,22 @@ class Home extends BaseController
 
       ]);
       $arr = json_decode(curl_exec($ch), true);
-      var_dump($arr);
-
       curl_close($ch);
 
       $dados['usuario'] = [];
-      if ($arr == []) {
+      if (empty($arr) ) {
          return redirect()->to(site_url("home/login"));
       }
-      if (isset($arr) != [] && isset($arr) != null) {
+      if(!empty($arr[' message']) && $arr['message'] == 'Credenciais inválidos'){
+         $this->session->setFlashdata('erro', 'Login ou senha incorreta.');
+         return redirect()->to(site_url("home/login"));
+
+      }
+      if (!empty($arr) &&  isset($arr['dados'])){
          $dados['usuario'] = $arr['dados'][0];
          $token['token'] = $arr['token'];
       }
-
-
-      if (isset($_POST) != null && isset($dados['usuario']) != []) {
+      if (isset($_POST) != null && !empty($dados['usuario'])) {
 
          $_SESSION["user"] = [];
          $_SESSION["user"]["id_usu"] = $dados['usuario']["id_usuario"];
@@ -62,7 +63,7 @@ class Home extends BaseController
          }
 
          if ($_SESSION["user"]["nivel"] == NIVEL_FUNCIONARIO) {
-            return redirect()->to(site_url("AtendimentoPizzaFuncionario"));
+            return redirect()->to(site_url("AtendimentoPedidosFuncionario"));
          }
 
          if ($_SESSION["user"]["nivel"] == NIVEL_INACESSIVEL) {

@@ -36,10 +36,7 @@
           <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
             <ul class="navbar-nav m-auto">
               <li class="nav-item">
-                <a class="nav-link" Style="color: #white; font-size: 20px;" href="<?= site_url("AtendimentoPizzaFuncionario"); ?>">Pedidos de Pizzas</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" Style="color: #white; font-size: 20px;" href="<?= site_url("AtendimentoBebidaFuncionario"); ?>">Pedidos de Bebidas</a>
+                <a class="nav-link" Style="color: #white; font-size: 20px;" href="<?= site_url("AtendimentoPedidosFuncionario"); ?>">Pedidos de Produtos</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" Style="color: #white; font-size: 20px;" href="<?= site_url("contaUsuarioFuncionario"); ?>">Minha Conta</a>
@@ -58,7 +55,7 @@
         <div class="form-row">
           <div class="form-group">
             <label for="id"></label>
-            <input type="hidden" id="id_func" class="form-control" name="id_usuariof" value="<?= $dados['id_usuariof']; ?>">
+            <input type="hidden" id="id_fun" class="form-control" name="id_usuario" value="<?= $dados['id_usuario']; ?>">
             <input type="hidden" id="nivel" class="form-control" name="nivel" value="<?= $dados['nivel']; ?>">
           </div>
           <div class="col-6 col-sm-6 col-md-6">

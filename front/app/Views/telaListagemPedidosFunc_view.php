@@ -33,11 +33,9 @@
                     <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
                         <ul class="navbar-nav m-auto">
                             <li class="nav-item">
-                                <a class="nav-link" Style="color: #white; font-size: 20px;" href="<?= site_url("AtendimentoPizzaFuncionario"); ?>">Pedidos de Pizzas</a>
+                                <a class="nav-link" Style="color: #white; font-size: 20px;" href="<?= site_url("AtendimentoPedidosFuncionario"); ?>">Pedidos de Produtos</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" Style="color: #white; font-size: 20px;" href="<?= site_url("AtendimentoBebidaFuncionario"); ?>">Pedidos de Bebidas</a>
-                            </li>
+
                             <li class="nav-item">
                                 <a class="nav-link" Style="color: #white; font-size: 20px;" href="<?= site_url("contaUsuarioFuncionario"); ?>">Minha Conta</a>
                             </li>
@@ -51,44 +49,44 @@
     <div id="empresa" style="padding:20px;margin:1px;">
         <span style='color:blue;'><?= session("success"); ?></span>
         <span style='color:red;'><?= session("Error"); ?></span>
-        <form class="register-form" action="<?= site_url("AtendimentoPizzaFuncionario/getPost") ?>" method="POST" enctype="multipart/form-data">
-            <h2 class="display-4" style="font-size: 35px;">Pedidos de Pizzas</h2>
+        <form class="register-form" action="<?= site_url("AtendimentoPedidosFuncionario/getPost") ?>" method="POST" enctype="multipart/form-data">
+            <h2 class="display-4" style="font-size: 35px;">Pedidos de Produtos</h2>
             <fieldset>
                 <div class="form-row">
                     <div class="col-md-12">
                         <label for="id_Usu"></label>
 
-                        <input id="func" class="form-control d-none" name="id_usuariof" value="<?= $_SESSION["user"]["id_usu"] ?>">
+                        <input id="func" class="form-control d-none" name="id_usuario" value="<?= $_SESSION["user"]["id_usu"] ?>">
                         <input id="func" class="form-control d-none" name="nome_func" value="<?= $_SESSION["user"]["nome"] ?>">
                         <input id="pedido" class="form-control d-none" name="id_pedido" value="<?= $dados['id_pedido']; ?>">
-                        <input id="id_pizza" class="form-control d-none" name="id_pizza" value="<?= $dados['id_pizza'] ;?>">
+                        <input id="id_pizza" class="form-control d-none" name="id_produto" value="<?= $dados['id_produto'] ;?>">
                         <input type="hidden" class="form-control" id="total_pg" step="0.01" name="total_pg"  value="<?= $dados['total_pg'] ?>" required>
 
                     </div>
                     <div class="col-6 col-sm-6 col-md-6">
                         <div id="lp-name-wrapper">
-                            <label for="nome"><b>Nome*</b></label>
+                            <label for="nome"><b>Nome do Cliente*</b></label>
                             <input type="text" class="form-control" id="nome" name="nome_cliente" placeholder="Nome" value="<?= $dados['nome_cliente'] ?>">
                         </div>
                     </div>
                     <div class="col-6 col-sm-6 col-md-6">
                         <div id="lp-lastname-wrapper">
-                            <label for="email"><b>Email*</b></label>
+                            <label for="email"><b>Email do Cliente*</b></label>
                             <input type="email" class="form-control" id="email" name="email" placeholder="Email" value="<?= $dados['email'] ?>">
                         </div>
                     </div>
                     <div class="col-6 col-sm-6 col-md-6">
                         <div id="lp-lastname-wrapper">
-                            <label for="tamanho"><b>Sabor*</b></label>
-                            <input type="text" class="form-control" id="sabor_pizza" name="sabor_pizza" placeholder="sabor" value="<?= $dados['sabor_pizza'] ?>">
+                            <label for="tamanho"><b>Nome do Produto*</b></label>
+                            <input type="text" class="form-control" id="nome" name="nome" placeholder="nome" value="<?= $dados['nome'] ?>">
                         </div>
                     </div>
-                    <div class="col-6 col-sm-6 col-md-6">
+                    <!-- <div class="col-6 col-sm-6 col-md-6">
                         <div id="lp-lastname-wrapper">
                             <label for="tamanho"><b>Tamanho*</b></label>
-                            <input type="text" class="form-control" id="tamanho" name="tamanho" placeholder="Tamanho" value="<?= $dados['tamanho'] ?>">
+                            <input type="text" class="form-control" id="tamanho" name="unidade_medida" placeholder="Unidade de medida" value="<?= $dados['unidade_medida'] ?>">
                         </div>
-                    </div>
+                    </div> -->
                     <div class="col-6 col-sm-6 col-md-6">
                         <div id="lp-telnumber-wrapper">
                             <label for="tamanho"><b>Tipo Entrega*</b></label>
@@ -189,8 +187,8 @@
                                 <tr>
                                     <td style="line-height: 60px;font-size: 15px;"><?php print $item["nome_cliente"] ?></td>
                                     <td style="line-height: 60px;font-size: 15px;"><?php print $item["email"] ?></td>
-                                    <td style="line-height: 60px;font-size: 15px;"><?php print $item["sabor_pizza"] ?></td>
-                                    <td style="line-height: 60px;font-size: 15px;"><?php print $item["tamanho"] ?></td>
+                                    /*falta fazer a consulta do nome do produto*/
+                                    /*falta fazer colocar unidade de medida*/
                                     <td style="line-height: 60px;font-size: 15px;"><?php print $item["tipo_entrega"] ?></td>
                                     <td style="line-height: 60px;font-size: 15px;"><?php print $item["forma_pg"] ?></td>
                                     <td style="line-height: 60px;font-size: 15px;"><?php print str_replace('.',',', $item["total_pg"]) ?></td>
@@ -200,8 +198,8 @@
                                     <td style="line-height: 60px;font-size: 15px;"><?php print $item["uf"] ?></td>
                                     <td style="line-height: 60px;font-size: 15px;"><?php print $item["num"] ?></td>
                                     <td style="line-height: 60px;font-size: 15px;"><?php print $item["finalizar_pedido"] ?></td>
-                                    <td> <a href='<?= site_url("atendimentoPizzaFuncionario/index/{$item['id_pedido']}") ?>'><button class="btn btn-primary btn-block text-center d-block pull-right" type="button" style="height: 61px;background-color: #0b7442;"><i class="far fa-edit" style="font-size: 36px;"></i></button></a></td>
-                                    <td> <a href='<?= $url = site_url("atendimentoPizzaFuncionario/deletar/{$item['id_pedido']}") ?>'>
+                                    <td> <a href='<?= site_url("atendimentoPedidosFuncionario/index/{$item['id_pedido']}") ?>'><button class="btn btn-primary btn-block text-center d-block pull-right" type="button" style="height: 61px;background-color: #0b7442;"><i class="far fa-edit" style="font-size: 36px;"></i></button></a></td>
+                                    <td> <a href='<?= $url = site_url("atendimentoPedidosFuncionario/deletar/{$item['id_pedido']}") ?>'>
                                             <button href='#' onclick='confirmDelete("<?= $url ?>")' class="btn btn-primary btn-block text-center d-block pull-right" type="button" style="height: 61px;background-color: #B22222;"><i class="far fa-trash-alt" style="font-size: 36px;"></i></button> </a>
                                     <?php endforeach; ?>
                                     </td>

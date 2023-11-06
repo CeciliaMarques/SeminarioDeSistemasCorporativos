@@ -47,11 +47,10 @@ class CadastroProduto extends BaseController
   
       ]);
       $arr['listagem'] = json_decode(curl_exec($ch), true);
-      
-      curl_close($ch);
 
-      $categoria = curl_init();
-      curl_setopt_array($categoria, [
+
+      $catg = curl_init();
+      curl_setopt_array( $catg, [
         CURLOPT_URL => 'http://127.0.0.1:5000/listar/categorias',
         CURLOPT_CUSTOMREQUEST => 'GET',
         CURLOPT_RETURNTRANSFER => true,
@@ -59,8 +58,9 @@ class CadastroProduto extends BaseController
   
       ]);
       
-      $arr['categorias'] = json_decode(curl_exec($categoria), true);
-      curl_close($categoria);
+      $arr['categorias'] = json_decode(curl_exec( $catg), true);
+      
+      curl_close( $catg);
    
       $arr['unidade_medida'] = $usuarioModel->unidadeMedida;
       return view('telaCadastrarProduto_view', $arr);
@@ -121,7 +121,7 @@ class CadastroProduto extends BaseController
     {
       $ch = curl_init();
       curl_setopt_array($ch, [
-        CURLOPT_URL => 'http://127.0.0.15000/deletar/produto/' . $id,
+        CURLOPT_URL => 'http://127.0.0.1:5000/deletar/produto/'. $id,
         CURLOPT_CUSTOMREQUEST => 'DELETE',
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_SSL_VERIFYPEER => false

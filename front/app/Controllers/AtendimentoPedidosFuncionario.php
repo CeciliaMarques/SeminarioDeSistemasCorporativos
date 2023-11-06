@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-class AtendimentoPizzaFuncionario extends BaseController
+class AtendimentoPedidosFuncionario extends BaseController
 {
 
 
@@ -19,9 +19,9 @@ class AtendimentoPizzaFuncionario extends BaseController
       $arr['dados']['id_pedido'] = -1;
       $arr['dados']['nome_cliente'] = '';
       $arr['dados']['email'] = '';
-      $arr['dados']['id_pizza'] = -1;
-      $arr['dados']['id_usuariof'] = -1;
-      $arr['dados']['tamanho'] = '';
+      $arr['dados']['id_produto'] = -1;
+      $arr['dados']['id_usuario'] = -1;
+      $arr['dados']['unidade_medida'] = '';
       $arr['dados']['tipo_entrega'] = '';
       $arr['dados']['forma_pg'] = '';
       $arr['dados']['total_pg'] = 0;
@@ -31,7 +31,7 @@ class AtendimentoPizzaFuncionario extends BaseController
       $arr['dados']['bairro'] = '';
       $arr['dados']['municipio'] = '';
       $arr['dados']['uf'] = '';
-      $arr['dados']['sabor_pizza'] = '';
+      $arr['dados']['nome'] = '';
       $arr['dados']['finalizar_pedido'] = '';
   
     }
@@ -39,7 +39,7 @@ class AtendimentoPizzaFuncionario extends BaseController
       $idP = $id;
       $ch = curl_init();
       curl_setopt_array($ch, [
-        CURLOPT_URL => 'http://127.0.0.1:5000/pedido/pizza/' . $idP,
+        CURLOPT_URL => 'http://127.0.0.1:5000/listar/pedido/' . $idP,
         CURLOPT_CUSTOMREQUEST => 'GET',
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_SSL_VERIFYPEER => false
@@ -52,7 +52,7 @@ class AtendimentoPizzaFuncionario extends BaseController
     } 
     $ch = curl_init();
     curl_setopt_array($ch, [
-      CURLOPT_URL => 'http://127.0.0.1:5000/pedidos/pizzas',
+      CURLOPT_URL => 'http://127.0.0.1:5000/listar/pedidos',
       CURLOPT_CUSTOMREQUEST => 'GET',
       CURLOPT_RETURNTRANSFER => true,
       CURLOPT_SSL_VERIFYPEER => false
@@ -63,7 +63,7 @@ class AtendimentoPizzaFuncionario extends BaseController
     $arr['tipoEntrega'] = $usuarioModel->tipoEntrega;
     $arr['formaPg'] = $usuarioModel->formaPg;
         
-    return view("telaListagemPizzasPedidos_view", $arr);
+    return view("telaListagemPedidosFunc_view", $arr);
     // return view("telaListagemPizzasPedidos_view", $arr);
 
   }
@@ -76,15 +76,15 @@ class AtendimentoPizzaFuncionario extends BaseController
    
    if(isset($_POST['update']) == 'update'){
      $this->update();
-     return redirect()->to(site_url('atendimentoPizzaFuncionario/index/'));
+     return redirect()->to(site_url('atendimentoPedidosFuncionario/index/'));
    }
    if (isset($_POST['limpar']) == 'limpar'){
     $this->index();
-    return redirect()->to(site_url('atendimentoPizzaFuncionario/index/'));
+    return redirect()->to(site_url('atendimentoPedidosFuncionario/index/'));
   
   }
    else {
-    return redirect()->to(site_url('atendimentoPizzaFuncionario/index/'));
+    return redirect()->to(site_url('atendimentoPedidosFuncionario/index/'));
    }
   
     
@@ -96,7 +96,7 @@ class AtendimentoPizzaFuncionario extends BaseController
     $x = json_encode($_POST); 
     $ch = curl_init();
     curl_setopt_array($ch, [
-      CURLOPT_URL => 'http://127.0.0.1:5000/atualizar/pedidos/pizzas',
+      CURLOPT_URL => 'http://127.0.0.1:5000/atualizar/pedidos',
       CURLOPT_CUSTOMREQUEST => 'PUT',
       CURLOPT_RETURNTRANSFER => true,
       CURLOPT_POSTFIELDS => $x,
@@ -107,7 +107,7 @@ class AtendimentoPizzaFuncionario extends BaseController
     $response = curl_exec($ch);
     curl_close($ch);
     // var_dump($response);
-    return redirect()->to(site_url('atendimentoPizzaFuncionario/index/'));
+    return redirect()->to(site_url('atendimentoPedidosFuncionario/index/'));
 
   }
 
@@ -116,7 +116,7 @@ class AtendimentoPizzaFuncionario extends BaseController
   {
     $ch = curl_init();
     curl_setopt_array($ch, [
-      CURLOPT_URL => 'http://127.0.0.1:5000/delete/pedidos/pizzas/' . $id,
+      CURLOPT_URL => 'http://127.0.0.1:5000/delete/pedidos/' . $id,
       CURLOPT_CUSTOMREQUEST => 'DELETE',
       CURLOPT_RETURNTRANSFER => true,
       CURLOPT_SSL_VERIFYPEER => false
@@ -127,7 +127,7 @@ class AtendimentoPizzaFuncionario extends BaseController
 
     $response = curl_exec($ch);
     curl_close($ch);
-    return redirect()->to(site_url('atendimentoPizzaFuncionario/index/'));
+    return redirect()->to(site_url('atendimentoPedidosFuncionario/index/'));
   }
 
 }    

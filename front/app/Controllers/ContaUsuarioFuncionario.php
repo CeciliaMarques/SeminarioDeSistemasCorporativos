@@ -16,9 +16,12 @@ class ContaUsuarioFuncionario extends BaseController
         $ch = curl_init();
         $id = $_SESSION["user"]["id_usu"];
         curl_setopt_array($ch, [
-          CURLOPT_URL => 'http://127.0.0.1:5000/usuario/' . $id,
+          CURLOPT_URL => 'http://127.0.0.1:5000/listar/usuario/' . $id,
           CURLOPT_CUSTOMREQUEST => 'GET',
           CURLOPT_RETURNTRANSFER => true,
+          CURLOPT_HTTPHEADER => [
+            'Authorization: Bearer ' . $_SESSION['user']['token'] // Adicione o token ao cabeçalho
+        ],
           CURLOPT_SSL_VERIFYPEER => false
 
 
@@ -42,6 +45,9 @@ $x = json_encode($_POST);
     CURLOPT_CUSTOMREQUEST => 'PUT',
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_POSTFIELDS => $x,
+    CURLOPT_HTTPHEADER => [
+      'Authorization: Bearer ' . $_SESSION['user']['token'] // Adicione o token ao cabeçalho
+  ],
     CURLOPT_SSL_VERIFYPEER => false
 
 

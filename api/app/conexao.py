@@ -128,8 +128,9 @@ def deletar_categoria(id_categoria):
             if con: 
                   #con.close()
                   pass
+
 def listar_categorias():
-       cursor.execute("SELECT * FROM categorias")
+       cursor.execute("SELECT * FROM categorias;")
        linhas = cursor.fetchall()
        vetor = []
        chaves = {}

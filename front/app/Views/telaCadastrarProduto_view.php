@@ -39,7 +39,7 @@
                 <a class="nav-link" Style="color: #white; font-size: 20px;" href="<?= site_url("cadastroFunc"); ?>">Funcionários</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" Style="color: #white; font-size: 20px;" href="<?= site_url("cadastroPizza"); ?>">Pizzas</a>
+                <a class="nav-link" Style="color: #white; font-size: 20px;" href="<?= site_url("cadastroCategoria"); ?>">Categorias</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" Style="color: #white; font-size: 20px;" href="<?= site_url("cadastroProduto"); ?>">Produtos</a>
@@ -161,13 +161,13 @@
                 <td style="line-height: 60px;font-size: 15px;"><?php print str_replace('.', ',', $item["valor"]) ?></td>
                 <td> <a href='<?= site_url("cadastroProduto/index/{$item['id_produto']}") ?>'><button class="btn btn-primary btn-block text-center d-block pull-right" type="button" style="height: 61px;background-color: #0b7442;"><i class="far fa-edit" style="font-size: 36px;"></i></button></a></td>
                 <td> <a href='<?= $url = site_url("cadastroProduto/deletar/{$item['id_produto']}") ?>'>
-                    <button href='#' onclick='confirmDelete("<?= $url ?>")' class="btn btn-primary btn-block text-center d-block pull-right" type="button" style="height: 61px;background-color: #B22222;"><i class="far fa-trash-alt" style="font-size: 36px;"></i></button> </a>
-                <?php endforeach; ?>
-                </td>
-              </tr>
-              <tr>
-              </tr>
-          </tbody>
+                      <button href='#' onclick='confirmDelete("<?= $url ?>")' class="btn btn-primary btn-block text-center d-block pull-right" type="button" style="height: 61px;background-color: #B22222;"><i class="far fa-trash-alt" style="font-size: 36px;"></i></button> </a>
+                  <?php endforeach; ?>
+                  </td>
+                </tr>
+                <tr>
+                </tr>
+            </tbody>
         </table>
       </div>
       <div class="col-sm-12 col-md-12 col-lg-12" style="background-color:#20B2AA"></div>

@@ -39,10 +39,10 @@
                 <a class="nav-link" Style="color: #white; font-size: 20px;" href="<?= site_url("cadastroFunc"); ?>">Funcionários</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" Style="color: #white; font-size: 20px;" href="<?= site_url("cadastroPizza"); ?>">Pizzas</a>
+                <a class="nav-link" Style="color: #white; font-size: 20px;" href="<?= site_url("cadastroCategoria"); ?>">Categorias</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" Style="color: #white; font-size: 20px;" href="<?= site_url("cadastrarBebida"); ?>">Bebidas</a>
+                <a class="nav-link" Style="color: #white; font-size: 20px;" href="<?= site_url("cadastroProduto"); ?>">Produtos</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" Style="color: #white; font-size: 20px;" href="<?= site_url("contaUsuario"); ?>">Minha Conta</a>
@@ -67,7 +67,7 @@
         <div class="form-row">
           <div class="form-group">
             <label for="id"></label>
-            <input type="hidden" id="id_func" class="form-control" name="id_usuariof" value="<?= $dados['id_usuariof']; ?>">
+            <input type="hidden" id="id_func" class="form-control" name="id_usuario" value="<?= $dados['id_usuario']; ?>">
             <input type="hidden" id="nivel" class="form-control" name="nivel" value="<?= $dados['nivel']; ?>">
           </div>
           <div class="col-6 col-sm-6 col-md-6">
