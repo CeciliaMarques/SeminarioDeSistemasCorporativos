@@ -106,6 +106,9 @@ class CadastroProduto extends BaseController
         CURLOPT_CUSTOMREQUEST => 'POST',
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_POSTFIELDS => $x,
+        CURLOPT_HTTPHEADER => [
+          'Authorization: Bearer ' . $_SESSION['user']['token'] // Adicione o token ao cabeçalho
+      ],
         CURLOPT_SSL_VERIFYPEER => false
   
   
@@ -124,6 +127,9 @@ class CadastroProduto extends BaseController
         CURLOPT_URL => 'http://127.0.0.1:5000/deletar/produto/'. $id,
         CURLOPT_CUSTOMREQUEST => 'DELETE',
         CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_HTTPHEADER => [
+          'Authorization: Bearer ' . $_SESSION['user']['token'] // Adicione o token ao cabeçalho
+      ],
         CURLOPT_SSL_VERIFYPEER => false
   
   
@@ -145,6 +151,9 @@ class CadastroProduto extends BaseController
         CURLOPT_CUSTOMREQUEST => 'PUT',
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_POSTFIELDS => $x,
+        CURLOPT_HTTPHEADER => [
+          'Authorization: Bearer ' . $_SESSION['user']['token'] // Adicione o token ao cabeçalho
+      ],
         CURLOPT_SSL_VERIFYPEER => false
   
   

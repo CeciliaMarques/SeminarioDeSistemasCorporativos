@@ -16,7 +16,7 @@ class ContaUsuarioFuncionario extends BaseController
         $ch = curl_init();
         $id = $_SESSION["user"]["id_usu"];
         curl_setopt_array($ch, [
-          CURLOPT_URL => 'http://127.0.0.1:5000/listar/usuario/' . $id,
+          CURLOPT_URL => 'http://127.0.0.1:3000/listar/usuario/' . $id,
           CURLOPT_CUSTOMREQUEST => 'GET',
           CURLOPT_RETURNTRANSFER => true,
           CURLOPT_HTTPHEADER => [
@@ -41,7 +41,7 @@ $x = json_encode($_POST);
 
   $ch = curl_init();
   curl_setopt_array($ch, [
-    CURLOPT_URL => 'http://127.0.0.1:5000/atualizar/usuario',
+    CURLOPT_URL => 'http://127.0.0.1:3000/atualizar/usuario',
     CURLOPT_CUSTOMREQUEST => 'PUT',
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_POSTFIELDS => $x,
