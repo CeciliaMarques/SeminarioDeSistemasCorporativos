@@ -17,44 +17,44 @@ def criar_tabelas():
     return resposta
 
 ########## Rotas  de Usuários ##########
-@app.route("/inserir/usuario",  methods=['POST'])
+# @app.route("/inserir/usuario",  methods=['POST'])
+# # @jwt_required()
+# def inserir_usuario():  
+#     #current_user = get_jwt_identity()  
+#     con  = conexao
+#     dados = request.get_json(force=True)
+#     resposta = con.inserir_usuario(dados)
+#     #return jsonify({'message': f'Hello, {current_user}'})
+#     return resposta
+
+# @app.route("/atualizar/usuario",methods=["PUT"])
 # @jwt_required()
-def inserir_usuario():  
-    #current_user = get_jwt_identity()  
-    con  = conexao
-    dados = request.get_json(force=True)
-    resposta = con.inserir_usuario(dados)
-    #return jsonify({'message': f'Hello, {current_user}'})
-    return resposta
+# def atualizar_usuario():    
+#     con  = conexao
+#     dados = request.get_json(force=True)
+#     resposta = con.atualizar_usuario(dados)
+#     return resposta
 
-@app.route("/atualizar/usuario",methods=["PUT"])
-@jwt_required()
-def atualizar_usuario():    
-    con  = conexao
-    dados = request.get_json(force=True)
-    resposta = con.atualizar_usuario(dados)
-    return resposta
+# @app.route("/listar/usuarios",methods=["GET"])
+# @jwt_required()
+# def listar_usuarios():    
+#     con  = conexao
+#     resposta = con.listar_usuarios()
+#     return resposta
 
-@app.route("/listar/usuarios",methods=["GET"])
-@jwt_required()
-def listar_usuarios():    
-    con  = conexao
-    resposta = con.listar_usuarios()
-    return resposta
+# @app.route("/listar/usuario/<id_usuario>",methods=["GET"])
+# @jwt_required()
+# def listar_usuario(id_usuario):    
+#     con  = conexao
+#     resposta = con.listar_usuario(id_usuario)
+#     return resposta
 
-@app.route("/listar/usuario/<id_usuario>",methods=["GET"])
-@jwt_required()
-def listar_usuario(id_usuario):    
-    con  = conexao
-    resposta = con.listar_usuario(id_usuario)
-    return resposta
-
-@app.route("/deletar/usuario/<id_usuario>",methods=["DELETE"])
-@jwt_required()
-def deletar_usuario(id_usuario):    
-    con  = conexao
-    resposta = con.deletar_usuario(id_usuario)
-    return resposta
+# @app.route("/deletar/usuario/<id_usuario>",methods=["DELETE"])
+# @jwt_required()
+# def deletar_usuario(id_usuario):    
+#     con  = conexao
+#     resposta = con.deletar_usuario(id_usuario)
+#     return resposta
 
 ########## Rotas  de Categorias ##########
 @app.route("/inserir/categoria",  methods=['POST'])
@@ -94,6 +94,7 @@ def deletar_categoria(id_categoria):
 
 ########## Rotas  de Produtos ##########
 @app.route("/inserir/produto",  methods=['POST'])
+@jwt_required()
 def inserir_produto():    
     con  = conexao
     dados = request.get_json(force=True)
@@ -101,6 +102,7 @@ def inserir_produto():
     return resposta
 
 @app.route("/atualizar/produto",methods=["PUT"])
+@jwt_required()
 def atualizar_produto():    
     con  = conexao
     dados = request.get_json(force=True)
@@ -120,6 +122,7 @@ def listar_produto(id_produto):
     return resposta
 
 @app.route("/deletar/produto/<id_produto>",methods=["DELETE"])
+@jwt_required()
 def deletar_produto(id_produto):    
     con  = conexao
     resposta = con.deletar_produto(id_produto)
