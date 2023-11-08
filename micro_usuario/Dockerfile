@@ -14,14 +14,14 @@ RUN pip install Flask jsonify psycopg2  virtualenv
 # Copi para /app
 COPY ./  /app
 
-# porta 5000
-EXPOSE 5000
-ENV FLASK_APP=api.py
+# porta 3000
+EXPOSE 3000
+ENV FLASK_APP=micro.py
 ENV FLASK_ENV=development
 ENV FLASK_DEBUG=1
 
 # executa a aplicação
-CMD ["flask", "run", "--host=0.0.0.0", "--port=5000"]
+CMD ["flask", "run", "--host=0.0.0.0", "--port=3000"]
 
 
 

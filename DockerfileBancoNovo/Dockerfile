@@ -2,7 +2,7 @@
 FROM postgres
 ENV POSTGRES_USER postgres
 ENV POSTGRES_PASSWORD 12345
-ENV POSTGRES_DB bancoDocker
+ENV POSTGRES_DB bancoDsc
 
 # Copie arquivos de configuração personalizados para o contêiner
 COPY postgresql.conf /etc/postgresql/postgresql.conf

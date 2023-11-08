@@ -6,7 +6,7 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 12345
-      POSTGRES_DB: bancoDocker
+      POSTGRES_DB: bancoDsc
     restart: always
     volumes:
      - ./DockerfileBancoNovo/banco:/var/lib/postgresql/data
@@ -14,6 +14,24 @@ services:
       - "5432:5432"
     networks:
       - minha-rede  
+  autenticacao:
+    build:
+      context: "micro_usuario"
+      dockerfile: Dockerfile
+    container_name: "container-micro"
+    restart: always
+    ports:
+     - "3000:3000" 
+    volumes:
+     - ./micro_usuario:/app 
+    environment:
+      - FLASK_APP=micro.py  
+      - FLASK_ENV=development
+      - FLASK_DEBUG=1
+    networks:
+      - minha-rede  
+    depends_on:
+      - db  
   api:
     build:
       context: "api"
@@ -31,7 +49,7 @@ services:
     networks:
       - minha-rede  
     depends_on:
-      - db  
+      - autenticacao
   web:
     build: "./front"
     container_name: "container-web" 
