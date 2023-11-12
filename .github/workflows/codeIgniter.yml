@@ -26,7 +26,7 @@ jobs:
 #instalar extensões do php
       - name: Install PHP Extensions
         run: |
-          sudo apt-get update && apt-get install -y \
+          sudo apt-get update && sudo apt-get install -y \
           libfreetype6-dev \
           ibjpeg62-turbo-dev \
           libpng-dev \
