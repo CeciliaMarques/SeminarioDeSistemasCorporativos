@@ -37,7 +37,7 @@ jobs:
         run: |
             cd path/SeminarioDeSistemasCorporativos/front
             composer install
-        working-directory: path/SeminarioDeSistemasCorporativos/front
+        working-directory: ./SeminarioDeSistemasCorporativos/front
 
 # #instalar dependencias
 #       - name: Install Dependencies
