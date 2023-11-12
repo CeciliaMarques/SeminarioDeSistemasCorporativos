@@ -33,11 +33,11 @@ jobs:
             php-intl \
             php-curl
 
-        - name: Build and run PHP front-end
-          run: |
-              cd path/front    
-              composer install
-          working-directory: path/front       
+      - name: Build and run PHP front-end
+        run: |
+            cd path/front    
+            composer install
+        working-directory: path/front       
 # #instalar dependencias
 #       - name: Install Dependencies
 #         run: composer install --no-interaction --prefer-dist
