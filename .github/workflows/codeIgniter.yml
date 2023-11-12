@@ -33,9 +33,8 @@ jobs:
             libzip-dev \
             libicu-dev \
             libcurl4-gnutls-dev
-          libcurl4-gnutls-dev \
-          sudo docker-php-ext-configure gd --with-freetype --with-jpeg
-          sudo docker-php-ext-install -j$(nproc) gd pdo pdo_mys
+            libcurl4-gnutls-dev \
+
 #instalar dependencias
       - name: Install Dependencies
         run: composer install --no-interaction --prefer-dist
