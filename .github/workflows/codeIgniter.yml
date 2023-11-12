@@ -36,7 +36,7 @@ jobs:
 #instalar dependencias
       - name: Install Dependencies
         run: |
-          cd path/SeminarioDeSistemasCorporativos/front/  # Substitua pelo caminho correto
+          cd SeminarioDeSistemasCorporativos/front/  # Substitua pelo caminho correto
           composer install --no-interaction --prefer-dist
 #hospedar CodeIgniter
       - name: Deploy CodeIgniter App
