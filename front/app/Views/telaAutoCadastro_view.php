@@ -46,6 +46,7 @@
   </header>
   <div id="empresa" style="padding:20px;margin:1px;">
     <span style='color:blue;'><?= session("success"); ?></span>
+    <span style='color:blue;'><?= session("erro"); ?></span>
     <form class="register-form" action="<?= site_url("cadastroUsuarioFunc") ?>" method="POST" enctype="multipart/form-data">
       <h2 class="display-4" style="font-size: 35px;">Cadastre-se</h2>
       <fieldset>

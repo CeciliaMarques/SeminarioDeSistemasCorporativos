@@ -28,7 +28,7 @@ class CadastroFunc extends BaseController
       $idU = $id;
       $ch = curl_init();
       curl_setopt_array($ch, [
-        CURLOPT_URL => 'http://127.0.0.1:3000/listar/usuario/' . $idU,
+        CURLOPT_URL => 'http://api:5000/listar/usuario/' . $idU,
         CURLOPT_CUSTOMREQUEST => 'GET',
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_HTTPHEADER => [
@@ -45,7 +45,7 @@ class CadastroFunc extends BaseController
 
     $ch = curl_init();
     curl_setopt_array($ch, [
-      CURLOPT_URL => 'http://127.0.0.1:3000/listar/usuarios',
+      CURLOPT_URL => 'http://api:5000/listar/usuarios',
       CURLOPT_CUSTOMREQUEST => 'GET',
       CURLOPT_RETURNTRANSFER => true,
       CURLOPT_HTTPHEADER => [
@@ -99,7 +99,7 @@ public function getPost(){
 
     $ch = curl_init();
     curl_setopt_array($ch, [
-      CURLOPT_URL => 'http://127.0.0.1:3000/inserir/usuario',
+      CURLOPT_URL => 'http://api:5000/inserir/usuario',
       CURLOPT_CUSTOMREQUEST => 'POST',
       CURLOPT_RETURNTRANSFER => true,
       CURLOPT_POSTFIELDS => $x,
@@ -109,7 +109,18 @@ public function getPost(){
     ]);
     $resposta = curl_exec($ch);
     curl_close($ch);
-    return redirect()->to(site_url("cadastroFunc/index/"));
+    
+    $respostaArray = json_decode($resposta, true);
+    if(!empty($respostaArray['message']) && $respostaArray ['message'] == 'Cadastrado com sucesso.'){
+      $this->session->setFlashdata('success', 'Cadastrado com sucesso.');
+      return redirect()->to(site_url("cadastroFunc/index/"));
+    }
+    else{
+      $this->session->setFlashdata('erro', 'O e-mail já existe.');
+      return redirect()->to(site_url("cadastroFunc/index/"));
+
+
+    }
   
 }
 
@@ -120,7 +131,7 @@ public function getPost(){
   {
     $ch = curl_init();
     curl_setopt_array($ch, [
-      CURLOPT_URL => 'http://127.0.0.1:3000/deletar/usuario/' . $id,
+      CURLOPT_URL => 'http://api:5000/deletar/usuario/' . $id,
       CURLOPT_CUSTOMREQUEST => 'DELETE',
       CURLOPT_RETURNTRANSFER => true,
       CURLOPT_HTTPHEADER => [
@@ -143,7 +154,7 @@ public function getPost(){
 
     $ch = curl_init();
     curl_setopt_array($ch, [
-      CURLOPT_URL => 'http://127.0.0.1:3000/atualizar/usuario',
+      CURLOPT_URL => 'http://api:5000/atualizar/usuario',
       CURLOPT_CUSTOMREQUEST => 'PUT',
       CURLOPT_RETURNTRANSFER => true,
       CURLOPT_POSTFIELDS => $x,

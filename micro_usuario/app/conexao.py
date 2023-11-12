@@ -5,7 +5,7 @@ import psycopg2
 import sys
 
 #Host do docker DB_HOST = '172.17.0.2'
-DB_HOST = "localhost"
+DB_HOST = "db"
 DB_NOME = "bancoDsc"
 DB_USU = "postgres"
 DB_SENHA = "12345"
@@ -52,17 +52,16 @@ def criar_tabelas():
 
 #operações de usuários
 def inserir_usuario(dados): 
-
-      cursor.execute("INSERT INTO usuarios (nome, email, telefone, cpf, nivel, senha ) VALUES (%s, %s, %s, %s, %s, %s);",
-                        (dados["nome"],  dados["email"], dados["telefone"], dados["cpf"],dados["nivel"], generate_password_hash(dados["senha"]) ))
-      con.commit()
-      return jsonify({"message": 'Cadastrado com sucesso.'}), 201
-
-def atualizar_usuario(dados):
-      cursor.execute("UPDATE usuarios SET nome = %s, email = %s, telefone = %s, cpf =%s, nivel = %s, senha = %s WHERE id_usuario =%s",
-                              (dados["nome"], dados["email"], dados["telefone"], dados["cpf"], dados["nivel"],generate_password_hash(dados["senha"]), dados["id_usuario"]))
-      con.commit()
-      return jsonify({"message": "Atualizado com sucesso.", "dados": dados}), 200 
+     cursor.execute("SELECT * FROM  usuarios where  email = %s",(dados ['email'],))
+     linhas = cursor.fetchall()
+     if len(linhas) == 0:
+            cursor.execute("INSERT INTO usuarios (nome, email, telefone, cpf, nivel, senha ) VALUES (%s, %s, %s, %s, %s, %s);",
+                    (dados["nome"],  dados["email"], dados["telefone"], dados["cpf"],dados["nivel"], generate_password_hash(dados["senha"]) ))
+            con.commit()
+            return jsonify({"message": 'Cadastrado com sucesso.'}), 201
+     else:
+             return jsonify({"msg":'O e-mail já existe'})
+    
 
 def deletar_usuario(id_usuario):
     try:
@@ -71,12 +70,18 @@ def deletar_usuario(id_usuario):
 
         return jsonify({"message": "Excluido com sucesso."}), 200
     
+    
+    except psycopg2.IntegrityError as e:
+         con.rollback()
+         return jsonify({"message": "O dado que você selecionou está integrado a outras tabelas.", "error": str(e)}), 500
+
     except Exception as e:
-        return jsonify({"message": "Erro ao excluir o usuário.", "error": str(e)}), 500
+        con.rollback()
+        return jsonify({"message": "Erro ao excluir.", "error": str(e)}), 500
+    
     finally:
-            if con: 
-                  #con.close()
-                  pass
+        if con:
+            pass
 
 def listar_usuarios():
        cursor.execute("SELECT * FROM usuarios")

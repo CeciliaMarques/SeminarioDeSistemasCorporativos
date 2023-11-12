@@ -25,7 +25,7 @@ class CadastroProduto extends BaseController
         $idP = $id;
         $ch = curl_init();
         curl_setopt_array($ch, [
-          CURLOPT_URL => 'http://127.0.0.1:5000/listar/produto/' . $idP,
+          CURLOPT_URL => 'http://api:5000/listar/produto/' . $idP,
           CURLOPT_CUSTOMREQUEST => 'GET',
           CURLOPT_RETURNTRANSFER => true,
           CURLOPT_SSL_VERIFYPEER => false
@@ -40,7 +40,7 @@ class CadastroProduto extends BaseController
   
       $ch = curl_init();
       curl_setopt_array($ch, [
-        CURLOPT_URL => 'http://127.0.0.1:5000/listar/produtos',
+        CURLOPT_URL => 'http://api:5000/listar/produtos',
         CURLOPT_CUSTOMREQUEST => 'GET',
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_SSL_VERIFYPEER => false
@@ -51,7 +51,7 @@ class CadastroProduto extends BaseController
 
       $catg = curl_init();
       curl_setopt_array( $catg, [
-        CURLOPT_URL => 'http://127.0.0.1:5000/listar/categorias',
+        CURLOPT_URL => 'http://api:5000/listar/categorias',
         CURLOPT_CUSTOMREQUEST => 'GET',
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_SSL_VERIFYPEER => false
@@ -102,7 +102,7 @@ class CadastroProduto extends BaseController
      
       $ch = curl_init();
       curl_setopt_array($ch, [
-        CURLOPT_URL => 'http://127.0.0.1:5000/inserir/produto',
+        CURLOPT_URL => 'http://api:5000/inserir/produto',
         CURLOPT_CUSTOMREQUEST => 'POST',
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_POSTFIELDS => $x,
@@ -124,7 +124,7 @@ class CadastroProduto extends BaseController
     {
       $ch = curl_init();
       curl_setopt_array($ch, [
-        CURLOPT_URL => 'http://127.0.0.1:5000/deletar/produto/'. $id,
+        CURLOPT_URL => 'http://api:5000/deletar/produto/'. $id,
         CURLOPT_CUSTOMREQUEST => 'DELETE',
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_HTTPHEADER => [
@@ -147,7 +147,7 @@ class CadastroProduto extends BaseController
       $x = json_encode($_POST); 
       $ch = curl_init();
       curl_setopt_array($ch, [
-        CURLOPT_URL => 'http://127.0.0.1:5000/atualizar/produto',
+        CURLOPT_URL => 'http://api:5000/atualizar/produto',
         CURLOPT_CUSTOMREQUEST => 'PUT',
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_POSTFIELDS => $x,

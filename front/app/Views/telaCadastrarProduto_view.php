@@ -48,10 +48,7 @@
                 <a class="nav-link" Style="color: #white; font-size: 20px;" href="<?= site_url("contaUsuario"); ?>">Minha Conta</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" Style="color: #white; font-size: 20px;" href="<?= site_url("listagemPedidosFinalizadosAdminPizza"); ?>">Pedidos de Pizzas Finalizados</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" Style="color: #white; font-size: 20px;" href="<?= site_url("listagemPedidosFinalizadosAdminBebida"); ?>">Pedidos de Bebidas Finalizados</a>
+                <a class="nav-link" Style="color: #white; font-size: 20px;" href="<?= site_url("listagemPedidosFinalizadosAdmin"); ?>">Lista de Pedidos Finalizados</a>
               </li>
             </ul>
           </div>
@@ -140,7 +137,7 @@
   <div class="title-bullet"><span> </span></div>
   <div>
     <div class="container">
-      <h2 class="display-4" style="font-size: 35px;">Lista de Bebidas</h2>
+      <h2 class="display-4" style="font-size: 35px;">Lista de Produtos</h2>
       <div class="table-responsive">
         <table class="table">
           <thead>

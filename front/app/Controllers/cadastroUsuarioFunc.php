@@ -13,7 +13,7 @@ class CadastroUsuarioFunc extends BaseController
 
     $ch = curl_init();
     curl_setopt_array($ch, [
-      CURLOPT_URL => 'http://127.0.0.1:3000/inserir/usuario',
+      CURLOPT_URL => 'http://api:5000/inserir/usuario',
       CURLOPT_CUSTOMREQUEST => 'POST',
       CURLOPT_RETURNTRANSFER => true,
       CURLOPT_POSTFIELDS => $x,
@@ -23,6 +23,16 @@ class CadastroUsuarioFunc extends BaseController
     ]);
     $resposta = curl_exec($ch);
     curl_close($ch);
+
+    $respostaArray = json_decode($resposta, true);
+    if(!empty($respostaArray['message']) && $respostaArray ['message'] == 'Cadastrado com sucesso.'){
+      $this->session->setFlashdata('success', 'Cadastrado com sucesso.');
+      return redirect()->to(site_url("CadastroUsuarioFunc/index"));
+    }
+    else{
+      $this->session->setFlashdata('erro', 'O e-mail já existe.');
+      return redirect()->to(site_url("CadastroUsuarioFunc/index/"));
+    }
     return view("telaAutoCadastro_view");
   }
 }

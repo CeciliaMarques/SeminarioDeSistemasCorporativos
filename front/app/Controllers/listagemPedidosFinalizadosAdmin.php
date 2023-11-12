@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-class ListagemPedidosFinalizadosAdminPizza extends BaseController
+class ListagemPedidosFinalizadosAdmin extends BaseController
 {
 
 
@@ -23,7 +23,7 @@ class ListagemPedidosFinalizadosAdminPizza extends BaseController
     $arr['listagem'] = json_decode(curl_exec($ch), true);
     curl_close($ch);
 
-    return view("telaPedidosFinalizadosPizzaAdmin_view", $arr);
+    return view("TelaPedidosFinalizadosPedidosAdmin_view", $arr);
 
 }
 
@@ -42,6 +42,6 @@ public function deletar($id)
 
   $response = curl_exec($ch);
   curl_close($ch);
-  return redirect()->to(site_url('listagemPedidosFinalizadosAdminPizza/index/'));
+  return redirect()->to(site_url('listagemPedidosFinalizadosAdmin/index/'));
 }
 }

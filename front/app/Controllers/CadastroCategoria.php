@@ -23,9 +23,12 @@ class CadastroCategoria extends BaseController
           $idC = $id;
           $ch = curl_init();
           curl_setopt_array($ch, [
-            CURLOPT_URL => 'http://127.0.0.1:5000/listar/categoria/' . $idC,
+            CURLOPT_URL => 'http://api:5000/listar/categoria/' . $idC,
             CURLOPT_CUSTOMREQUEST => 'GET',
             CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_HTTPHEADER => [
+              'Authorization: Bearer ' . $_SESSION['user']['token'] // Adicione o token ao cabeçalho
+          ],
             CURLOPT_SSL_VERIFYPEER => false
     
           ]);
@@ -40,7 +43,7 @@ class CadastroCategoria extends BaseController
     
         $ch = curl_init();
         curl_setopt_array($ch, [
-          CURLOPT_URL => 'http://127.0.0.1:5000/listar/categorias',
+          CURLOPT_URL => 'http://api:5000/listar/categorias',
           CURLOPT_CUSTOMREQUEST => 'GET',
           CURLOPT_RETURNTRANSFER => true,
           CURLOPT_SSL_VERIFYPEER => false
@@ -88,7 +91,7 @@ class CadastroCategoria extends BaseController
         $x = json_encode($_POST);
         $ch = curl_init();
         curl_setopt_array($ch, [
-          CURLOPT_URL => 'http://127.0.0.1:5000/inserir/categoria',
+          CURLOPT_URL => 'http://api:5000/inserir/categoria',
           CURLOPT_CUSTOMREQUEST => 'POST',
           CURLOPT_RETURNTRANSFER => true,
           CURLOPT_POSTFIELDS =>$x,
@@ -110,7 +113,7 @@ class CadastroCategoria extends BaseController
       {
         $ch = curl_init();
         curl_setopt_array($ch, [
-          CURLOPT_URL => 'http://127.0.0.1:5000/deletar/categoria/' . $id,
+          CURLOPT_URL => 'http://api:5000/deletar/categoria/' . $id,
           CURLOPT_CUSTOMREQUEST => 'DELETE',
           CURLOPT_RETURNTRANSFER => true,
           CURLOPT_HTTPHEADER => [
@@ -134,7 +137,7 @@ class CadastroCategoria extends BaseController
     
         $ch = curl_init();
         curl_setopt_array($ch, [
-          CURLOPT_URL => 'http://127.0.0.1:5000/atualizar/categoria',
+          CURLOPT_URL => 'http://api:5000/atualizar/categoria',
           CURLOPT_CUSTOMREQUEST => 'PUT',
           CURLOPT_RETURNTRANSFER => true,
           CURLOPT_POSTFIELDS =>$x,

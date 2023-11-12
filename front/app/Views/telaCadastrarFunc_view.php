@@ -48,10 +48,7 @@
                 <a class="nav-link" Style="color: #white; font-size: 20px;" href="<?= site_url("contaUsuario"); ?>">Minha Conta</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" Style="color: #white; font-size: 20px;" href="<?= site_url("listagemPedidosFinalizadosAdminPizza"); ?>">Pedidos de Pizzas Finalizados</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" Style="color: #white; font-size: 20px;" href="<?= site_url("listagemPedidosFinalizadosAdminBebida"); ?>">Pedidos de Bebidas Finalizados</a>
+                <a class="nav-link" Style="color: #white; font-size: 20px;" href="<?= site_url("listagemPedidosFinalizadosAdmin"); ?>">Lista de Pedidos Finalizados</a>
               </li>
             </ul>
           </div>
@@ -61,6 +58,7 @@
   </header>
   <div id="empresa" style="padding:20px;margin:1px;">
     <span style='color:blue;'><?= session("success"); ?></span>
+    <span style='color:red;'><?= session("erro"); ?></span>
     <form class="register-form" action="<?= site_url("cadastroFunc/getPost") ?>" method="POST" enctype="multipart/form-data">
       <h2 class="display-4" style="font-size: 35px;">Cadastro de Funcionário</h2>
       <fieldset>
