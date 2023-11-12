@@ -33,7 +33,7 @@ jobs:
             php-intl \
             php-curl
       - name: Change to the "front" directory
-        run: cd SeminarioDeSistemasCorporativos/front
+        run: cd ./SeminarioDeSistemasCorporativos/front
 #instalar dependencias
       - name: Install Dependencies
         run: composer install --no-interaction --prefer-dist
