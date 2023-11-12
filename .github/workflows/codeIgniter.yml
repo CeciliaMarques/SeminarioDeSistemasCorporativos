@@ -37,8 +37,7 @@ jobs:
       - name: Install Dependencies
         uses: php-actions/composer@v6
         with:
-          path: /tmp/composer-cache
-          key: ${{ runner.os }}-${{ hashFiles('**/composer.lock') }}
+          working_dir: SeminarioDeSistemasCorporativos/front
 #hospedar CodeIgniter
       - name: Deploy CodeIgniter App
         run: |
