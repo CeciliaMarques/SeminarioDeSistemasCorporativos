@@ -35,11 +35,14 @@ jobs:
 
 #instalar dependencias
       - name: Install Dependencies
-        run: composer install 
+        run: |
+          cd path/SeminarioDeSistemasCorporativos/front/  # Substitua pelo caminho correto
+          composer install --no-interaction --prefer-dist
 #hospedar CodeIgniter
       - name: Deploy CodeIgniter App
         run: |
+          # Exemplo
           # cp .env.example .env
           # php spark serve
-          #colocar credencias da hospedagem
+          # colocar credencias da hospedagem
  
