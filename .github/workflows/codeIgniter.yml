@@ -37,7 +37,7 @@ jobs:
       - name: Install Dependencies
         uses: php-actions/composer@v6
         with:
-          working_dir: CeciliaMarques/SeminarioDeSistemasCorporativos/front/
+          working_dir: CeciliaMarques/SeminarioDeSistemasCorporativos/front
 #hospedar CodeIgniter
       - name: Deploy CodeIgniter App
         run: |
