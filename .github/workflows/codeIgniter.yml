@@ -35,9 +35,10 @@ jobs:
 
       - name: Build and run PHP front-end
         run: |
-            cd path SeminarioDeSistemaCorporativos/front    
+            cd path/SeminarioDeSistemasCorporativos/front
             composer install
-        working-directory: path/SeminarioDeSistemaCorporativos/front   
+        working-directory: path/SeminarioDeSistemasCorporativos/front
+
 # #instalar dependencias
 #       - name: Install Dependencies
 #         run: composer install --no-interaction --prefer-dist
