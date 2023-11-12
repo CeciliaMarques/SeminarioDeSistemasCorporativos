@@ -38,9 +38,9 @@ jobs:
               cd path/front    
               composer install
           working-directory: path/front       
-#instalar dependencias
-      - name: Install Dependencies
-        run: composer install --no-interaction --prefer-dist
+# #instalar dependencias
+#       - name: Install Dependencies
+#         run: composer install --no-interaction --prefer-dist
 #hospedar CodeIgniter
       - name: Deploy CodeIgniter App
         run: |
