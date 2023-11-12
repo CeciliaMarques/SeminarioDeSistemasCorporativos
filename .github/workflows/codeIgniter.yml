@@ -35,7 +35,7 @@ jobs:
 
 #instalar dependencias
       - name: Install Dependencies
-        run: composer install --no-interaction --prefer-dist
+        run: composer install 
 #hospedar CodeIgniter
       - name: Deploy CodeIgniter App
         run: |
