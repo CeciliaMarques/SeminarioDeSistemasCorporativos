@@ -35,10 +35,10 @@ jobs:
 
 #instalar dependencias
       - name: Install Dependencies
-         uses: php-actions/composer@v6
-          with:
-        path: /tmp/composer-cache
-        key: ${{ runner.os }}-${{ hashFiles('**/composer.lock') }}
+        uses: php-actions/composer@v6
+        with:
+          path: /tmp/composer-cache
+          key: ${{ runner.os }}-${{ hashFiles('**/composer.lock') }}
 #hospedar CodeIgniter
       - name: Deploy CodeIgniter App
         run: |
