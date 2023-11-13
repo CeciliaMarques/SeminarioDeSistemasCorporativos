@@ -22,9 +22,10 @@ class App extends BaseConfig
      * environments.
      *
      * @var string
+     * @var string
      */
    # public $baseURL ='http://localhost/projeto6p/SeminarioDeSistemasCorporativos/front';
-    public $baseURL = 'https://5e1c-45-225-60-138.ngrok-free.app';
+    public $baseURL = 'https://localhost/';
 
 
     /**

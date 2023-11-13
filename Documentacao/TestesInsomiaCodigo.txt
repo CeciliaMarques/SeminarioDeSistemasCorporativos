@@ -1,0 +1,26 @@
+
+//http://localhost:5000/inserir/categoria
+
+const response1 = await insomnia.send();
+const body = JSON.parse(response1.data);
+expect(body.nome).to.equal("Sorvetes");
+expect(body.descricao).to.equal("Sorvete de Casquinha");
+
+
+//http://localhost:5000/atualizar/categoria
+const response1 = await insomnia.send();
+expect(response1.status).to.equal(200);
+
+//http://localhost:5000/inserir/categoria
+const response = await insomnia.send();
+expect(response.data).to.be.an('string');
+
+
+//http://localhost:5000/listar/usuarios
+const response = await insomnia.send();
+const body = JSON.parse(response.data);
+const item = body[0];
+console.log(item);
+expect(body).to.be.an('array');
+expect(item).to.be.an('object');
+expect(item).to.have.property('email');
