@@ -121,6 +121,12 @@ def listar_produto(id_produto):
     resposta = con.listar_produto(id_produto)
     return resposta
 
+@app.route("/listar/categoria/produtos/<id_categoria>",methods=["GET"])
+def listar_categoria_produto(id_categoria):    
+    con  = conexao
+    resposta = con.listar_categoria_produto(id_categoria)
+    return resposta
+
 @app.route("/deletar/produto/<id_produto>",methods=["DELETE"])
 @jwt_required()
 def deletar_produto(id_produto):    

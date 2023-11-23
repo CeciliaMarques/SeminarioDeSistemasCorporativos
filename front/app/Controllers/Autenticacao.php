@@ -35,7 +35,7 @@ class Autenticacao extends BaseController
     $payload = $client->verifyIdToken($_POST["credential"]);
     //verifica os dados do payload
     if (isset($payload["email"])) {
-      PedidosUsuarios::login($payload["name"], $payload["email"], $payload["picture"]);
+      CardapioCliente::login($payload["name"], $payload["email"], $payload["picture"]);
       return redirect()->to(site_url("home/loginGoogleAtivo"));
       exit;
     } else {

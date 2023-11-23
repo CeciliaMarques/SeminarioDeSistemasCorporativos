@@ -64,7 +64,7 @@
         <div class="form-row">
           <div class="form-group">
             <label for="id"></label>
-            <input type="hidden" id="id_func" class="form-control" name="id_usuariof">
+            <input type="hidden" id="id_func" class="form-control" name="id_usuario">
             <input type="hidden" id="id_pizza" class="form-control" name="id_categoria" value="<?= $dados['id_categoria']; ?>">
           </div>
           <div class="col-12 col-sm-12 col-md-12">
@@ -77,7 +77,7 @@
           <div class="col-12 col-sm-12 col-md-12" required>
             <div id="lp-telnumber-wrapper">
               <label for="descricao"><b>Descrição*</b></label>
-              <input type="text" class="form-control" id="descricao" name="descricao" placeholder="descricao" value="<?= $dados['descricao']; ?>" required>
+              <input type="text" class="form-control" id="descricao" name="descricao" placeholder="descrição" value="<?= $dados['descricao']; ?>" required>
             </div>
             <div style='color:blue;'></div>
           </div>

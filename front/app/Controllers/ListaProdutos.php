@@ -2,25 +2,15 @@
 
 namespace App\Controllers;
 
-class FinalizarPedidosBebida extends BaseController
+class ListaProdutos extends BaseController
 {
 
-public function index($id = null )
+public function index($id = null)
     {  
 
-        $usuarioModel = new \App\Models\UsuarioModel();
-        // if ($_GET == null) {
-        //   $arr['dados']['id_pizza'] = -1;
-        //   $arr['dados']['sabor_pizza'] = '';
-        //   $arr['dados']['valor'] = 0;
-        //   $arr['dados']['tamanho'] = '';
-      
-        // }
-        // if ($id != null &&  $id>-1) {
-          $idP = $id;
           $ch = curl_init();
           curl_setopt_array($ch, [
-            CURLOPT_URL => 'http://127.0.0.1:5000/bebida/' . $idP,
+            CURLOPT_URL => 'http://api:5000/listar/categoria/produtos/' .$id,
             CURLOPT_CUSTOMREQUEST => 'GET',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_SSL_VERIFYPEER => false
@@ -28,20 +18,22 @@ public function index($id = null )
           ]); 
                 $arr = json_decode(curl_exec($ch), true);
                 curl_close($ch);
-                $arr['dados'] = $arr[0];
-                $_SESSION['dados'] = $arr;
+                // dd( $arr);
+                if(empty($arr)){
+                  $arr['listagem'] =[];
+                }else{
+                $arr['listagem'] = $arr;
+            
+                // $_SESSION['dados'] = $arr;
                
-               
-                $arr['tipoEntrega'] = $usuarioModel->tipoEntrega;
-                $arr['formaPg'] = $usuarioModel->formaPg;
-                
-              return view('telaPedidoBebida_view', $arr);
+                }
+              return view('telaListaProdutosCardapio_view', $arr);
             // return view('telaCardapioPizza_view');
         }
       
         public function getPost(){ 
           $x = $_POST;
-          $id = $_POST['id_bebida'];
+          $id = $_POST['id_categoria'];
           if (isset($_POST['salvar']) == 'salvar'){
              $this->salvar();
              $this->session->setFlashdata('success', 'Pedido salvo com sucesso.');
@@ -73,8 +65,7 @@ public function index($id = null )
               CURLOPT_SSL_VERIFYPEER => false
         
         
-            ]);
-        
+            ]);        
             $resposta = curl_exec($ch);
             curl_close($ch);
             return redirect()->to(site_url("FinalizarPedidosBebida/index/$id"));

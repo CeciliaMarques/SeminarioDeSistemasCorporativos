@@ -252,6 +252,17 @@ def listar_produto(id_produto):
                   # chaves = {}  
        return jsonify(vetor) 
 
+def listar_categoria_produto(id_categoria):
+       cursor.execute("SELECT * FROM produtos WHERE  id_categoria=\'{}\'".format(id_categoria))
+       linhas = cursor.fetchall()
+       vetor = []
+       chaves = {}
+       for resultado in linhas:
+          chaves = {"id_produto": resultado[0], "nome": resultado[1], "id_categoria": resultado[2], "unidade_medida":resultado[3], "valor":resultado[4]} 
+          vetor.append(chaves) 
+                  # chaves = {}  
+       return jsonify(vetor) 
+
 #operações de pedidos
 def inserir_pedido(dados): 
 

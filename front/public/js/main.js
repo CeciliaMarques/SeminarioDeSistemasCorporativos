@@ -93,6 +93,11 @@ $(document).ready(function() {
      $("#verificarEmail").keyup(verificarEmail); 
      $("#cep").mask("99.999-999");  /// a mascara do cep
      $("#cpf").mask("000.000.000-00");
-})
+});
 
- 
+function redirecionarCategoria(selectElement) {
+    var selectedUrl = selectElement.value;
+    if (selectedUrl) {
+      window.location.href = selectedUrl;
+    }
+  }

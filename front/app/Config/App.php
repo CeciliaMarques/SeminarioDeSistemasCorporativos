@@ -24,8 +24,8 @@ class App extends BaseConfig
      * @var string
      * @var string
      */
-   # public $baseURL ='http://localhost/projeto6p/SeminarioDeSistemasCorporativos/front';
-    public $baseURL = 'https://localhost/';
+   public $baseURL ='http://localhost';
+    #public $baseURL = 'https://localhost/';
 
 
     /**

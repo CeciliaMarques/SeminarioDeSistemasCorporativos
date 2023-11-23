@@ -13,9 +13,9 @@ class Home extends BaseController
 
    public function loginGoogleAtivo()
    {
-      if (PedidosUsuarios::logado() === true) {
+      if (CardapioCliente::logado() === true) {
 
-         return redirect()->to(site_url("PedidosUsuarios/index/"));
+         return redirect()->to(site_url("CardapioCliente/index/"));
       } else {
 
          return redirect()->to(site_url("Home"));
@@ -90,7 +90,7 @@ class Home extends BaseController
 
    public function logout()
    {
-      session_destroy();
+      unset($_SESSION['usuario']);
       return redirect()->to(site_url("home"));
    }
 }
