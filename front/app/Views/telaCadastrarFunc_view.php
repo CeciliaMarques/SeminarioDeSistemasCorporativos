@@ -27,8 +27,13 @@
           <button aria-controls="navbarTogglerDemo03" style="background-color: #B22222;border: 1px solid black; color:white;" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarTogglerDemo03" data-toggle="collapse" type="button"><i aria-hidden="true" class="fa fa-bars"></i></button> <a class="navbar-brand" href="#">
             <img alt="koolmj" class="img-fluid" src="<?= base_url('public/assets/img/logo_pizzaria.png') ?>" width="300px" height="300px"></a>
           <div class="km-navbar-brand-btn-container">
-            <a class="km-navbar-brand-btn-container" style="background-color: #B22222; border: 1px solid black; color:white; font-size: 20px;" href='<?= site_url("home/logout") ?>'>Sair</a>
+            <a class="km-navbar-brand-btn-container" style="background-color: #B22222; border: 1px solid black; color:white; font-size: 20px;" href='<?= site_url("home/logout") ?>'>Sair <label id="logado"></a>
           </div>
+          <div class="km-navbar-brand-btn-container" style="padding-top: 50px;">
+          </div>
+          <h5 id="logado">
+              <? echo $_SESSION["user"]["email"] ?>
+            </h5>
         </div>
       </div>
       <div class="km-navbar-menu" style="background-color:#B22222; ">
@@ -96,7 +101,7 @@
             <div style='color:blue;'></div>
           </div>
           <div class="col-6 col-sm-6 col-md-6" required>
-            <div id="lp-telnumber-wrapper">
+            <div id="nivel">
               <label for="nivel"><b>Nível</b></label>
               <select name="nivel" class="form-control mb-3">
                 <?php
@@ -129,7 +134,7 @@
 
           <div class="col-4 col-sm-4 col-md-4">
             <div id="lp-name-wrapper">
-              <button type="submit" name="salvar" value="salvar" style="background-color: #B22222; border-color:#B22222;" class="btn btn-primary btn-block">Salvar</button>
+              <button type="submit" name="salvar" id="salvar" value="salvar" style="background-color: #B22222; border-color:#B22222;" class="btn btn-primary btn-block">Salvar</button>
             </div>
           </div>
 

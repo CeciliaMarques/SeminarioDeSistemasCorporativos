@@ -135,7 +135,7 @@ def deletar_produto(id_produto):
     return resposta
 
 ########## Rotas  de Pedidos ##########
-@app.route("/inserir/pedido",  methods=['POST'])
+@app.route("/inserir/pedido",methods=['POST'])
 def inserir_pedido():    
     con  = conexao
     dados = request.get_json(force=True)

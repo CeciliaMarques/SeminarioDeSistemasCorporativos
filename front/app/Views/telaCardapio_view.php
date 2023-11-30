@@ -9,6 +9,7 @@
   <link rel="stylesheet" type="text/css" href="<?= base_url('/https://fonts.googleapis.com/css?family=Roboto:400,300,700,400italic,300italic,700italic') ?>">
   <link rel="stylesheet" type="text/css" href="<?= base_url('public/assets/fonts/fontawesome-all.min.css') ?>">
   <link rel="stylesheet" type="text/css" href="<?= base_url('public/assets/fonts/font-awesome.min.css') ?>">
+  <link rel="stylesheet" type="text/css" href="<?= base_url('../public/bootstrap-icons/font/bootstrap-icons.min.css') ?>">
   <link rel="stylesheet" type="text/css" href="<?= base_url('public/assets/fonts/simple-line-icons.min.css') ?>">
   <link rel="stylesheet" type="text/css" href="<?= base_url('public/assets/fonts/fontawesome5-overrides.min.css') ?>">
   <link rel="stylesheet" type="text/css" href="<?= base_url('public/assets/css/Google-Style-Login.css') ?>">
@@ -17,7 +18,6 @@
   <link rel="stylesheet" type="text/css" href="<?= base_url('public/assets/css/styles.css') ?>">
   <link rel="stylesheet" type="text/css" href="<?= base_url('public/assets/css/title-bullets.css') ?>">
   <link rel="stylesheet" type="text/css" href="<?= base_url('public/assets/css/TR-Form.css') ?>">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 </head>
 
 <body>
@@ -26,15 +26,10 @@
       <div class="km-navbar-brand text-lg-center">
         <div class="container">
           <button aria-controls="navbarTogglerDemo03" style="background-color: #B22222;border: 1px solid black; color:white;" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarTogglerDemo03" data-toggle="collapse" type="button"><i aria-hidden="true" class="fa fa-bars"></i></button> <a class="navbar-brand" href="#">
-            <img alt="koolmj" class="img-fluid" src="<?= base_url('public/assets/img/logo_pizzaria.png') ?>" width="300px" height="300px"></a>
+            <img alt="koolmj" class="img-fluid" src="<?= base_url('public/assets/img/logo_pizzaria.png') ?>" width="200px" height="300px"></a>
           <div class="km-navbar-brand-btn-container">
             <div class="km-navbar-brand-btn-container">
-              <?php if ($_SESSION["usuario"]["foto"] != "") : ?>
-                <img class="rounded-circle" src="<?= $_SESSION['usuario']['foto'] ?>" width="60px" height="60px">
-              <?php endif; ?>
-              <?php if ($_SESSION["usuario"]['foto'] == "") : ?>
-                <img class="rounded-circle img-thumbnail" src="<?= base_url("public/assets/img/avatarCor.png") ?>" width="60px" height="10px">
-              <?php endif; ?>
+              <!--Colocar a foto -->
               </br>
               <label><b><a style="background-color:#B22222; border-color:black; color:white " href='<?= site_url("home/logout") ?>'>Sair</a></b></label>
             </div>
@@ -45,7 +40,7 @@
             <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
               <ul class="navbar-nav m-auto">
                 <li class="nav-item">
-                  <a class="nav-link" Style="color: #white; font-size: 20px;" href="<?= site_url("CardapioCliente"); ?>">Categorias de Produtos</a>
+                  <a class="nav-link" Style="color: #white; font-size: 20px;" href="<?= site_url("CardapioCliente"); ?>">Produtos</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" Style="color: #white; font-size: 20px;" href="<?= site_url("ProdutosAdicionados"); ?>">Produtos Adiconados</a>
@@ -90,7 +85,7 @@
               <th style="font-size: 20px;">Produto</th>
               <th style="font-size: 20px;">Unidade de Medida</th>
               <th style="font-size: 20px;">Valor</th>
-              <th style="font-size: 20px;"></th>
+              <th style="font-size: 20px;">Adicionar</th>
 
             </tr>
           </thead>
@@ -101,8 +96,7 @@
                 <td style="line-height: 60px;font-size: 15px;"><?php print $item["nome"] ?></td>
                 <td style="line-height: 60px;font-size: 15px;"><?php print $item["unidade_medida"] ?></td>
                 <td style="line-height: 60px;font-size: 15px;"><?php print str_replace('.', ',', $item["valor"]) ?></td>
-                <td> <a href='<?= site_url("ProdutosAdicionados/adicionarItens/{$item['id_produto']}") ?>'><button class="btn btn-primary btn-block
-                   text-center d-block pull-right" type="button" style="height: 61px;background-color: #0b7442;">Adicionar</button></a></td>
+                <td> <a  id="adicionar_carrinho"  href='<?= site_url("ProdutosAdicionados/adicionarItens/{$item['id_produto']}") ?>'><i class="bi bi-cart-plus" style="font-size: 35px; color: #0b7442;"></i></button></a></td>
 
               <?php endforeach; ?>
               </td>
@@ -138,8 +132,6 @@
   <script src="<?= base_url("public/js/main.js") ?>"></script>
   <script src='<?= base_url("public/assets/js/jquery.min.js") ?>'></script>
   <script src='<?= base_url("public/assets/bootstrap/js/bootstrap.min.js") ?>'></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 </body>
 
 </html>

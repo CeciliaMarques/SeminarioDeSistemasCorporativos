@@ -36,19 +36,32 @@ def criar_tabelas():
       cursor.execute("CREATE TABLE IF NOT EXISTS produtos (id_produto serial PRIMARY KEY, nome VARCHAR(50), id_categoria INTEGER, unidade_medida VARCHAR, valor NUMERIC,"
                      "FOREIGN KEY(id_categoria) REFERENCES categorias);")
       
-      cursor.execute("CREATE TABLE IF NOT EXISTS pedidos(id_pedido serial PRIMARY KEY, "
-                          " nome_cliente VARCHAR(40), email VARCHAR(40),"
-                           "id_produto INTEGER, id_usuario INTEGER, medida VARCHAR, tipo_entrega VARCHAR(40),"
-                           "forma_pg VARCHAR, total_pg NUMERIC, cep VARCHAR(20),"
-                           "rua VARCHAR(50), num INTEGER, bairro VARCHAR(40), municipio VARCHAR, uf VARCHAR(2), referencia VARCHAR,"
-                           "produto VARCHAR(40), status VARCHAR,finalizar_pedido VARCHAR(10)," 
-                           "nome_fun VARCHAR(40), data_pedido TIMESTAMP, quant INTEGER, "
-                           "FOREIGN KEY(id_usuario) REFERENCES usuarios,"
-                           "FOREIGN KEY(id_produto) REFERENCES produtos);")
-
-    # Commit (salvar) as mudanças
+      cursor.execute("CREATE TABLE IF NOT EXISTS pedidos(id_pedido serial PRIMARY KEY,"
+                        "nome_cliente VARCHAR(40), email VARCHAR(40),"
+                        "id_usuario INTEGER,  tipo_entrega VARCHAR(40),"
+                        "forma_pg VARCHAR, cep VARCHAR(20),"
+                        "rua VARCHAR(50), num INTEGER, bairro VARCHAR(40), municipio VARCHAR, "
+                        "uf VARCHAR(2), referencia VARCHAR, status VARCHAR,"
+                        "finalizar_pedido VARCHAR(10),nome_fun VARCHAR(40),"
+                        "id_produto INTEGER,produto VARCHAR(40), medida VARCHAR(40), total_pg NUMERIC, quant INTEGER," 
+                        "data_hora  TIMESTAMP DEFAULT CURRENT_TIMESTAMP, "
+                        "FOREIGN KEY(id_produto) REFERENCES produtos);")
       con.commit()
       return jsonify("Criei as tabelas") 
+    
+    
+    #   cursor.execute("CREATE TABLE IF NOT EXISTS pedidos(id_pedido serial PRIMARY KEY,"
+    #                     "nome_cliente VARCHAR(40), email VARCHAR(40),"
+    #                     "id_usuario INTEGER, tipo_entrega VARCHAR(40),forma_pg VARCHAR, cep VARCHAR(20),"
+    #                     "rua VARCHAR(50), num INTEGER, bairro VARCHAR(40), municipio VARCHAR, uf VARCHAR(2), referencia VARCHAR,"
+    #                     "status VARCHAR, finalizar_pedido VARCHAR(10),nome_fun VARCHAR(40),produto VARCHAR(40),"
+    #                     "id_produto INTEGER,  quant INTEGER, medida VARCHAR(40), total_pg NUMERIC," 
+    #                     " data_hora  TIMESTAMP DEFAULT CURRENT_TIMESTAMP, "
+    #                     "FOREIGN KEY(id_produto) REFERENCES produtos);")  
+
+    # Commit (salvar) as mudanças
+    #   con.commit()
+    #   return jsonify("Criei as tabelas") 
 
 #operações de usuários
 def inserir_usuario(dados): 
@@ -264,20 +277,53 @@ def listar_categoria_produto(id_categoria):
        return jsonify(vetor) 
 
 #operações de pedidos
+
+# def inserir_pedido(dados): 
+
+#       cursor.execute("INSERT INTO pedidos (nome_cliente, email, id_produto, id_usuario, medida,"
+#                      "tipo_entrega, forma_pg, total_pg, cep, rua, num, bairro, municipio, uf, referencia,"
+#                      "produto, status, finalizar_pedido, nome_fun, quant) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);",
+#                      (dados["nome_cliente"], dados["email"], dados["id_produto"], dados["id_usuario"],
+#                       dados["medida"], dados["tipo_entrega"], dados["forma_pg"], dados["total_pg"],
+#                       dados["cep"], dados["rua"], dados["num"], dados["bairro"], dados["municipio"],
+#                       dados["uf"], dados["referencia"], dados["produto"], dados["status"], dados["finalizar_pedido"],
+#                       dados["nome_fun"],dados["quant"]))
+#       con.commit()
+#       return jsonify({"message": "Pedido cadastrado com sucesso."}), 201
+
 def inserir_pedido(dados): 
 
-      cursor.execute("INSERT INTO pedidos (nome_cliente, email, id_produto, id_usuario, medida,"
-                     "tipo_entrega, forma_pg, total_pg, cep, rua, num, bairro, municipio, uf, referencia,"
-                     "produto, status, finalizar_pedido, nome_fun, data_pedido, quant) VALUES (%s, %s, %s, %s, %s,"
-                     " %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);",
-                        (dados["nome_cliente"],  dados["email"], dados["id_produto"], dados["id_usuario"],
-                         dados["medida"], dados["tipo_entrega"], dados["forma_pg"], dados["total_pg"],
-                         dados["cep"], dados["rua"], dados["num"], dados["bairro"], dados["municipio"],
-                         dados["uf"], dados["referencia"], dados["produto"], dados["status"], dados["finalizar_pedido"],
-                         dados["nome_fun"], dados["data_pedido"], dados["quant"]))
-      con.commit()
-      return jsonify({"message": "Pedido cadastrado com sucesso."}), 201
+        nome_cliente = dados["nome_cliente"]
+        email = dados["email"]
+        id_usuario = dados["id_usuario"]
+        tipo_entrega = dados["tipo_entrega"]
+        forma_pg = dados["forma_pg"]
+        cep = dados["cep"]
+        rua = dados["rua"]
+        num = dados["num"]
+        bairro = dados["bairro"]
+        municipio = dados["municipio"]
+        uf = dados["uf"]
+        referencia = dados["referencia"]
+        status = dados["status"]
+        finalizar_pedido = dados["finalizar_pedido"]
+        nome_fun = dados["nome_fun"]
 
+        produtos = dados["produtos"]
+        for produto in produtos:
+         cursor.execute("INSERT INTO pedidos (nome_cliente, email, id_usuario,"
+                     "tipo_entrega, forma_pg,cep, rua, num, bairro, municipio, uf, referencia, status,"
+                     "finalizar_pedido, nome_fun, id_produto, produto, medida, total_pg, quant)"
+                     "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);",
+                     (nome_cliente,  email, id_usuario, tipo_entrega,
+                      forma_pg, cep, rua, num, bairro, municipio,
+                      uf, referencia, status, finalizar_pedido,nome_fun,
+                      produto["id_produto"], produto["produto"], produto["medida"],
+                      produto["total_pg"], produto["quant"]))
+        con.commit()
+        return jsonify({"message": "Pedido cadastrado com sucesso."}), 201
+    
+ #atualizar tem que refazer
 def atualizar_pedido(dados):
       cursor.execute("UPDATE pedidos SET nome_cliente = %s, email = %s, id_produto = %s, id_usuario = %s, medida = %s,"
                      "tipo_entrega = %s, forma_pg = %s, total_pg = %s, cep = %s, rua = %s, num = %s, bairro = %s, municipio = %s," 
@@ -317,11 +363,11 @@ def listar_pedidos():
        chaves = {}
        for resultado in linhas:
           chaves = {"id_pedido": resultado[0], "nome_cliente": resultado[1], "email": resultado[2],
-                     "id_produto":resultado[3], "id_usuario":resultado[4],"medida":resultado[5], 
-                     "tipo_entrega":resultado[6], "forma_pg":resultado[7], "total_pg":resultado[8],
-                     "cep":resultado[9], "rua":resultado[10], "num":resultado[11],"bairro":resultado[12],
-                     "municipio":resultado[13], "uf":resultado[14], "referencia":resultado[15], "produto":resultado[16],
-                     "status":resultado[17], "finalizar_pedido":resultado[18], "nome_func":resultado[19], "data_pedido":resultado[20], "quant":resultado[21]} 
+                     "id_usuario":resultado[3], "tipo_entrega":resultado[4],"forma_pg":resultado[5], 
+                     "cep":resultado[6], "rua":resultado[7], "num":resultado[8],
+                     "bairro":resultado[9], "municipio":resultado[10], "uf":resultado[11],"referencia":resultado[12],
+                     "status":resultado[13], "finalizar":resultado[14], "nome_fun":resultado[15], "id_produto":resultado[16],
+                     "produto":resultado[17], "medida":resultado[18], "total_pg":resultado[19], "quant":resultado[20], "data_pedido":resultado[21]} 
           vetor.append(chaves) 
                   # chaves = {}  
        return jsonify(vetor)  
@@ -333,14 +379,14 @@ def listar_pedido(id_pedido):
        chaves = {}
        for resultado in linhas:
           chaves = {"id_pedido": resultado[0], "nome_cliente": resultado[1], "email": resultado[2],
-                     "id_produto":resultado[3], "id_usuario":resultado[4],"medida":resultado[5], 
-                     "tipo_entrega":resultado[6], "forma_pg":resultado[7], "total_pg":resultado[8],
-                     "cep":resultado[9], "rua":resultado[10], "num":resultado[11],"bairro":resultado[12],
-                     "municipio":resultado[13], "uf":resultado[14], "referencia":resultado[15], "produto":resultado[16],
-                     "status":resultado[17], "finalizar_pedido":resultado[18], "nome_func":resultado[19], "data_pedido":resultado[20], "quant":resultado[21]} 
+                     "id_usuario":resultado[3], "tipo_entrega":resultado[4],"forma_pg":resultado[5], 
+                     "cep":resultado[6], "rua":resultado[7], "num":resultado[8],
+                     "bairro":resultado[9], "municipio":resultado[10], "uf":resultado[11],"referencia":resultado[12],
+                     "status":resultado[13], "finalizar":resultado[14], "nome_fun":resultado[15], "id_produto":resultado[16],
+                     "produto":resultado[17], "medida":resultado[18], "total_pg":resultado[19], "quant":resultado[20], "data_pedido":resultado[21]} 
           vetor.append(chaves) 
                   # chaves = {}  
-       return jsonify(vetor) 
+       return jsonify(vetor)  
 
 def fechar_conexao():
       con.close()

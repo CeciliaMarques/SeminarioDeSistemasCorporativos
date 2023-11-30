@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title> Tela pedido de pizza </title>
+    <title> Tela Finalizar Pedido</title>
     <link rel="stylesheet" type="text/css" href="<?= base_url('../public/assets/bootstrap/css/bootstrap.min.css') ?>">
     <link rel="stylesheet" type="text/css" href="<?= base_url('../public/assets/fonts/font-awesome.min.css') ?>">
     <link rel="stylesheet" type="text/css" href="<?= base_url('../public/assets/css/Google-Style-Login.css') ?>">
@@ -23,16 +23,7 @@
                         <button aria-controls="navbarTogglerDemo03" style="background-color: #B22222;border: 1px solid black; color:white;" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarTogglerDemo03" data-toggle="collapse" type="button"><i aria-hidden="true" class="fa fa-bars"></i></button> <a class="navbar-brand" href="#">
                             <img alt="koolmj" class="img-fluid" src="<?= base_url('public/assets/img/logo_pizzaria.png') ?>" width="300px" height="300px"></a>
                         <div class="km-navbar-brand-btn-container">
-                            <div class="km-navbar-brand-btn-container">
-                                <?php if ($_SESSION["usuario"]["foto"] != "") : ?>
-                                    <img class="rounded-circle" src="<?= $_SESSION['usuario']['foto'] ?>" width="60px" height="60px">
-                                <?php endif; ?>
-                                <?php if ($_SESSION["usuario"]['foto'] == "") : ?>
-                                    <img class="rounded-circle img-thumbnail" src="<?= base_url("public/assets/img/avatarCor.png") ?>" width="60px" height="10px">
-                                <?php endif; ?>
-                                </br>
-                                <label><b><a style="background-color:#B22222; border-color:black; color:white " href='<?= site_url("home/logout") ?>'>Sair</a></b></label>
-                            </div>
+                            <!-- COLOCAR A FOTO -->
                         </div>
 
                     </div>
@@ -41,13 +32,10 @@
                             <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
                                 <ul class="navbar-nav m-auto">
                                     <li class="nav-item">
-                                        <a class="nav-link" Style="color: #white; font-size: 20px;" href="<?= site_url("PedidosUsuarios"); ?>">Pizzas</a>
+                                        <a class="nav-link" Style="color: #white; font-size: 20px;" href="<?= site_url("CardapioCliente"); ?>">Produtos</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" Style="color: #white; font-size: 20px;" href="<?= site_url("bebidas"); ?>">Bebidas</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" Style="color: #white; font-size: 20px;" href="<?= site_url(""); ?>">Minha Conta</a>
+                                        <a class="nav-link" Style="color: #white; font-size: 20px;" href="<?= site_url("ProdutosAdicionados"); ?>">Produtos Adicionados</a>
                                     </li>
                                 </ul>
                             </div>
@@ -59,42 +47,32 @@
     <div id="empresa" style="padding:20px;margin:1px;">
         <span style='color:blue;'><?= session("success"); ?></span>
         <span style='color:red;'><?= session("Error"); ?></span>
-        <form class="register-form" action="<?= site_url("FinalizarPedidosPizza/getPost") ?>" method="POST" enctype="multipart/form-data">
-            <h2 class="display-4" style="font-size: 35px;"> Faça Seu Pedido de Pizza</h2>
+        <form class="register-form" action="<?= site_url("FinalizarPedidos/salvar") ?>" method="POST" enctype="multipart/form-data">
+            <h2 class="display-4" style="font-size: 35px;"> Finalize seu Pedido!</h2>
+
+           
+
             <fieldset>
                 <div class="form-row">
                     <div class="col-md-12">
                         <label for="id_Usu"></label>
                         <input id="finalizar_pedido" class="form-control d-none" name="finalizar_pedido" value="">
-                        <input id="func" class="form-control d-none" name="id_usuariof" value=0>
-                        <input id="pedido" class="form-control d-none" name="id_pedido" value="">
-                        <input id="finalizar_pedido" class="form-control d-none" name="finalizar_pedido" value="">
-                        <input id="nome_func" class="form-control d-none" name="nome_func" value="">
-                        <input id="id_pizza" class="form-control d-none" name="id_pizza" value="<?= $dados['id_pizza'] ?>">
-                        <input id="total_pg" type="hidden" class="form-control" step="0.01" name="total_pg" placeholder="Total" value="<?= $dados['valor'] ?>">
+                        <input id="func" type="hidden" class="form-control d-none" name="id_usuario" value=0>
+                        <input id="pedido" type="hidden" class="form-control d-none" name="medida" value="">
+                        <input id="nome_fun" type="hidden" class="form-control d-none" name="nome_fun" value="">
+                        <input id="status" type="hidden" class="form-control d-none" name="status" value="">
+
                     </div>
                     <div class="col-6 col-sm-6 col-md-6">
                         <div id="lp-name-wrapper">
                             <label for="nome"><b>Nome*</b></label>
-                            <input type="text" class="form-control" id="nome" name="nome_cliente" placeholder="Nome" value="<?= $_SESSION['usuario']['nome'] ?>">
+                            <input type="text" class="form-control" id="nome" name="nome_cliente" placeholder="Nome">
                         </div>
                     </div>
-                    <div class="col-6 col-sm-6 col-md-6">
+                    <div class="col-6  col-sm-6 col-md-6">
                         <div id="lp-lastname-wrapper">
                             <label for="email"><b>Email*</b></label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Email" value="<?= $_SESSION['usuario']['email'] ?>">
-                        </div>
-                    </div>
-                    <div class="col-6 col-sm-6 col-md-6">
-                        <div id="lp-lastname-wrapper">
-                            <label for="tamanho"><b>Sabor*</b></label>
-                            <input type="text" class="form-control" id="sabor_pizza" name="sabor_pizza" placeholder="Sabor" value="<?= $dados['sabor_pizza'] ?>">
-                        </div>
-                    </div>
-                    <div class="col-6 col-sm-6 col-md-6">
-                        <div id="lp-lastname-wrapper">
-                            <label for="tamanho"><b>Tamanho*</b></label>
-                            <input type="text" class="form-control" id="tamanho" name="tamanho" placeholder="" value="<?= $dados['tamanho'] ?>">
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Email">
                         </div>
                     </div>
                     <div class="col-6 col-sm-6 col-md-6">
@@ -114,7 +92,7 @@
                     </div>
                     <div class="col-6 col-sm-6 col-md-6" required>
                         <div id="lp-telnumber-wrapper">
-                            <label for="tamanho"><b>Forma de Pagamento*</b></label>
+                            <label for="forma_pg"><b>Forma de Pagamento*</b></label>
                             <select name="forma_pg" class="form-control mb-3" required>
                                 <?php foreach ($formaPg as $key => $t) :
                                     $selected = "";
@@ -164,9 +142,10 @@
                             <input type="text" class="form-control" id="uf" name="uf" placeholder="UF" required>
                         </div>
                     </div>
-                    <div class="col-12 col-sm-12 col-md-12">
+                    <div class="col-6 col-sm-6 col-md-6">
                         <div id="lp-lastname-wrapper">
-                            <label for="total"><b>Total: R$<?= str_replace('.', ',', $dados['valor']) ?> </b></label>
+                            <label for="referencia"><b>Referencia*</b></label>
+                            <input type="text" class="form-control" id="referencia" name="referencia" placeholder="Referencia" required>
                         </div>
                     </div>
                     <div class="col-12 col-sm-12 col-md-12">

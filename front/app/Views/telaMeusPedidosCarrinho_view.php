@@ -7,6 +7,8 @@
   <title> Tela Produtos Adicionados </title>
   <link rel="stylesheet" type="text/css" href="<?= base_url('../public/assets/bootstrap/css/bootstrap.min.css') ?>">
   <link rel="stylesheet" type="text/css" href="<?= base_url('../public/assets/fonts/font-awesome.min.css') ?>">
+  <link rel="stylesheet" type="text/css" href="<?= base_url('../public/bootstrap-icons/font/bootstrap-icons.min.css') ?>">
+  <link rel="stylesheet" type="text/css" href="<?= base_url('../public/assets/fonts/bootstrap-icons.css') ?>">
   <link rel="stylesheet" type="text/css" href="<?= base_url('../public/assets/css/Google-Style-Login.css') ?>">
   <link rel="stylesheet" type="text/css" href="<?= base_url('../public/assets/css/Navbar-with-menu-and-login.css') ?>">
   <link rel="stylesheet" type="text/css" href="<?= base_url('../public/assets/css/navbar.css') ?>">
@@ -20,15 +22,10 @@
       <div class="km-navbar-brand text-lg-center">
         <div class="container">
           <button aria-controls="navbarTogglerDemo03" style="background-color: #B22222;border: 1px solid black; color:white;" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarTogglerDemo03" data-toggle="collapse" type="button"><i aria-hidden="true" class="fa fa-bars"></i></button> <a class="navbar-brand" href="#">
-            <img alt="koolmj" class="img-fluid" src="<?= base_url('public/assets/img/logo_pizzaria.png') ?>" width="300px" height="300px"></a>
+            <img alt="koolmj" class="img-fluid" src="<?= base_url('public/assets/img/logo_pizzaria.png') ?>" width="200px" height="300px"></a>
           <div class="km-navbar-brand-btn-container">
             <div class="km-navbar-brand-btn-container">
-              <?php if ($_SESSION["usuario"]["foto"] != "") : ?>
-                <img class="rounded-circle" src="<?= $_SESSION['usuario']['foto'] ?>" width="60px" height="60px">
-              <?php endif; ?>
-              <?php if ($_SESSION["usuario"]['foto'] == "") : ?>
-                <img class="rounded-circle img-thumbnail" src="<?= base_url("public/assets/img/avatarCor.png") ?>" width="60px" height="10px">
-              <?php endif; ?>
+              <!--Colocar a foto do usuário, não se esqueça, por favor -->
               </br>
               <label><b><a style="background-color:#B22222; border-color:black; color:white " href='<?= site_url("home/logout") ?>'>Sair</a></b></label>
             </div>
@@ -39,13 +36,10 @@
             <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
               <ul class="navbar-nav m-auto">
                 <li class="nav-item">
-                  <a class="nav-link" Style="color: #white; font-size: 20px;" href="<?= site_url("PedidosUsuarios"); ?>">Pizzas</a>
+                  <a class="nav-link" Style="color: #white; font-size: 20px;" href="<?= site_url("CardapioCliente"); ?>">Produtos</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" Style="color: #white; font-size: 20px;" href="<?= site_url("bebidas"); ?>">Bebidas</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" Style="color: #white; font-size: 20px;" href="<?= site_url(""); ?>">Minha Conta</a>
+                  <a class="nav-link" Style="color: #white; font-size: 20px;" href="<?= site_url("ProdutosAdicionados"); ?>">Produtos Adiconados</a>
                 </li>
               </ul>
             </div>
@@ -62,19 +56,24 @@
         <div class="table-responsive">
           <table class="table">
             <tr>
-              <th style="font-size: 15px;">Produto</th>
-              <th style="font-size: 15px;">Tamanho</th>
-              <th style="font-size: 15px;">Valor Unitário</th>
-              <th style="font-size: 15px;">Valor</th>
-              <th style="font-size: 15px;">Quantidade</th>
-              <th style="font-size: 15px;"></th>
-              <th style="font-size: 15px;"></th>
+              <th style="font-size: 20px;">Produto</th>
+              <th style="font-size: 20px;">Tamanho</th>
+              <th style="font-size: 20px;">Valor Unitário</th>
+              <th style="font-size: 20px;">Valor</th>
+              <th style="font-size: 20px;">Quantidade</th>
+              <th class="text-center" style="font-size: 20px;">Remover</th>
             </tr>
             </thead>
             <form action="<?= site_url("produtosAdicionados/atualizarItens") ?>" method="POST">
-             <? $totalPedido = 0; ?>
+              <? $totalPedido = 0; ?>
               <tbody>
-                <?php foreach ($_SESSION['carrinho'] as $id => $quant) :
+
+                <?php if (empty($_SESSION['carrinho'])) {
+                  $_SESSION['carrinho'] = [];
+                  print("Carrinho Vazio!");
+                }
+
+                foreach ($_SESSION['carrinho'] as $id => $quant) :
                   $ch = curl_init();
                   curl_setopt_array($ch, [
                     CURLOPT_URL => 'http://api:5000/listar/produto/' . $id,
@@ -87,36 +86,74 @@
                   curl_close($ch);
 
                 ?>
-                 
-                  <? foreach ($itens as $item) : 
-                     $subTotal = $item["valor"] * $quant; 
-                     $totalPedido += $subTotal;?>
-                   
-                    <tr>
-                      <td style="line-height: 30px;font-size: 15px;"><?php print $item["nome"] ?></td>
-                      <td style="line-height: 30px;font-size: 15px;"><?php print $item["unidade_medida"] ?></td>
-                      <td style="line-height: 30px;font-size: 15px;"><?php print str_replace('.', ',', $item["valor"]) ?></td>  
-                      <td style="line-height: 30px;font-size: 15px;"><?php print $subTotal ?></td>  
-                      <td>
-                        <input type="text" size="3px" name="prod[<?php echo $item['id_produto'] ?>]" value="<?php echo $quant ?>" size="1" />
-                      </td>
-                      <td><a href='<?= site_url("ProdutosAdicionados/adicionarItens/{$item['id_produto']}") ?>'><button type="button" class="btn btn-primary" style="height: 45px;background-color: #0b7442;">Finalizar</button></a></td>
-                      <td> <a href='<?= $url = site_url("ProdutosAdicionados/removerItens/{$item['id_produto']}") ?>'>
-                          <button href='#' onclick='confirmDelete("<?= $url ?>")' class="btn btn-primary btn-block
-                          text-center d-block pull-right" type="button" style="height: 45px;background-color: #B22222;">Remover</button></a></td>
 
+                  <? foreach ($itens as $item) :
+                    $subTotal = $item["valor"] * $quant;
+                    $totalPedido += $subTotal; ?>
+
+                    <tr>
+                      <td style="line-height: 60px;font-size: 15px;"><?php print $item["nome"] ?></td>
+                      <td style="line-height: 60px;font-size: 15px;"><?php print $item["unidade_medida"] ?></td>
+                      <td style="line-height: 60px;font-size: 15px;"><?php print str_replace('.', ',', $item["valor"]) ?></td>
+                      <td style="line-height: 60px;font-size: 15px;"><?php print $subTotal ?></td>
+                      <td style="line-height: 60px;font-size: 15px;">
+                        <input type="text" id="atualizar_carrinho" size="1px" class="text-center" name="prod[<?php echo $item['id_produto'] ?>]" value="<?php echo $quant ?>" size="1" />
                       </td>
+                      <td style="line-height: 60px;font-size: 15px;"><a id="remover_produto_carrinho" href='<?= $url = site_url("ProdutosAdicionados/removerItens/{$item['id_produto']}") ?>'>
+                          <i class="bi bi-cart-x" style="font-size: 35px; color:#B22222;"></i></a></td>
+                      </td>
+                      <?
+                      if (!isset($_SESSION['dados'])) {
+                        $_SESSION['dados'] = array();
+                      }
+                      $produto_existente = false;
+                      foreach ($_SESSION['dados'] as &$produto) {
+                        if ($produto['id_produto'] == $id) {
+                          // Produto encontrado, atualiza a quantidade
+                          $produto['nome'] = $item["nome"];
+                          $produto['medida'] =  $item["unidade_medida"];
+                          $produto['quant'] = $quant;
+                          $produto['valor'] = $item["valor"];
+                          $produto['total_pg'] = $subTotal;
+                          $produto_existente = true;
+                          break;
+                        }
+                      }
+                      if (!$produto_existente) {
+                        array_push(
+                          $_SESSION['dados'],
+                          array(
+                            'id_produto' => $id,
+                            'nome' => $item["nome"],
+                            'medida' => $item["unidade_medida"],
+                            'quant' => $quant,
+                            'valor' =>  $item["valor"],
+                            'total_pg' => $subTotal,
+                          )
+                        );
+                      }
+                      // unset($_SESSION['dados']);
+                      // dd($_SESSION['dados']);
+                      ?>
                     <?php endforeach; ?>
                   <?php endforeach; ?>
                     </tr>
                     <tr>
-                      <td>Total: <?php print $totalPedido; ?></td>
+                      <td>Total: <?php print $totalPedido; ?>
+                      <td>
+                    </tr>
                     </tr>
               </tbody>
           </table>
-          <button class="btn btn-primary" type="submit">Atualizar Carrinho</button>
+          <button class="btn btn-primary" id="botao_atualizar_carrinho" type="submit" style="height: 45px; width: 150px; border: none;
+           cursor: pointer;">Atualizar <i class="bi bi-cart"></i></button>
 
           </form>
+          <a href='<?= site_url("FinalizarPedidos") ?>'>
+            <button type="button" class="btn btn-primary" style="height: 45px; width: 150px;background-color: #0b7442; border: none;cursor: pointer;">
+              Finalizar Pedido
+            </button>
+          </a>
         </div>
         <div>
           <a style="color: black;" href='<?= site_url("cardapioCliente/index") ?>'>Continuar Comprando</a>

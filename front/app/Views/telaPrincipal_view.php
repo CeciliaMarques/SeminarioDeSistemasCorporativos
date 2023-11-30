@@ -58,10 +58,10 @@
                                 <h2>Faça Já Seu Pedido!</h2>
                             </div>
                             <!-- <button type="submit" class="btn btn-primary btn-lg btn-block" style="font-size: 20px; background-color:#B22222; border: 1px solid black "> <i class="fa fa-google"><b>&nbsp AUTENTICAR</b></i></button> -->
-                            <div class="row justify-content-md-center">
-                                <div id="g_id_onload" data-client_id="612629133152-qht0o8a463qd439han3906adpgnh9l9v.apps.googleusercontent.com" data-login_uri="<?= base_url("Autenticacao");?>" data-auto_prompt="false">
-                                </div>
-                                <div class="g_id_signin" data-type="standard" data-size="large" data-theme="outline" data-text="sign_in_with" data-shape="rectangular" data-logo_alignment="left">
+                            <div class="row justify-content-md-center" style="padding-bottom: 20px;">
+                                <button class="btn btn-primary" style="background-color:white; "  >
+                                    <a style ="color:black;" id="autenticar" href="<?= site_url("CardapioCliente/index/");?>">AUTENTICAR</a>
+                                </button>
                                 </div>
                             </div>
                         </div>

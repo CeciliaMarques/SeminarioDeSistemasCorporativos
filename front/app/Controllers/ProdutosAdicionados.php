@@ -7,7 +7,7 @@ class ProdutosAdicionados extends BaseController
 
   public function index(){
 
-    return view("TelaMeusPedidos_view");
+    return view("TelaMeusPedidosCarrinho_view");
   }
   public function adicionarItens($id = null)
   {
