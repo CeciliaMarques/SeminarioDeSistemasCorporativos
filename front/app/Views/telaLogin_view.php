@@ -24,8 +24,8 @@
         <p class="profile-name-card"> </p>
         <form class="form-signin" action="<?= site_url("home/logar") ?>" method="POST">
             <span class="reauth-email"> </span>
-            <input class="form-control" name="email" type="email" id="inputEmail" required="" placeholder="Email" autofocus="">
-            <input class="form-control" name="senha" type="password" id="inputPassword" required="" placeholder="Senha">
+            <input class="form-control" name="email" type="email" id="email" required="" placeholder="Email" autofocus="">
+            <input class="form-control" name="senha" type="password" id="senha" required="" placeholder="Senha">
             <button class="btn btn-primary btn-block btn-lg btn-signin" style="background-color: #B22222; border-color:#B22222;" type="submit">Entrar</button>
 
             <div class="form-group">
