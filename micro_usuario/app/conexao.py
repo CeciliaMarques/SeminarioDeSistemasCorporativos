@@ -42,8 +42,7 @@ def criar_tabelas():
                            "forma_pg VARCHAR, total_pg NUMERIC, cep VARCHAR(20),"
                            "rua VARCHAR(50), num INTEGER, bairro VARCHAR(40), municipio VARCHAR, uf VARCHAR(2), referencia VARCHAR,"
                            "produto VARCHAR(40), status VARCHAR,finalizar_pedido VARCHAR(10)," 
-                           "nome_fun VARCHAR(40), data_pedido TIMESTAMP, quant INTEGER, "
-                           "FOREIGN KEY(id_usuario) REFERENCES usuarios,"
+                           "nome_fun VARCHAR(40), quant INTEGER, data_hora  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,"
                            "FOREIGN KEY(id_produto) REFERENCES produtos);")
 
     # Commit (salvar) as mudanças
