@@ -36,19 +36,20 @@ def criar_tabelas():
       cursor.execute("CREATE TABLE IF NOT EXISTS produtos (id_produto serial PRIMARY KEY, nome VARCHAR(50), id_categoria INTEGER, unidade_medida VARCHAR, valor NUMERIC,"
                      "FOREIGN KEY(id_categoria) REFERENCES categorias);")
       
-      cursor.execute("CREATE TABLE IF NOT EXISTS pedidos(id_pedido serial PRIMARY KEY, "
-                          " nome_cliente VARCHAR(40), email VARCHAR(40),"
-                           "id_produto INTEGER, id_usuario INTEGER, medida VARCHAR, tipo_entrega VARCHAR(40),"
-                           "forma_pg VARCHAR, total_pg NUMERIC, cep VARCHAR(20),"
-                           "rua VARCHAR(50), num INTEGER, bairro VARCHAR(40), municipio VARCHAR, uf VARCHAR(2), referencia VARCHAR,"
-                           "produto VARCHAR(40), status VARCHAR,finalizar_pedido VARCHAR(10)," 
-                           "nome_fun VARCHAR(40), quant INTEGER, data_hora  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,"
-                           "FOREIGN KEY(id_produto) REFERENCES produtos);")
-
-    # Commit (salvar) as mudanças
+      
+      cursor.execute("CREATE TABLE IF NOT EXISTS pedidos(id_pedido serial PRIMARY KEY,"
+                        "nome_cliente VARCHAR(40), email VARCHAR(40),"
+                        "id_usuario INTEGER,  tipo_entrega VARCHAR(40),"
+                        "forma_pg VARCHAR, cep VARCHAR(20),"
+                        "rua VARCHAR(50), num INTEGER, bairro VARCHAR(40), municipio VARCHAR, "
+                        "uf VARCHAR(2), referencia VARCHAR, status VARCHAR,"
+                        "finalizar_pedido VARCHAR(10),nome_fun VARCHAR(40),"
+                        "id_produto INTEGER,produto VARCHAR(40), medida VARCHAR(40), total_pg NUMERIC, quant INTEGER," 
+                        "data_hora  TIMESTAMP DEFAULT CURRENT_TIMESTAMP, "
+                        "FOREIGN KEY(id_produto) REFERENCES produtos);")
       con.commit()
       return jsonify("Criei as tabelas") 
-
+    
 #operações de usuários
 def inserir_usuario(dados): 
      cursor.execute("SELECT * FROM  usuarios where  email = %s",(dados ['email'],))
