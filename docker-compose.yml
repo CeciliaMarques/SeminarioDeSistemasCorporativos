@@ -15,24 +15,42 @@ services:
       - "5432:5432"
     networks:
       - minha-rede  
-  # autenticacao:
-  #   build:
-  #     context: "micro_usuario"
-  #     dockerfile: Dockerfile
-  #   container_name: "container-micro"
-  #   restart: always
-  #   ports:
-  #    - "3000:3000" 
-  #   volumes:
-  #    - ./micro_usuario:/app 
-  #   environment:
-  #     - FLASK_APP=micro.py  
-  #     - FLASK_ENV=development
-  #     - FLASK_DEBUG=1
-  #   networks:
-  #     - minha-rede  
-  #   depends_on:
-  #     - db  
+  autenticacao:
+    build:
+      context: "micro_usuario"
+      dockerfile: Dockerfile
+    container_name: "container-micro"
+    restart: always
+    ports:
+     - "3000:3000" 
+    volumes:
+     - ./micro_usuario:/app 
+    environment:
+      - FLASK_APP=micro.py  
+      - FLASK_ENV=development
+      - FLASK_DEBUG=1
+    networks:
+      - minha-rede  
+    depends_on:
+      - db  
+  email:
+    build:
+      context: "micro_email"
+      dockerfile: Dockerfile
+    container_name: "container-email"
+    restart: always
+    ports:
+     - "4000:4000" 
+    volumes:
+     - ./micro_email:/app 
+    environment:
+      - FLASK_APP=envio_email.py  
+      - FLASK_ENV=development
+      - FLASK_DEBUG=1
+    networks:
+      - minha-rede  
+    depends_on:
+      - db 
   api:
     build:
       context: "api"
