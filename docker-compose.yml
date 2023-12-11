@@ -4,6 +4,7 @@ services:
     image: postgres
     container_name: "container-postgres"
     environment:
+      # DB_HOST: db
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 12345
       POSTGRES_DB: bancoDsc
