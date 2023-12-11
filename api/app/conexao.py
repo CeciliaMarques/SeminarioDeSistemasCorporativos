@@ -1,6 +1,7 @@
 from flask import Flask, jsonify
 from werkzeug.security import generate_password_hash,  check_password_hash
 from flask_jwt_extended import create_access_token
+from datetime import datetime
 import psycopg2
 import sys
 
@@ -37,14 +38,14 @@ def criar_tabelas():
                      "FOREIGN KEY(id_categoria) REFERENCES categorias);")
       
       cursor.execute("CREATE TABLE IF NOT EXISTS pedidos(id_pedido serial PRIMARY KEY,"
-                        "nome_cliente VARCHAR(40), email VARCHAR(40),"
+                        "nome_cliente VARCHAR(50), email VARCHAR(40),"
                         "id_usuario INTEGER,  tipo_entrega VARCHAR(40),"
-                        "forma_pg VARCHAR, cep VARCHAR(20),"
-                        "rua VARCHAR(50), num INTEGER, bairro VARCHAR(40), municipio VARCHAR, "
-                        "uf VARCHAR(2), referencia VARCHAR, status VARCHAR,"
+                        "forma_pg VARCHAR(20), cep VARCHAR(20),"
+                        "rua VARCHAR(50), num INTEGER, bairro VARCHAR(40), municipio VARCHAR(50), "
+                        "uf VARCHAR(2), referencia VARCHAR(50), status VARCHAR(50),"
                         "finalizar_pedido VARCHAR(10),nome_fun VARCHAR(40),"
                         "id_produto INTEGER,produto VARCHAR(40), medida VARCHAR(40), total_pg NUMERIC, quant INTEGER," 
-                        "data_hora  TIMESTAMP DEFAULT CURRENT_TIMESTAMP, "
+                        "data DATE DEFAULT CURRENT_DATE, hora TIMESTAMP DEFAULT CURRENT_TIMESTAMP,"
                         "FOREIGN KEY(id_produto) REFERENCES produtos);")
       con.commit()
       return jsonify("Criei as tabelas") 
@@ -101,7 +102,7 @@ def deletar_usuario(id_usuario):
             pass
 
 def listar_usuarios():
-       cursor.execute("SELECT * FROM usuarios")
+       cursor.execute("SELECT * FROM usuarios ORDER BY id_usuario ASC")
        linhas = cursor.fetchall()
        vetor = []
        chaves = {}
@@ -126,7 +127,7 @@ def logar(dados):
     email = dados["email"]
     senha = dados["senha"]
 
-    cursor.execute("SELECT * FROM usuarios WHERE email = %s", (email,))
+    cursor.execute("SELECT * FROM usuarios WHERE email = %s ORDER BY id_usuario ASC", (email,))
     linhas = cursor.fetchall()
     vetor = []
 
@@ -308,33 +309,34 @@ def inserir_pedido(dados):
         status = dados["status"]
         finalizar_pedido = dados["finalizar_pedido"]
         nome_fun = dados["nome_fun"]
-
+        
         produtos = dados["produtos"]
+        
         for produto in produtos:
          cursor.execute("INSERT INTO pedidos (nome_cliente, email, id_usuario,"
-                     "tipo_entrega, forma_pg,cep, rua, num, bairro, municipio, uf, referencia, status,"
-                     "finalizar_pedido, nome_fun, id_produto, produto, medida, total_pg, quant)"
-                     "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);",
-                     (nome_cliente,  email, id_usuario, tipo_entrega,
-                      forma_pg, cep, rua, num, bairro, municipio,
-                      uf, referencia, status, finalizar_pedido,nome_fun,
-                      produto["id_produto"], produto["produto"], produto["medida"],
-                      produto["total_pg"], produto["quant"]))
+                    "tipo_entrega, forma_pg, cep, rua, num, bairro, municipio, uf, referencia, status,"
+                    "finalizar_pedido, nome_fun, id_produto, produto, medida, total_pg, quant)"
+                    "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);",
+                    (nome_cliente,  email, id_usuario, tipo_entrega,
+                    forma_pg, cep, rua, num, bairro, municipio,
+                    uf, referencia, status, finalizar_pedido,nome_fun,
+                    produto["id_produto"], produto["produto"], produto["medida"],
+                    produto["total_pg"], produto["quant"]))
         con.commit()
         return jsonify({"message": "Pedido cadastrado com sucesso."}), 201
     
  #atualizar tem que refazer
 def atualizar_pedido(dados):
-      cursor.execute("UPDATE pedidos SET nome_cliente = %s, email = %s, id_produto = %s, id_usuario = %s, medida = %s,"
-                     "tipo_entrega = %s, forma_pg = %s, total_pg = %s, cep = %s, rua = %s, num = %s, bairro = %s, municipio = %s," 
-                     "uf = %s, referencia = %s, produto = %s, status = %s, finalizar_pedido = %s, nome_fun = %s, data_pedido = %s, quant = %s  WHERE id_pedido =%s",
-                        (dados["nome_cliente"],  dados["email"], dados["id_produto"], dados["id_usuario"],
-                         dados["medida"], dados["tipo_entrega"], dados["forma_pg"], dados["total_pg"],
-                         dados["cep"], dados["rua"], dados["num"], dados["bairro"], dados["municipio"],
-                         dados["uf"], dados["referencia"], dados["produto"], dados["status"], dados["finalizar_pedido"],
-                         dados["nome_fun"], dados["data_pedido"], dados["quant"], dados["id_pedido"]))      
+      cursor.execute("UPDATE pedidos SET nome_cliente = %s, email = %s, id_usuario = %s, tipo_entrega = %s, forma_pg = %s,"
+                    "cep = %s, rua = %s, num = %s, bairro = %s, municipio = %s, uf = %s, referencia = %s, status = %s," 
+                    "finalizar_pedido = %s, nome_fun = %s, id_produto = %s, produto = %s, medida = %s, total_pg = %s, quant = %s WHERE id_pedido =%s",
+                    (dados["nome_cliente"], dados["email"], dados["id_usuario"], dados["tipo_entrega"],
+                    dados["forma_pg"], dados["cep"], dados["rua"], dados["num"],
+                    dados["bairro"], dados["municipio"], dados["uf"], dados["referencia"], dados["status"],
+                    dados["finalizar_pedido"], dados["nome_fun"], dados["id_produto"], dados["produto"], dados["medida"],
+                    dados["total_pg"], dados["quant"], dados["id_pedido"]))      
       con.commit()
-      return jsonify({"message": "Produto atualizado com sucesso.", "data": dados}), 200 
+      return jsonify({"message": "Pedido atualizado com sucesso.", "data": dados}), 200 
 
 def deletar_pedido(id_pedido):
     try:
@@ -357,7 +359,7 @@ def deletar_pedido(id_pedido):
             pass
 
 def listar_pedidos():
-       cursor.execute("SELECT * FROM pedidos")
+       cursor.execute("SELECT * FROM pedidos ORDER BY id_pedido ASC")
        linhas = cursor.fetchall()
        vetor = []
        chaves = {}
@@ -366,14 +368,14 @@ def listar_pedidos():
                      "id_usuario":resultado[3], "tipo_entrega":resultado[4],"forma_pg":resultado[5], 
                      "cep":resultado[6], "rua":resultado[7], "num":resultado[8],
                      "bairro":resultado[9], "municipio":resultado[10], "uf":resultado[11],"referencia":resultado[12],
-                     "status":resultado[13], "finalizar":resultado[14], "nome_fun":resultado[15], "id_produto":resultado[16],
-                     "produto":resultado[17], "medida":resultado[18], "total_pg":resultado[19], "quant":resultado[20], "data_pedido":resultado[21]} 
+                     "status":resultado[13], "finalizar_pedido":resultado[14], "nome_fun":resultado[15], "id_produto":resultado[16],
+                     "produto":resultado[17], "medida":resultado[18], "total_pg":resultado[19], "quant":resultado[20], "data":resultado[21],'hora':resultado[22]} 
           vetor.append(chaves) 
                   # chaves = {}  
        return jsonify(vetor)  
 
 def listar_pedido(id_pedido):
-       cursor.execute("SELECT * FROM pedidos WHERE  id_pedido=\'{}\'".format(id_pedido))
+       cursor.execute("SELECT * FROM pedidos WHERE  id_pedido=\'{}\' ORDER BY id_pedido ASC".format(id_pedido))
        linhas = cursor.fetchall()
        vetor = []
        chaves = {}
@@ -382,11 +384,87 @@ def listar_pedido(id_pedido):
                      "id_usuario":resultado[3], "tipo_entrega":resultado[4],"forma_pg":resultado[5], 
                      "cep":resultado[6], "rua":resultado[7], "num":resultado[8],
                      "bairro":resultado[9], "municipio":resultado[10], "uf":resultado[11],"referencia":resultado[12],
-                     "status":resultado[13], "finalizar":resultado[14], "nome_fun":resultado[15], "id_produto":resultado[16],
-                     "produto":resultado[17], "medida":resultado[18], "total_pg":resultado[19], "quant":resultado[20], "data_pedido":resultado[21]} 
+                     "status":resultado[13], "finalizar_pedido":resultado[14], "nome_fun":resultado[15], "id_produto":resultado[16],
+                     "produto":resultado[17], "medida":resultado[18], "total_pg":resultado[19], "quant":resultado[20], "data":resultado[21], "hora":resultado[22]} 
           vetor.append(chaves) 
                   # chaves = {}  
        return jsonify(vetor)  
 
+def listar_pedido_usuario(email):
+       cursor.execute("SELECT * FROM pedidos WHERE  email=\'{}\' ORDER BY id_pedido ASC".format(email))
+       linhas = cursor.fetchall()
+       vetor = []
+       chaves = {}
+       for resultado in linhas:
+          chaves = {"id_pedido": resultado[0], "nome_cliente": resultado[1], "email": resultado[2],
+                     "id_usuario":resultado[3], "tipo_entrega":resultado[4],"forma_pg":resultado[5], 
+                     "cep":resultado[6], "rua":resultado[7], "num":resultado[8],
+                     "bairro":resultado[9], "municipio":resultado[10], "uf":resultado[11],"referencia":resultado[12],
+                     "status":resultado[13], "finalizar_pedido":resultado[14], "nome_fun":resultado[15], "id_produto":resultado[16],
+                     "produto":resultado[17], "medida":resultado[18], "total_pg":resultado[19], "quant":resultado[20], "data":resultado[21],"hora":resultado[22]} 
+          vetor.append(chaves) 
+                  # chaves = {}  
+       return jsonify(vetor)
+       
+def listar_pedidos_finalizados():
+       cursor.execute("SELECT * FROM pedidos WHERE finalizar_pedido='Finalizado' ORDER BY id_pedido ASC")
+       linhas = cursor.fetchall()
+       vetor = []
+       chaves = {}
+       for resultado in linhas:
+          chaves = {"id_pedido": resultado[0], "nome_cliente": resultado[1], "email": resultado[2],
+                     "id_usuario":resultado[3], "tipo_entrega":resultado[4],"forma_pg":resultado[5], 
+                     "cep":resultado[6], "rua":resultado[7], "num":resultado[8],
+                     "bairro":resultado[9], "municipio":resultado[10], "uf":resultado[11],"referencia":resultado[12],
+                     "status":resultado[13], "finalizar_pedido":resultado[14], "nome_fun":resultado[15], "id_produto":resultado[16],
+                     "produto":resultado[17], "medida":resultado[18], "total_pg":resultado[19], "quant":resultado[20], "data":resultado[21], "hora":resultado[22]} 
+          vetor.append(chaves) 
+                  # chaves = {}  
+       return jsonify(vetor) 
+   
+def procurar_pedidos_por_data(dados):
+
+            # data = datetime.strptime(dados, "%a, %d %b %Y %H:%M:%S")
+            cursor.execute("SELECT * FROM pedidos WHERE data= %s AND finalizar_pedido='Finalizado' ORDER BY id_pedido ASC", (dados,))
+            linhas = cursor.fetchall()
+            vetor = []
+            chaves = {}
+            for resultado in linhas:
+                chaves = {"id_pedido": resultado[0], "nome_cliente": resultado[1], "email": resultado[2],
+                        "id_usuario":resultado[3], "tipo_entrega":resultado[4],"forma_pg":resultado[5], 
+                        "cep":resultado[6], "rua":resultado[7], "num":resultado[8],
+                        "bairro":resultado[9], "municipio":resultado[10], "uf":resultado[11],"referencia":resultado[12],
+                        "status":resultado[13], "finalizar_pedido":resultado[14], "nome_fun":resultado[15], "id_produto":resultado[16],
+                        "produto":resultado[17], "medida":resultado[18], "total_pg":resultado[19], "quant":resultado[20], "data":resultado[21], "hora":resultado[22]} 
+                vetor.append(chaves) 
+            return jsonify(vetor)
+    #     else:
+    #         return jsonify({"error": "Chave 'data' não encontrada nos dados"}), 400
+    
+    
+    # except Exception as e:
+    #     return jsonify({"error": str(e)}), 500   
+    
+    
+    
+    
+    #  data = dados['data_hora']
+    #  data_formatada = datetime.strptime(dados, "%d/%m/%Y").strftime("%Y-%m-%d %H:%M:%S")
+    # if 'data_hora' in dados:
+    #  data_formatada = datetime.strptime(dados['data_hora'], "%d/%m/%Y").strftime("%Y-%m-%d %H:%M:%S")
+    #  cursor.execute("SELECT * FROM pedidos WHERE data_hora=%s AND finalizar_pedido='finalizado' ORDER BY id_pedido ASC", (data_formatada,))
+    #  linhas = cursor.fetchall()
+    #  vetor = []
+    #  chaves = {}
+    #  for resultado in linhas:
+    #       chaves = {"id_pedido": resultado[0], "nome_cliente": resultado[1], "email": resultado[2],
+    #                  "id_usuario":resultado[3], "tipo_entrega":resultado[4],"forma_pg":resultado[5], 
+    #                  "cep":resultado[6], "rua":resultado[7], "num":resultado[8],
+    #                  "bairro":resultado[9], "municipio":resultado[10], "uf":resultado[11],"referencia":resultado[12],
+    #                  "status":resultado[13], "finalizar_pedido":resultado[14], "nome_fun":resultado[15], "id_produto":resultado[16],
+    #                  "produto":resultado[17], "medida":resultado[18], "total_pg":resultado[19], "quant":resultado[20], "data_pedido":resultado[21]} 
+    #       vetor.append(chaves) 
+    #  return jsonify(vetor)
+       
 def fechar_conexao():
       con.close()

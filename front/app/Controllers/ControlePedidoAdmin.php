@@ -2,13 +2,13 @@
 
 namespace App\Controllers;
 
-class AtendimentoPedidosFuncionario extends BaseController
+class ControlePedidoAdmin extends BaseController
 {
   /** 
    * Consumindo método get de api em Python
    */
 
-  public function index($id = null)
+  public function index($id=null)
   {
     $arr['dados']=[];
     if ($_GET == null) {
@@ -32,31 +32,42 @@ class AtendimentoPedidosFuncionario extends BaseController
       'referencia' => '',
       'produto' => '',
       'nome_fun' => '',
+      'status' => '',
       'finalizar_pedido' => '',
-      'data' => '',
-      'hora' => '',
 
     ];
   }
-    if ($id !== null &&  $id>-1) {
-      $idP = $id;
+    if (isset($_POST['data']) && !empty($_POST['data'])) {
+      $data_pedido = $_POST['data'];
+      // dd($data_pedido); 
+      $data = date('Y-m-d', strtotime($data_pedido)); // Use o formato Y-m-d H:i:s
+      $x = json_encode($data);  // Envie a data no formato correto
+      // dd($x);
       $ch = curl_init();
       curl_setopt_array($ch, [
-        CURLOPT_URL => 'http://api:5000/listar/pedido/' . $idP,
-        CURLOPT_CUSTOMREQUEST => 'GET',
+        CURLOPT_URL => 'http://api:5000/procurar/pedidos',
+        CURLOPT_CUSTOMREQUEST => 'POST',
+        CURLOPT_POSTFIELDS =>$x,
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_SSL_VERIFYPEER => false
 
       ]);
       $arr = json_decode(curl_exec($ch), true);
       curl_close($ch);
-      $arr['dados'] = $arr[0];
+      // // var_dump($arr);
+      // dd($arr);
+      if(!empty($arr)){
+        $arr['dados'] = $arr[0];
+      }else{
+        $this->session->setFlashdata('Error', 'Não Existem Dados Correspondentes a Essa Data.');
+        return redirect()->to(site_url('ControlePedidoAdmin/index'));
+      }
     }
 
 
     $ch = curl_init();
     curl_setopt_array($ch, [
-      CURLOPT_URL => 'http://api:5000/listar/pedidos',
+      CURLOPT_URL => 'http://api:5000/listar/pedidos/finalizados',
       CURLOPT_CUSTOMREQUEST => 'GET',
       CURLOPT_RETURNTRANSFER => true,
       CURLOPT_SSL_VERIFYPEER => false
@@ -73,7 +84,7 @@ class AtendimentoPedidosFuncionario extends BaseController
 
 
 
-    return view("telaListagemPedidosFunc_view", $arr);
+    return view("telaPedidosFinalizadosAdmin_view", $arr);
   }
 
   public function update()
@@ -95,7 +106,7 @@ class AtendimentoPedidosFuncionario extends BaseController
     $response = curl_exec($ch);
     curl_close($ch);
     // var_dump($response);
-    return redirect()->to(site_url('AtendimentoPedidosFuncionario/index'));
+    return redirect()->to(site_url('ControlePedidoAdmin/index'));
   }
 
 
@@ -117,6 +128,6 @@ class AtendimentoPedidosFuncionario extends BaseController
 
     $response = curl_exec($ch);
     curl_close($ch);
-    return redirect()->to(site_url('AtendimentoPedidosFuncionario/index/'));
+    return redirect()->to(site_url('ControlePedidoAdmin/index'));
   }
 }

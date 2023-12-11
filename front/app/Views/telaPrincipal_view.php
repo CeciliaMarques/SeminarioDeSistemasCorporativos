@@ -45,23 +45,22 @@
     </header>
 
     <!-- <div id="empresa" style="padding:20px;margin:1px;"> -->
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12 col-md-12 col-lg-12" style="align-items: 'justify';">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12" style="align-items: 'justify';">
+                <div class="container">
+                    <div class="row justify-content-md-center">
+                        <img alt="koolmj" class="img-fluid" src="<?= site_url('../public/assets/img/logo.png') ?>"></a>
+
+                    </div>
                     <div class="container">
                         <div class="row justify-content-md-center">
-                            <img alt="koolmj" class="img-fluid" src="<?= site_url('../public/assets/img/logo.png') ?>"></a>
-
+                            <h2>Faça Já Seu Pedido!</h2>
                         </div>
-                        <div class="container">
-                            <div class="row justify-content-md-center">
-                                <h2>Faça Já Seu Pedido!</h2>
-                            </div>
-                            <!-- <button type="submit" class="btn btn-primary btn-lg btn-block" style="font-size: 20px; background-color:#B22222; border: 1px solid black "> <i class="fa fa-google"><b>&nbsp AUTENTICAR</b></i></button> -->
-                            <div class="row justify-content-md-center" style="padding-bottom: 20px;">
-                                <button class="btn btn-primary" style="background-color:white; "  >
-                                    <a style ="color:black;" id="autenticar" href="<?= site_url("CardapioCliente/index/");?>">AUTENTICAR</a>
-                                </button>
+                        <div class="row justify-content-md-center" style="padding-bottom: 20px;">
+                                <div id="g_id_onload" data-client_id="612629133152-qht0o8a463qd439han3906adpgnh9l9v.apps.googleusercontent.com" data-login_uri="<?= site_url("Autenticacao"); ?>" data-auto_prompt="false">
+                                </div>
+                                <div class="g_id_signin" data-type="standard" data-size="large" data-theme="outline" data-text="sign_in_with" data-shape="rectangular" data-logo_alignment="left">
                                 </div>
                             </div>
                         </div>
@@ -72,24 +71,24 @@
                 </div>
             </div>
         </div>
-        
-    <footer style = "background-color:#B22222">
-    <div class="row p-0 m-0">
-      <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 d-flex justify-content-center align-items-center align-content-center p-0 m-0">
-        <p class="p-0 m-0" style ="color: white;">Nos acompanhe através da nossas redes sociais:</p>
-        <a class="p-0 m-2 d-inline-block" href="" target="_blank">
-          <h3><i class="fa fa-facebook"></i></h3>
-        </a>
-        <a class="p-0 m-2 d-inline-block" href="" target="_blank">
-          <h3><i class="fa fa-twitter"></i></h3>
-        </a>
-        <a class="p-0 m-2 d-inline-block" href="" target="_blank">
-          <h3><i class="fa fa-youtube"></i></h3>
-        </a>
-      </div>
+
+        <footer style="background-color:#B22222">
+            <div class="row p-0 m-0">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 d-flex justify-content-center align-items-center align-content-center p-0 m-0">
+                    <p class="p-0 m-0" style="color: white;">Nos acompanhe através da nossas redes sociais:</p>
+                    <a class="p-0 m-2 d-inline-block" href="" target="_blank">
+                        <h3><i class="fa fa-facebook"></i></h3>
+                    </a>
+                    <a class="p-0 m-2 d-inline-block" href="" target="_blank">
+                        <h3><i class="fa fa-twitter"></i></h3>
+                    </a>
+                    <a class="p-0 m-2 d-inline-block" href="" target="_blank">
+                        <h3><i class="fa fa-youtube"></i></h3>
+                    </a>
+                </div>
+            </div>
     </div>
-    </div>
-  <!-- </div> -->
+    <!-- </div> -->
     </div>
     <script src='<?= base_url("public/assets/js/jquery.min.js") ?>'></script>
     <script src='<?= base_url("public/assets/bootstrap/js/bootstrap.min.js") ?>'></script>

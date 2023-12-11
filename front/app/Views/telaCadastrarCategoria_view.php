@@ -25,7 +25,7 @@
       <div class="km-navbar-brand text-lg-center">
         <div class="container">
           <button aria-controls="navbarTogglerDemo03" style="background-color: #B22222;border: 1px solid black; color:white;" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarTogglerDemo03" data-toggle="collapse" type="button"><i aria-hidden="true" class="fa fa-bars"></i></button> <a class="navbar-brand" href="">
-            <img alt="koolmj" class="img-fluid" src="<?= base_url('public/assets/img/logo_pizzaria.png') ?>" width="300px" height="300px"></a>
+            <img alt="koolmj" class="img-fluid" src="<?= base_url('public/assets/img/logo_pizzaria.png') ?>" width="200px" height="200px"></a>
           <div class="km-navbar-brand-btn-container">
             <a class="km-navbar-brand-btn-container" style="background-color: #B22222; border: 1px solid black; color:white; font-size: 20px;" href='<?= site_url("home/logout") ?>'>Sair</a>
           </div>
@@ -48,7 +48,7 @@
                 <a class="nav-link" Style="color: #white; font-size: 20px;" href="<?= site_url("contaUsuario"); ?>">Minha Conta</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" Style="color: #white; font-size: 20px;" href="<?= site_url("listagemPedidosFinalizadosAdmin"); ?>">Lista de Pedidos Finalizados</a>
+                <a class="nav-link" Style="color: #white; font-size: 20px;" href="<?= site_url("ControlePedidoAdmin"); ?>">Lista de Pedidos Finalizados</a>
               </li>
             </ul>
           </div>

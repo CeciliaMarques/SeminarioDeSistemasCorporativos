@@ -24,27 +24,36 @@
           <button aria-controls="navbarTogglerDemo03" style="background-color: #B22222;border: 1px solid black; color:white;" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarTogglerDemo03" data-toggle="collapse" type="button"><i aria-hidden="true" class="fa fa-bars"></i></button> <a class="navbar-brand" href="#">
             <img alt="koolmj" class="img-fluid" src="<?= base_url('public/assets/img/logo_pizzaria.png') ?>" width="200px" height="300px"></a>
           <div class="km-navbar-brand-btn-container">
-            <div class="km-navbar-brand-btn-container">
-              <!--Colocar a foto do usuário, não se esqueça, por favor -->
-              </br>
-              <label><b><a style="background-color:#B22222; border-color:black; color:white " href='<?= site_url("home/logout") ?>'>Sair</a></b></label>
-            </div>
+            <?php if ($_SESSION["usuario"]["foto"] != "") : ?>
+              <img class="rounded-circle" src="<?= $_SESSION['usuario']['foto'] ?>" width="60px" height="60px">
+            <?php endif; ?>
+            <?php if ($_SESSION["usuario"]['foto'] == "") : ?>
+              <img class="rounded-circle img-thumbnail" src="<?= base_url("public/assets/img/avatarCor.png") ?>" width="60px" height="10px">
+            <?php endif; ?>
+            </br>
           </div>
         </div>
-        <div class="km-navbar-menu" style="background-color:#B22222; ">
-          <div class="container">
-            <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-              <ul class="navbar-nav m-auto">
-                <li class="nav-item">
-                  <a class="nav-link" Style="color: #white; font-size: 20px;" href="<?= site_url("CardapioCliente"); ?>">Produtos</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" Style="color: #white; font-size: 20px;" href="<?= site_url("ProdutosAdicionados"); ?>">Produtos Adiconados</a>
-                </li>
-              </ul>
-            </div>
+      </div>
+      <div class="km-navbar-menu" style="background-color:#B22222; ">
+        <div class="container">
+          <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+            <ul class="navbar-nav m-auto">
+              <li class="nav-item">
+                <a class="nav-link" Style="color: #white; font-size: 20px;" href="<?= site_url("CardapioCliente"); ?>">Produtos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" Style="color: #white; font-size: 20px;" href="<?= site_url("ProdutosAdicionados"); ?>">Produtos Adiconados</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" Style="color: #white; font-size: 20px;" href="<?= site_url("#"); ?>">Pedidos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" Style="color: #white; font-size: 20px;" href='<?= site_url("home/logout") ?>'>Sair</a>
+              </li>
+            </ul>
           </div>
         </div>
+      </div>
     </nav>
   </header>
   <div id="empresa" style="padding:20px;margin:1px;">
@@ -150,7 +159,7 @@
 
           </form>
           <a href='<?= site_url("FinalizarPedidos") ?>'>
-            <button type="button" class="btn btn-primary" style="height: 45px; width: 150px;background-color: #0b7442; border: none;cursor: pointer;">
+            <button type="button" class="btn btn-primary" id="finalizar_pedido" style="height: 45px; width: 150px;background-color: #0b7442; border: none;cursor: pointer;">
               Finalizar Pedido
             </button>
           </a>

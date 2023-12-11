@@ -49,6 +49,7 @@
                                         <a class="nav-link" Style="color: #white; font-size: 20px;" href='<?= site_url("home/logout") ?>'>Sair</a>
                                     </li>
                                 </ul>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -58,8 +59,8 @@
     <div id="empresa" style="padding:20px;margin:1px;">
         <span style='color:blue;'><?= session("success"); ?></span>
         <span style='color:red;'><?= session("Error"); ?></span>
-        <form class="register-form" action="<?= site_url("FinalizarPedidos/salvar") ?>" method="POST" enctype="multipart/form-data">
-            <h2 class="display-4" style="font-size: 35px;"> Finalize seu Pedido!</h2>
+        <form class="register-form" action="<?= site_url("MeusPedidosEnviados/atualizar_pedido_cliente") ?>" method="POST" enctype="multipart/form-data">
+            <h2 class="display-4" style="font-size: 35px;">Editar pedido</h2>
 
 
 
@@ -67,23 +68,28 @@
                 <div class="form-row">
                     <div class="col-md-12">
                         <label for="id_Usu"></label>
-                        <input id="finalizar_pedido" class="form-control d-none" name="finalizar_pedido" value="Aberto">
-                        <input id="func" type="hidden" class="form-control d-none" name="id_usuario" value=0>
-                        <input id="pedido" type="hidden" class="form-control d-none" name="medida" value="">
-                        <input id="nome_fun" type="hidden" class="form-control d-none" name="nome_fun" value="">
-                        <input id="status" type="hidden" class="form-control d-none" name="status" value="Enviado">
-
+                        <input id="finalizar_pedido" class="form-control d-none" name="finalizar_pedido" value="<?= $dados['finalizar_pedido'] ?>">
+                        <input id="func" type="hidden" class="form-control d-none" name="id_usuario" value="<?= $dados['id_usuario']; ?>">
+                        <input id="id_produto" type="hidden" class="form-control d-none" name="id_produto" value="<?= $dados['id_produto'] ?>">
+                        <input id="produto" type="hidden" class="form-control d-none" name="produto" value="<?= $dados['produto'] ?>">
+                        <input id="pedido" type="hidden" class="form-control d-none" name="medida" value="<?= $dados['medida'] ?>">
+                        <input id="nome_fun" type="hidden" class="form-control d-none" name="nome_fun" value="<?= $dados['nome_fun'] ?>">
+                        <input id="status" type="hidden" class="form-control d-none" name="status" value="<?= $dados['status'] ?>">
+                        <input id="total_pg" type="hidden" class="form-control d-none" name="total_pg" value="<?= $dados['total_pg'] ?>">
+                        <input id="produto" type="hidden" class="form-control d-none" name="produto" value="<?= $dados['produto'] ?>">
+                        <input id="quant" type="hidden" class="form-control d-none" name="quant" value="<?= $dados['quant'] ?>">
+                        <input id="id_pedido" type="hidden" class="form-control d-none" name="id_pedido" value="<?= $dados['id_pedido'] ?>">
                     </div>
                     <div class="col-6 col-sm-6 col-md-6">
                         <div id="lp-name-wrapper">
                             <label for="nome"><b>Nome*</b></label>
-                            <input type="text" class="form-control" id="nome" name="nome_cliente" value="<?= $_SESSION['usuario']['nome'] ?>" placeholder="Nome">
+                            <input type="text" class="form-control" id="nome" name="nome_cliente" placeholder="Nome" value="<?= $dados['nome_cliente'] ?>">
                         </div>
                     </div>
                     <div class="col-6  col-sm-6 col-md-6">
                         <div id="lp-lastname-wrapper">
                             <label for="email"><b>Email*</b></label>
-                            <input type="email" class="form-control" id="email" name="email" value="<?= $_SESSION['usuario']['email'] ?>" placeholder="Email">
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Email" value="<?= $dados['email'] ?>">
                         </div>
                     </div>
                     <div class="col-6 col-sm-6 col-md-6">
@@ -119,59 +125,56 @@
                     <div class="col-6 col-sm-6 col-md-6">
                         <div id="lp-lastname-wrapper">
                             <label for="rua"><b>CEP*</b></label>
-                            <input type="text" class="form-control cep-mask" id="cep" name="cep" placeholder="CEP" required>
+                            <input type="text" class="form-control cep-mask" id="cep" name="cep" placeholder="CEP" value="<?= $dados['cep'] ?>" required>
                         </div>
                     </div>
                     <div class="col-6 col-sm-6 col-md-6">
                         <div id="lp-lastname-wrapper">
                             <label for="rua"><b>Rua*</b></label>
-                            <input type="text" class="form-control" id="logradouro" name="rua" placeholder="Rua" required>
+                            <input type="text" class="form-control" id="logradouro" name="rua" placeholder="Rua" value="<?= $dados['rua'] ?>" required>
                         </div>
                     </div>
                     <div class="col-6 col-sm-6 col-md-6">
                         <div id="lp-lastname-wrapper">
                             <label for="numero"><b>Número*</b></label>
-                            <input type="numeric" class="form-control" id="numero" name="num" placeholder="Número" required>
+                            <input type="numeric" class="form-control" id="numero" name="num" placeholder="Número" value="<?= $dados['num'] ?>" required>
                         </div>
                     </div>
 
                     <div class="col-6 col-sm-6 col-md-6">
                         <div id="lp-lastname-wrapper">
                             <label for="bairro"><b>Bairro*</b></label>
-                            <input type="text" class="form-control" id="bairro" name="bairro" placeholder="Bairro" required>
+                            <input type="text" class="form-control" id="bairro" name="bairro" placeholder="Bairro" value="<?= $dados['bairro'] ?>" required>
                         </div>
                     </div>
                     <div class="col-6 col-sm-6 col-md-6">
                         <div id="lp-lastname-wrapper">
                             <label for="cidade"><b>Cidade*</b></label>
-                            <input type="text" class="form-control" id="cidade" name="municipio" placeholder="Cidade" required>
+                            <input type="text" class="form-control" id="cidade" name="municipio" placeholder="Cidade" value="<?= $dados['municipio'] ?>" required>
                         </div>
                     </div>
                     <div class="col-6 col-sm-6 col-md-6">
                         <div id="lp-lastname-wrapper">
                             <label for="uf"><b>UF*</b></label>
-                            <input type="text" class="form-control" id="uf" name="uf" placeholder="UF" required>
+                            <input type="text" class="form-control" id="uf" name="uf" placeholder="UF" value="<?= $dados['uf'] ?>" required>
                         </div>
                     </div>
                     <div class="col-6 col-sm-6 col-md-6">
                         <div id="lp-lastname-wrapper">
                             <label for="referencia"><b>Referencia*</b></label>
-                            <input type="text" class="form-control" id="referencia" name="referencia" placeholder="Referencia" required>
+                            <input type="text" class="form-control" id="referencia" name="referencia" placeholder="Referencia" value="<?= $dados['referencia'] ?>" required>
                         </div>
                     </div>
                     <div class="col-12 col-sm-12 col-md-12">
                         <label for=""></label>
                         <div id="lp-name-wrapper">
-                            <button type="submit" id="botao_enviar_pedido" style="background-color: #B22222; border-color:#B22222;" class="btn btn-primary btn-block">Enviar Pedido</button>
+                            <button type="submit" id="botao_enviar_pedido" style="background-color: #B22222; border-color:#B22222;" class="btn btn-primary btn-block">Salvar</button>
                         </div>
                     </div>
                 </div>
     </div>
     </fieldset>
     </form>
-    <div>
-        <a style="color: black;" href='<?= site_url("cardapioCliente/index") ?>'>Continuar Comprando</a>
-    </div>
     <div class="title-bullet"></div>
     <div class="title-bullet"></div>
     <div class="row p-0 m-0">

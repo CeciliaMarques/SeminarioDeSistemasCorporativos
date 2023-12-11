@@ -155,10 +155,28 @@ def listar_pedidos():
     resposta = con.listar_pedidos()
     return resposta
 
+@app.route("/listar/pedido/usuario/<email>",methods=["GET"])
+def listar_pedido_usuario(email):    
+    con  = conexao
+    resposta = con.listar_pedido_usuario(email)
+    return resposta
 @app.route("/listar/pedido/<id_pedido>",methods=["GET"])
 def listar_pedido(id_pedido):    
     con  = conexao
     resposta = con.listar_pedido(id_pedido)
+    return resposta
+
+@app.route("/listar/pedidos/finalizados",methods=["GET"])
+def listar_pedido_finalizados():    
+    con  = conexao
+    resposta = con.listar_pedidos_finalizados()
+    return resposta
+
+@app.route("/procurar/pedidos",methods=["POST"])
+def procurar_pedidos_por_data():    
+    con  = conexao
+    dados = request.get_json(force=True)
+    resposta = con.procurar_pedidos_por_data(dados)
     return resposta
 
 @app.route("/deletar/pedido/<id_pedido>",methods=["DELETE"])

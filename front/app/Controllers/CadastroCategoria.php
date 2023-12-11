@@ -19,7 +19,7 @@ class CadastroCategoria extends BaseController
         
       
         }
-        if ($id != null &&  $id>-1) {
+        if ($id !== null &&  $id>-1) {
           $idC = $id;
           $ch = curl_init();
           curl_setopt_array($ch, [

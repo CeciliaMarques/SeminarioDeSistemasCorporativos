@@ -33,12 +33,20 @@
                 <div class="container">
                     <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
                         <ul class="navbar-nav m-auto">
-                            <li class="nav-item">
-                                <a class="nav-link" Style="color: #white; font-size: 20px;" href="<?= site_url("AtendimentoPedidosFuncionario"); ?>">Pedidos de Produtos</a>
+                            <li class="nav-item active">
+                                <a class="nav-link" Style="color: #white; font-size: 20px;" href="<?= site_url("cadastroFunc"); ?>">Funcionários</a>
                             </li>
-
                             <li class="nav-item">
-                                <a class="nav-link" Style="color: #white; font-size: 20px;" href="<?= site_url("contaUsuarioFuncionario"); ?>">Minha Conta</a>
+                                <a class="nav-link" Style="color: #white; font-size: 20px;" href="<?= site_url("cadastroCategoria"); ?>">Categorias</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" Style="color: #white; font-size: 20px;" href="<?= site_url("cadastroProduto"); ?>">Produtos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" Style="color: #white; font-size: 20px;" href="<?= site_url("contaUsuario"); ?>">Minha Conta</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" Style="color: #white; font-size: 20px;" href="<?= site_url("ControlePedidoAdmin"); ?>">Lista de Pedidos Finalizados</a>
                             </li>
                         </ul>
                     </div>
@@ -50,8 +58,8 @@
     <div id="empresa" style="padding:20px;margin:1px;">
         <span style='color:blue;'><?= session("success"); ?></span>
         <span style='color:red;'><?= session("Error"); ?></span>
-        <form class="register-form" action="<?= site_url("AtendimentoPedidosFuncionario/update") ?>" method="POST" enctype="multipart/form-data">
-            <h2 class="display-4" style="font-size: 35px;">Pedidos de Produtos</h2>
+        <form class="register-form" action="<?= site_url("ControlePedidoAdmin") ?>" method="POST" enctype="multipart/form-data">
+            <!-- <h2 class="display-4" style="font-size: 35px;">Pedidos de Produtos</h2> -->
             <fieldset>
                 <div class="form-row">
                     <div class="col-md-12">
@@ -73,77 +81,28 @@
                         <input type="hidden" class="form-control" id="municipio" name="municipio" value="<?= $dados['municipio'] ?>">
                         <input type="hidden" class="form-control" id="uf" name="uf" value="<?= $dados['uf'] ?>">
                         <input type="hidden" class="form-control" id="referencia" name="referencia" value="<?= $dados['referencia'] ?>">
+                        <input type="hidden" class="form-control" id="forma_pg" name="forma_pg" value="<?= $dados['forma_pg'] ?>">
+                        <input type="hidden" class="form-control" id="status" name="status" value="<?= $dados['status'] ?>">
+                        <input type="hidden" class="form-control" id="tipo_entrega" name="tipo_entrega" value="<?= $dados['tipo_entrega'] ?>">
+                        <input type="hidden" class="form-control" id="total_pg" name="total_pg" value="<?= $dados['total_pg'] ?>">
+                        <input type="hidden" class="form-control" id="finalizar_pedido" name="tipo_entrega" value="<?= $dados['finalizar_pedido'] ?>">
                     </div>
-                </div>
-                <div class="col-12 col-sm-12 col-md-12" required>
-                    <div id="lp-telnumber-wrapper">
-                        <label for="forma_pg"><b>Forma de Pagamento*</b></label>
-                        <select name="forma_pg" class="form-control mb-3" required>
-                            <?php foreach ($formaPg as $key => $t) :
-                                $selected = "";
-                                // if (v($arr, 'nivel') == $key) {
-                                $selected = "selected";
-                                // }
-                            ?>
-                                <option <?= $selected ?> value="<?= $key ?>"><?= $t ?></option>
-                            <?php endforeach; ?>
-                        </select>
+                    <!-- <div class="row justify-content-md-center"> -->
+                    <div class="col-auto"><b>Data</b></label></div>
+                    <div class="col-auto">
+                    <label class="sr-only" for="inlineFormInput">Data</label>
+                        <input type="date" class="form-control" id="data" name="data">
                     </div>
-                </div>
-                <div class="col-12 col-sm-12 col-md-12">
-                    <div id="lp-telnumber-wrapper">
-                        <label for="tipoEntrega"><b>Status*</b></label>
-                        <select name="status" class="form-control mb-3" required>
-                            <?php foreach ($status as $key => $tipo) :
-                                $selected = "";
-                                // if (v($arr, 'nivel') == $key) {
-                                $selected = "selected";
-                                // }
-                            ?>
-                                <option <?= $selected ?> value="<?= $key ?>"><?= $tipo ?></option>
-                            <?php endforeach; ?>
-                        </select>
+                    <div class="col-auto">
+                        <button type="submit" class="btn btn-primary mb-2">Pesquisar</button>
                     </div>
-                </div>
-                <div class="col-12 col-sm-12 col-md-12">
-                    <div id="lp-telnumber-wrapper">
-                        <label for="tipoEntrega"><b>Tipo da Entrega*</b></label>
-                        <select name="tipo_entrega" class="form-control mb-3" required>
-                            <?php foreach ($tipoEntrega as $key => $tipo) :
-                                $selected = "";
-                                // if (v($arr, 'nivel') == $key) {
-                                $selected = "selected";
-                                // }
-                            ?>
-                                <option <?= $selected ?> value="<?= $key ?>"><?= $tipo ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-12 col-sm-12 col-md-12">
-                    <div id="lp-lastname-wrapper">
-                        <label for="total_pg"><b>Total : R$<?= $dados['total_pg'] ?> </b></label>
-                    </div>
-                </div>
-                <div class="col-12 col-sm-12 col-md-12">
-                    <div id="lp-lastname-wrapper">
-                        <label for="potavel"><b>Finalizar Pedido?*</b></label>
-                        <label><input type="radio" name="finalizar_pedido" value="Em Andamento" <?php $dados['finalizar_pedido'] == "Pendente" ? print 'checked' : '' ?>>Não</label>
-                        <label><input type="radio" name="finalizar_pedido" value="Finalizado" <?php $dados['finalizar_pedido'] == "Finalizado" ? print 'checked' : '' ?>>Sim</label>
-                    </div>
-                    <div class="col-12 col-sm-12 col-md-12">
-                        <label for=""></label>
-                        <div id="lp-name-wrapper">
-                            <button type="submit" style="background-color: #B22222; border-color:#B22222;" class="btn btn-primary btn-block">Salvar</button>
-                        </div>
-                    </div>
-                </div>
+                    <!-- </div> -->
             </fieldset>
         </form>
         <div class="title-bullet"><span> </span></div>
         <div>
             <div class="container">
-                <h2 class="display-4" style="font-size: 35px;">Lista de Pedidos</h2>
+                <h2 class="display-4" style="font-size: 35px;">Lista de Pedidos Finalizados</h2>
                 <div class="table-responsive">
                     <table class="table">
                         <thead>
@@ -161,7 +120,6 @@
                                 <th style="font-size: 20px;">Total</th>
                                 <th style="font-size: 20px;">Data do Pedido</th>
                                 <th style="font-size: 20px;">Horario</th>
-                                <th class="text-center" style="font-size: 20px;">Editar</th>
                                 <th class="text-center" style="font-size: 20px;">Excluir</th>
                             </tr>
                         </thead>
@@ -190,11 +148,10 @@
                                     <td style="line-height: 40px;font-size: 15px;"><?php print $item["medida"] ?></td>
                                     <td style="line-height: 40px;font-size: 15px;"><?php print $item["finalizar_pedido"] ?></td>
                                     <td style="line-height: 40px;font-size: 15px;"><?php print str_replace('.', ',', $item["total_pg"]) ?></td>
-                                    <?php $data = date('d-m-y', strtotime($item["data"]));
-                                    $horaAtual = date("H:i:s", strtotime($item["hora"])); ?>
+                                    <?php  $data = date('d-m-y', strtotime($item["data"]));
+                                           $horaAtual = date("H:i:s", strtotime($item["hora"]));?>
                                     <td style="line-height: 40px;font-size: 15px;"><?php print $data ?></td>
                                     <td style="line-height: 40px;font-size: 15px;"><?php print $horaAtual ?></td>
-                                    <td> <a href='<?= site_url("atendimentoPedidosFuncionario/index/{$item['id_pedido']}") ?>'><button class="btn btn-primary btn-block text-center d-block pull-right" type="button" style="height: 61px;background-color: #0b7442;"><i class="far fa-edit" style="font-size: 36px;"></i></button></a></td>
                                     <td> <a href='<?= $url = site_url("atendimentoPedidosFuncionario/deletar/{$item['id_pedido']}") ?>'>
                                             <button href='#' onclick='confirmDelete("<?= $url ?>")' class="btn btn-primary btn-block text-center d-block pull-right" type="button" style="height: 61px;background-color: #B22222;"><i class="far fa-trash-alt" style="font-size: 36px;"></i></button> </a>
                                     <?php endforeach; ?>

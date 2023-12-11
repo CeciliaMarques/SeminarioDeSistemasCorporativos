@@ -48,7 +48,7 @@
                                 <a class="nav-link" Style="color: #white; font-size: 20px;" href="<?= site_url("contaUsuario"); ?>">Minha Conta</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" Style="color: #white; font-size: 20px;" href="<?= site_url("listagemPedidosFinalizadosAdminPizza"); ?>">Pedidos de Pizzas Finalizados</a>
+                                <a class="nav-link" Style="color: #white; font-size: 20px;" href="<?= site_url("ControlePedidoAdmin"); ?>">Pedidos de Pizzas Finalizados</a>
                             </li>
                         </ul>
                     </div>

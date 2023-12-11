@@ -38,11 +38,11 @@ def criar_tabelas():
       
       
       cursor.execute("CREATE TABLE IF NOT EXISTS pedidos(id_pedido serial PRIMARY KEY,"
-                        "nome_cliente VARCHAR(40), email VARCHAR(40),"
+                        "nome_cliente VARCHAR(50), email VARCHAR(40),"
                         "id_usuario INTEGER,  tipo_entrega VARCHAR(40),"
-                        "forma_pg VARCHAR, cep VARCHAR(20),"
-                        "rua VARCHAR(50), num INTEGER, bairro VARCHAR(40), municipio VARCHAR, "
-                        "uf VARCHAR(2), referencia VARCHAR, status VARCHAR,"
+                        "forma_pg VARCHAR(20), cep VARCHAR(20),"
+                        "rua VARCHAR(50), num INTEGER, bairro VARCHAR(40), municipio VARCHAR(50), "
+                        "uf VARCHAR(2), referencia VARCHAR(50), status VARCHAR(50),"
                         "finalizar_pedido VARCHAR(10),nome_fun VARCHAR(40),"
                         "id_produto INTEGER,produto VARCHAR(40), medida VARCHAR(40), total_pg NUMERIC, quant INTEGER," 
                         "data_hora  TIMESTAMP DEFAULT CURRENT_TIMESTAMP, "
