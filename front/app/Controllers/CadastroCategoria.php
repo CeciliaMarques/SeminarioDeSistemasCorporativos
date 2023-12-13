@@ -36,9 +36,7 @@ class CadastroCategoria extends BaseController
           curl_close($ch);
     
           $arr['dados'] = $arr[0];
-          // $a1 = json_encode($arr);
-          // $arr1['dados'] = json_encode($arr[0]);
-          // return $this->update($id);
+         
         }
     
         $ch = curl_init();

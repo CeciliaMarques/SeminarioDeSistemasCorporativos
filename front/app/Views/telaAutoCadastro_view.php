@@ -53,7 +53,7 @@
         <div class="form-row">
           <div class="form-group">
             <label for="id"></label>
-            <input type="hidden" id="id_func" class="form-control" name="id_usuariof">
+            <input type="hidden" id="id_func" class="form-control" name="id_usuario">
           </div>
           <div class="col-6 col-sm-6 col-md-6">
             <div id="lp-mail-wrapper">

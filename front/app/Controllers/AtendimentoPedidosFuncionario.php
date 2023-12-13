@@ -119,4 +119,42 @@ class AtendimentoPedidosFuncionario extends BaseController
     curl_close($ch);
     return redirect()->to(site_url('AtendimentoPedidosFuncionario/index/'));
   }
+  public function notificar($id){
+    if ($id !== null &&  $id>-1) {
+      $idP = $id;
+      $ch = curl_init();
+      curl_setopt_array($ch, [
+        CURLOPT_URL => 'http://api:5000/listar/pedido/' . $idP,
+        CURLOPT_CUSTOMREQUEST => 'GET',
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_SSL_VERIFYPEER => false
+
+      ]);
+      $arr = json_decode(curl_exec($ch), true);
+      curl_close($ch);
+      $arr['dados'] = $arr[0];
+    }
+    if(isset($_POST) && !empty($_POST)){
+      $x = json_encode($_POST);
+      $ch = curl_init();
+      curl_setopt_array($ch, [
+        CURLOPT_URL => 'http://api:5000/enviar/email',
+        CURLOPT_CUSTOMREQUEST => 'POST',
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_POSTFIELDS =>$x,
+      //   CURLOPT_HTTPHEADER => [
+      //     'Authorization: Bearer ' . $_SESSION['user']['token'] // Adicione o token ao cabeçalho
+      // ],
+        CURLOPT_SSL_VERIFYPEER => false
+  
+  
+      ]);
+  
+      $resposta = curl_exec($ch);
+      curl_close($ch);
+      return redirect()->to(site_url('AtendimentoPedidosFuncionario/index/'));
+    }
+
+    return view("telaNotificar_view", $arr);
+  }
 }

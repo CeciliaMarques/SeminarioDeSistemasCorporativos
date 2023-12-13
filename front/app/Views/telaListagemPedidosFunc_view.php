@@ -15,6 +15,7 @@
     <link rel="stylesheet" type="text/css" href="<?= base_url('public/assets/css/styles.css') ?>">
     <link rel="stylesheet" type="text/css" href="<?= base_url('public/assets/css/title-bullets.css') ?>">
     <link rel="stylesheet" type="text/css" href="<?= base_url('public/assets/css/TR-Form.css') ?>">
+    <link rel="stylesheet" type="text/css" href="<?= base_url('../public/bootstrap-icons/font/bootstrap-icons.min.css') ?>">
 </head>
 
 <body>
@@ -163,6 +164,7 @@
                                 <th style="font-size: 20px;">Horario</th>
                                 <th class="text-center" style="font-size: 20px;">Editar</th>
                                 <th class="text-center" style="font-size: 20px;">Excluir</th>
+                                <th class="text-center" style="font-size: 20px;">Notificar</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -183,7 +185,7 @@
                                         <?php print $item["bairro"] . "," ?>
                                         <?php print $item["municipio"] . "," ?>
                                         <?php print $item["uf"] . "," ?>
-                                        <?php print $item["referencia"] . "," ?>
+                                        <?php print $item["referencia"] . "" ?>
                                     </td>
                                     <td style="line-height: 40px;font-size: 15px;"><?php print $item["status"] ?></td>
                                     <td style="line-height: 40px;font-size: 15px;"><?php print $item["produto"] ?></td>
@@ -194,11 +196,12 @@
                                     $horaAtual = date("H:i:s", strtotime($item["hora"])); ?>
                                     <td style="line-height: 40px;font-size: 15px;"><?php print $data ?></td>
                                     <td style="line-height: 40px;font-size: 15px;"><?php print $horaAtual ?></td>
-                                    <td> <a href='<?= site_url("atendimentoPedidosFuncionario/index/{$item['id_pedido']}") ?>'><button class="btn btn-primary btn-block text-center d-block pull-right" type="button" style="height: 61px;background-color: #0b7442;"><i class="far fa-edit" style="font-size: 36px;"></i></button></a></td>
+                                    <td> <a href='<?= site_url("atendimentoPedidosFuncionario/index/{$item['id_pedido']}") ?>'><button class="btn btn-primary btn-block text-center d-block pull-right" type="button" style="height: 61px;background-color: #0b7442 ;width: 60px;"><i class="far fa-edit" style="font-size: 36px;"></i></button></a></td>
                                     <td> <a href='<?= $url = site_url("atendimentoPedidosFuncionario/deletar/{$item['id_pedido']}") ?>'>
-                                            <button href='#' onclick='confirmDelete("<?= $url ?>")' class="btn btn-primary btn-block text-center d-block pull-right" type="button" style="height: 61px;background-color: #B22222;"><i class="far fa-trash-alt" style="font-size: 36px;"></i></button> </a>
-                                    <?php endforeach; ?>
+                                            <button href='#' onclick='confirmDelete("<?= $url ?>")' class="btn btn-primary btn-block text-center d-block pull-right" type="button" style="height: 61px;background-color: #B22222; width: 60px;"><i class="far fa-trash-alt" style="font-size: 36px;"></i></button> </a>
                                     </td>
+                                    <td> <a href='<?= site_url("atendimentoPedidosFuncionario/notificar/{$item['id_pedido']}") ?>'><button class="btn btn-primary btn-block text-center d-block pull-right" type="button" style="height: 61px; background-color:#0d6efd; color:#FFFFFF; width: 60px;"><i class="bi bi-envelope-at" style="font-size: 36px;"></i></button></a></td>
+                                        <?php endforeach; ?>
                                 </tr>
 
                         </tbody>
