@@ -13,7 +13,7 @@ def enviar_email(dados):
     msg['Subject'] = "Seu pedido saiu para a entrega - Pizzaria Marques"
     msg['From'] = 'testedsc60@gmail.com'
     msg['To'] = dados['email']
-    password = 'txkowdcvmzsnhwkl' 
+    password = '' 
     msg.add_header('Content-Type', 'text/html')
     msg.set_payload(corpo_email )
 
