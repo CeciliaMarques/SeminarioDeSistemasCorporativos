@@ -104,7 +104,7 @@
               <tr>
                 <td style="line-height: 60px;font-size: 15px;"><?php print $item["nome"] ?></td>
                 <td style="line-height: 60px;font-size: 15px;"><?php print $item["unidade_medida"] ?></td>
-                <td style="line-height: 60px;font-size: 15px;"><?php print str_replace('.', ',', $item["valor"]) ?></td>
+                <td style="line-height: 60px;font-size: 15px;"><?php print "R$ ".str_replace('.', ',', $item["valor"]) ?></td>
                 <td> <a id="adicionar_carrinho" href='<?= site_url("ProdutosAdicionados/adicionarItens/{$item['id_produto']}") ?>'><i class="bi bi-cart-plus" style="font-size: 35px; color: #0b7442;"></i></button></a></td>
 
               <?php endforeach; ?>

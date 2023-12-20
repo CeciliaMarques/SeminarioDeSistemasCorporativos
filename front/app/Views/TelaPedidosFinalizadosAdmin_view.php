@@ -90,6 +90,7 @@
                     <!-- <div class="row justify-content-md-center"> -->
                     <div class="col-auto"><b>Data</b></label></div>
                     <div class="col-auto">
+
                     <label class="sr-only" for="inlineFormInput">Data</label>
                         <input type="date" class="form-control" id="data" name="data">
                     </div>
@@ -124,10 +125,11 @@
                             </tr>
                         </thead>
                         <tbody>
-
-
+                            <?php  $totalPedido = 0;  ?>
                             <?php foreach ($listagem as $item) : ?>
+
                                 <tr>
+                                <?php $totalPedido += $item["total_pg"]; ?>
                                     <td style="line-height: 40px;font-size: 15px;"><?php print $item["id_pedido"] ?></td>
                                     <td style="line-height: 40px;font-size: 15px;"><?php print $item["nome_cliente"] ?></td>
                                     <td style="line-height: 40px;font-size: 15px;"><?php print $item["email"] ?></td>
@@ -147,17 +149,19 @@
                                     <td style="line-height: 40px;font-size: 15px;"><?php print $item["produto"] ?></td>
                                     <td style="line-height: 40px;font-size: 15px;"><?php print $item["medida"] ?></td>
                                     <td style="line-height: 40px;font-size: 15px;"><?php print $item["finalizar_pedido"] ?></td>
-                                    <td style="line-height: 40px;font-size: 15px;"><?php print str_replace('.', ',', $item["total_pg"]) ?></td>
+                                    <td style="line-height: 40px;font-size: 15px;"><?php print "R$ ".str_replace('.', ',', $item["total_pg"]) ?></td>
                                     <?php  $data = date('d-m-y', strtotime($item["data"]));
                                            $horaAtual = date("H:i:s", strtotime($item["hora"]));?>
                                     <td style="line-height: 40px;font-size: 15px;"><?php print $data ?></td>
                                     <td style="line-height: 40px;font-size: 15px;"><?php print $horaAtual ?></td>
-                                    <td> <a href='<?= $url = site_url("atendimentoPedidosFuncionario/deletar/{$item['id_pedido']}") ?>'>
+                                    <td> <a href='<?= $url = site_url("ControlePedidoAdmin/deletar/{$item['id_pedido']}") ?>'>
                                             <button href='#' onclick='confirmDelete("<?= $url ?>")' class="btn btn-primary btn-block text-center d-block pull-right" type="button" style="height: 61px;background-color: #B22222;"><i class="far fa-trash-alt" style="font-size: 36px;"></i></button> </a>
                                     <?php endforeach; ?>
                                     </td>
                                 </tr>
-
+                                <tr>
+                                <td colspan="12" style="line-height: 40px; font-size: 15px;"><strong>Total:</strong><?php print "R$ " . $totalPedido; ?></td>
+                            </tr>
                         </tbody>
 
                     </table>

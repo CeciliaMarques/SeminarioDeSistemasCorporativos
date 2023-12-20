@@ -141,7 +141,7 @@
                                     <td style="line-height: 40px;font-size: 15px;"><?php print $item["produto"] ?></td>
                                     <td style="line-height: 40px;font-size: 15px;"><?php print $item["medida"] ?></td>
                                     <td style="line-height: 40px;font-size: 15px;"><?php print $item["finalizar_pedido"] ?></td>
-                                    <td style="line-height: 40px;font-size: 15px;"><?php print str_replace('.', ',', $item["total_pg"]) ?></td>
+                                    <td style="line-height: 40px;font-size: 15px;"><?php print "R$ ".str_replace('.', ',', $item["total_pg"]) ?></td>
                                     <?php  $data = date('d-m-y', strtotime($item["data"]));
                                            $horaAtual = date("H:i:s", strtotime($item["hora"]));?>
                                     <td style="line-height: 40px;font-size: 15px;"><?php print $data ?></td>

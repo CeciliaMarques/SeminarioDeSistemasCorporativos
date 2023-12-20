@@ -88,6 +88,7 @@
 
 
                             <?php foreach ($listagem as $item) : ?>
+                                <?php $totalPedido += $item['valor']; ?>
                                 <tr>
                                     <td style="line-height: 60px;font-size: 15px;"><?php print $item["nome_cliente"] ?></td>
                                     <td style="line-height: 60px;font-size: 15px;"><?php print $item["email"] ?></td>
@@ -95,7 +96,7 @@
                                     <td style="line-height: 60px;font-size: 15px;"><?php print $item["tamanho"] ?></td>
                                     <td style="line-height: 60px;font-size: 15px;"><?php print $item["tipo_entrega"] ?></td>
                                     <td style="line-height: 60px;font-size: 15px;"><?php print $item["forma_pg"] ?></td>
-                                    <td style="line-height: 60px;font-size: 15px;"><?php print str_replace('.', ';', $item["total_pg"]) ?></td>
+                                    <td style="line-height: 60px;font-size: 15px;"><?php print "R$ " . str_replace('.', ';', $item["total_pg"]) ?></td>
                                     <td style="line-height: 60px;font-size: 15px;"><?php print $item["cep"] ?></td>
                                     <td style="line-height: 60px;font-size: 15px;"><?php print $item["municipio"] ?></td>
                                     <td style="line-height: 60px;font-size: 15px;"><?php print $item["bairro"] ?></td>
@@ -103,16 +104,17 @@
                                     <td style="line-height: 60px;font-size: 15px;"><?php print $item["num"] ?></td>
                                     <td style="line-height: 60px;font-size: 15px;"><?php print $item["finalizar_pedido"] ?></td>
                                     <td style="line-height: 60px;font-size: 15px;"><?php print $item["nome_func"] ?></td>
-                                    <td> <a href='<?= $url = site_url("listagemPedidosFinalizadosAdminPizza/deletar/{$item['id_pedido']}") ?>'>
+                                    <td> <a href='<?= $url = site_url("ControlePedidoAdmin/deletar/{$item['id_pedido']}") ?>'>
                                             <button href='#' onclick='confirmDelete("<?= $url ?>")' class="btn btn-primary btn-block text-center d-block pull-right" type="button" style="height: 61px;background-color: #B22222;"><i class="far fa-trash-alt" style="font-size: 36px;"></i></button> </a>
                                     <?php endforeach; ?>
                                     </td>
                                 </tr>
-                                <tr>
-                                </tr>
+
                         </tbody>
 
                     </table>
+                    <label>Total: <?php print "R$ " . $totalPedido; ?>
+                            </label>
                 </div>
             </div>
         </div>

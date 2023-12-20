@@ -103,8 +103,8 @@
                     <tr>
                       <td style="line-height: 60px;font-size: 15px;"><?php print $item["nome"] ?></td>
                       <td style="line-height: 60px;font-size: 15px;"><?php print $item["unidade_medida"] ?></td>
-                      <td style="line-height: 60px;font-size: 15px;"><?php print str_replace('.', ',', $item["valor"]) ?></td>
-                      <td style="line-height: 60px;font-size: 15px;"><?php print $subTotal ?></td>
+                      <td style="line-height: 60px;font-size: 15px;"><?php print "R$ ".str_replace('.', ',', $item["valor"]) ?></td>
+                      <td style="line-height: 60px;font-size: 15px;"><?php print "R$ ".$subTotal ?></td>
                       <td style="line-height: 60px;font-size: 15px;">
                         <input type="text" id="atualizar_carrinho" size="1px" class="text-center" name="prod[<?php echo $item['id_produto'] ?>]" value="<?php echo $quant ?>" size="1" />
                       </td>
@@ -148,8 +148,8 @@
                   <?php endforeach; ?>
                     </tr>
                     <tr>
-                      <td>Total: <?php print $totalPedido; ?>
-                      <td>
+                      <td>Total: <?php print "R$ ".$totalPedido; ?>
+                    </td>
                     </tr>
                     </tr>
               </tbody>

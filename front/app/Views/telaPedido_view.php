@@ -153,7 +153,7 @@
                             <input type="text" class="form-control" id="uf" name="uf" placeholder="UF" required>
                         </div>
                     </div>
-                    <div class="col-6 col-sm-6 col-md-6">
+                    <div class="col-12 col-sm-12 col-md-12">
                         <div id="lp-lastname-wrapper">
                             <label for="referencia"><b>Referencia*</b></label>
                             <input type="text" class="form-control" id="referencia" name="referencia" placeholder="Referencia" required>
@@ -169,11 +169,12 @@
     </div>
     </fieldset>
     </form>
-    <div>
-        <a style="color: black;" href='<?= site_url("cardapioCliente/index") ?>'>Continuar Comprando</a>
+    <div class="col-12 col-sm-12 col-md-12">
+       <center> <a style="color: black;" href='<?= site_url("cardapioCliente/index") ?>'>Continuar Comprando</a></center>
     </div>
-    <div class="title-bullet"></div>
-    <div class="title-bullet"></div>
+    <!-- <div class="title-bullet"></div> -->
+    <!-- <div class="title-bullet"></div> -->
+    </br>
     <div class="row p-0 m-0">
         <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 d-flex justify-content-center align-items-center align-content-center p-0 m-0">
             <p class="p-0 m-0">Nos acompanhe através da nossas redes sociais:</p>

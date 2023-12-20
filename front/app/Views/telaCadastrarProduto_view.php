@@ -155,7 +155,7 @@
               <tr>
                 <td style="line-height: 60px;font-size: 15px;"><?php print $item["nome"] ?></td>
                 <td style="line-height: 60px;font-size: 15px;"><?php print $item["unidade_medida"] ?></td>
-                <td style="line-height: 60px;font-size: 15px;"><?php print str_replace('.', ',', $item["valor"]) ?></td>
+                <td style="line-height: 60px;font-size: 15px;"><?php print "R$ ".str_replace('.', ',', $item["valor"]) ?></td>
                 <td> <a href='<?= site_url("cadastroProduto/index/{$item['id_produto']}") ?>'><button class="btn btn-primary btn-block text-center d-block pull-right" type="button" style="height: 61px;background-color: #0b7442;"><i class="far fa-edit" style="font-size: 36px;"></i></button></a></td>
                 <td> <a href='<?= $url = site_url("cadastroProduto/deletar/{$item['id_produto']}") ?>'>
                       <button href='#' onclick='confirmDelete("<?= $url ?>")' class="btn btn-primary btn-block text-center d-block pull-right" type="button" style="height: 61px;background-color: #B22222;"><i class="far fa-trash-alt" style="font-size: 36px;"></i></button> </a>
