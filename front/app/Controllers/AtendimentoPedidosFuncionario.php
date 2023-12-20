@@ -103,7 +103,7 @@ class AtendimentoPedidosFuncionario extends BaseController
   {
     $ch = curl_init();
     curl_setopt_array($ch, [
-      CURLOPT_URL => 'http://api:5000/deletar/pedidos/' . $id,
+      CURLOPT_URL => 'http://api:5000/deletar/pedido/'. $id,
       CURLOPT_CUSTOMREQUEST => 'DELETE',
       CURLOPT_RETURNTRANSFER => true,
       CURLOPT_HTTPHEADER => [
@@ -119,12 +119,12 @@ class AtendimentoPedidosFuncionario extends BaseController
     curl_close($ch);
     return redirect()->to(site_url('AtendimentoPedidosFuncionario/index/'));
   }
-  public function notificar($id){
+  public function notificar($id = null){
     if ($id !== null &&  $id>-1) {
       $idP = $id;
       $ch = curl_init();
       curl_setopt_array($ch, [
-        CURLOPT_URL => 'http://api:5000/listar/pedido/' . $idP,
+        CURLOPT_URL => 'http://api:5000/listar/pedido/'. $idP,
         CURLOPT_CUSTOMREQUEST => 'GET',
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_SSL_VERIFYPEER => false
@@ -138,7 +138,7 @@ class AtendimentoPedidosFuncionario extends BaseController
       $x = json_encode($_POST);
       $ch = curl_init();
       curl_setopt_array($ch, [
-        CURLOPT_URL => 'http://email:4000/enviar/email',
+        CURLOPT_URL => 'http://api:5000/enviar/email',
         CURLOPT_CUSTOMREQUEST => 'POST',
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_POSTFIELDS =>$x,
