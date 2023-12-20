@@ -96,9 +96,9 @@ class ControlePedidoAdmin extends BaseController
       CURLOPT_CUSTOMREQUEST => 'PUT',
       CURLOPT_RETURNTRANSFER => true,
       CURLOPT_POSTFIELDS => $x,
-      CURLOPT_HTTPHEADER => [
-        'Authorization: Bearer ' . $_SESSION['user']['token'] // Adicione o token ao cabeçalho
-      ],
+      // CURLOPT_HTTPHEADER => [
+      //   'Authorization: Bearer ' . $_SESSION['user']['token'] // Adicione o token ao cabeçalho
+      // ],
       CURLOPT_SSL_VERIFYPEER => false
 
 
@@ -112,14 +112,15 @@ class ControlePedidoAdmin extends BaseController
 
   public function deletar($id)
   {
+    $idP=$id;
     $ch = curl_init();
     curl_setopt_array($ch, [
-      CURLOPT_URL => 'http://api:5000/deletar/pedidos/' . $id,
+      CURLOPT_URL => 'http://api:5000/deletar/pedido/' . $idP,
       CURLOPT_CUSTOMREQUEST => 'DELETE',
       CURLOPT_RETURNTRANSFER => true,
-      CURLOPT_HTTPHEADER => [
-        'Authorization: Bearer ' . $_SESSION['user']['token'] // Adicione o token ao cabeçalho
-      ],
+      // CURLOPT_HTTPHEADER => [
+      //   'Authorization: Bearer ' . $_SESSION['user']['token'] // Adicione o token ao cabeçalho
+      // ],
       CURLOPT_SSL_VERIFYPEER => false
 
 
