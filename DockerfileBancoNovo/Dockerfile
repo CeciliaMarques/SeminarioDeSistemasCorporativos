@@ -4,6 +4,8 @@ ENV POSTGRES_USER postgres
 ENV POSTGRES_PASSWORD 12345
 ENV POSTGRES_DB bancoDsc
 
+RUN  apt-get update
+RUN  apt-get upgrade
 # Copie arquivos de configuração personalizados para o contêiner
 COPY postgresql.conf /etc/postgresql/postgresql.conf
 COPY pg_hba.conf /etc/postgresql/pg_hba.conf
