@@ -1,7 +1,9 @@
 from flask import Flask, jsonify
 from werkzeug.security import generate_password_hash,  check_password_hash
 from flask_jwt_extended import create_access_token
-from datetime import datetime
+# from datetime import datetime
+import smtplib
+import email.message
 import psycopg2
 import sys
 
@@ -38,13 +40,13 @@ def criar_tabelas():
                      "FOREIGN KEY(id_categoria) REFERENCES categorias);")
       
       cursor.execute("CREATE TABLE IF NOT EXISTS pedidos(id_pedido serial PRIMARY KEY,"
-                        "nome_cliente VARCHAR(50), email VARCHAR(40),"
-                        "id_usuario INTEGER,  tipo_entrega VARCHAR(40),"
-                        "forma_pg VARCHAR(20), cep VARCHAR(20),"
-                        "rua VARCHAR(50), num INTEGER, bairro VARCHAR(40), municipio VARCHAR(50), "
-                        "uf VARCHAR(2), referencia VARCHAR(50), status VARCHAR(50),"
-                        "finalizar_pedido VARCHAR(10),nome_fun VARCHAR(40),"
-                        "id_produto INTEGER,produto VARCHAR(40), medida VARCHAR(40), total_pg NUMERIC, quant INTEGER," 
+                        "nome_cliente VARCHAR(200), email VARCHAR(200),"
+                        "id_usuario INTEGER,  tipo_entrega VARCHAR(100),"
+                        "forma_pg VARCHAR(100), cep VARCHAR(100),"
+                        "rua VARCHAR(200), num INTEGER, bairro VARCHAR(200), municipio VARCHAR(200), "
+                        "uf VARCHAR(2), referencia VARCHAR(200), status VARCHAR(50),"
+                        "finalizar_pedido VARCHAR(30),nome_fun VARCHAR(40),"
+                        "id_produto INTEGER,produto VARCHAR(200), medida VARCHAR(40), total_pg NUMERIC, quant INTEGER," 
                         "data DATE DEFAULT CURRENT_DATE, hora TIMESTAMP DEFAULT CURRENT_TIMESTAMP,"
                         "FOREIGN KEY(id_produto) REFERENCES produtos);")
       con.commit()
@@ -438,33 +440,28 @@ def procurar_pedidos_por_data(dados):
                         "produto":resultado[17], "medida":resultado[18], "total_pg":resultado[19], "quant":resultado[20], "data":resultado[21], "hora":resultado[22]} 
                 vetor.append(chaves) 
             return jsonify(vetor)
-    #     else:
-    #         return jsonify({"error": "Chave 'data' não encontrada nos dados"}), 400
-    
-    
-    # except Exception as e:
-    #     return jsonify({"error": str(e)}), 500   
-    
-    
-    
-    
-    #  data = dados['data_hora']
-    #  data_formatada = datetime.strptime(dados, "%d/%m/%Y").strftime("%Y-%m-%d %H:%M:%S")
-    # if 'data_hora' in dados:
-    #  data_formatada = datetime.strptime(dados['data_hora'], "%d/%m/%Y").strftime("%Y-%m-%d %H:%M:%S")
-    #  cursor.execute("SELECT * FROM pedidos WHERE data_hora=%s AND finalizar_pedido='finalizado' ORDER BY id_pedido ASC", (data_formatada,))
-    #  linhas = cursor.fetchall()
-    #  vetor = []
-    #  chaves = {}
-    #  for resultado in linhas:
-    #       chaves = {"id_pedido": resultado[0], "nome_cliente": resultado[1], "email": resultado[2],
-    #                  "id_usuario":resultado[3], "tipo_entrega":resultado[4],"forma_pg":resultado[5], 
-    #                  "cep":resultado[6], "rua":resultado[7], "num":resultado[8],
-    #                  "bairro":resultado[9], "municipio":resultado[10], "uf":resultado[11],"referencia":resultado[12],
-    #                  "status":resultado[13], "finalizar_pedido":resultado[14], "nome_fun":resultado[15], "id_produto":resultado[16],
-    #                  "produto":resultado[17], "medida":resultado[18], "total_pg":resultado[19], "quant":resultado[20], "data_pedido":resultado[21]} 
-    #       vetor.append(chaves) 
-    #  return jsonify(vetor)
+
+def enviar_email(dados):  
+    corpo_email = f"""
+    <p><b>Olá, {dados['nome']}</b></p>
+    <p> Mensagem:{dados['mensagem']} <p>
+    """
+
+    msg = email.message.Message()
+    msg['Subject'] = "Seu Pedido - Pizzaria Marques"
+    msg['From'] = 'testedsc60@gmail.com'
+    msg['To'] = dados['email']
+    password = 'cfkkitwtwhqdnxrx' 
+    msg.add_header('Content-Type', 'text/html')
+    msg.set_payload(corpo_email )
+
+    s = smtplib.SMTP('smtp.gmail.com: 587')
+    s.starttls()
+    # Login Credentials for sending the mail
+    s.login(msg['From'], password)
+    s.sendmail(msg['From'], [msg['To']], msg.as_string().encode('utf-8'))
+    return('Email enviado')
+
        
 def fechar_conexao():
       con.close()

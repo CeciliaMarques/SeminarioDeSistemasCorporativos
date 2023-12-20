@@ -192,3 +192,8 @@ def login():
     dados = request.get_json(force=True)
     resposta = con.logar(dados)
     return resposta
+@app.route("/enviar/email",  methods=['POST'])
+def enviar_email():    
+    dados = request.get_json(force=True)
+    resposta = conexao.enviar_email(dados)
+    return resposta
