@@ -22,7 +22,7 @@ services:
     container_name: "container-micro"
     restart: always
     ports:
-     - "3000:3000" 
+     - "8000:8000" 
     volumes:
      - ./micro_usuario:/app 
     environment:
